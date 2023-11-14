@@ -88,6 +88,10 @@ th {
 }
 #tools {
   max-width: 480px;
+  text-align: left;
+}
+#tools h2 {
+  text-align: center;
 }
 .practice #tools div, .practice #tools span {
   text-align: left;
