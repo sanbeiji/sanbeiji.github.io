@@ -1,0 +1,405 @@
+@import url('https://fonts.googleapis.com/css?family=Special+Elite&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC&display=swap');
+
+body {
+  background-color: #bbb;
+  text-align: center;
+  font-family: 'Special Elite', 'Noto Serif SC', 'Kaiti TC', monospace;
+  color:#000;
+}
+
+input[type=checkbox]
+{
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(2.5); /* IE */
+  -moz-transform: scale(2.5); /* FF */½
+  -webkit-transform: scale(2.5); /* Safari and Chrome */
+  -o-transform: scale(2.5); /* Opera */
+  transform: scale(2.5);
+  padding: 12px;
+  margin-right: 1em;
+  display: block;
+  float: left;
+  border: 1px solid green;
+}
+
+table {
+  border-collapse: collapse;
+}
+td {
+  font-size: 0.9em;
+}
+tr:nth-child(even) td {
+    background-color: #d2d2d2;
+}
+td, th {
+    border: 1px dotted #8a8a8a;
+    padding: 0.4em;
+    color: #333;
+}
+th {
+  background-color: #b9b9b9;
+  text-align: center;
+}
+.small {
+  font-size: smaller;
+  font-style: italic;
+}
+.withindex td:first-of-type {
+  text-align: right;
+}
+
+/* Might want to wrap a span around your checkbox text */
+.checkboxtext
+{
+  /* Checkbox text */
+  font-size: 110%;
+  display: inline;
+}
+#aboutLink {
+  font-size: 9pt;
+}
+#aboutContent {
+  display: none;
+  padding:1em 2em;
+  border: 1px solid #888;
+  border-radius: 20px;
+  background-color: #ddd;
+  text-align: left;
+  color: #000;
+  width:80%;
+  margin: 0 auto;
+  line-height: 1.3em;
+}
+#aboutContent a {
+  border-bottom: 1px dotted #aaa;
+}
+#layout {
+  margin: 2em auto;
+  width:80%;
+  padding:2em 1em;
+  border: 1px solid #777;
+  border-radius: 30px;
+  background-color: #fff;
+}
+#tools {
+  max-width: 480px;
+}
+.practice #tools div, .practice #tools span {
+  text-align: left;
+}
+#hide {
+  display: none;
+}
+#hideLink {
+  text-align: center;
+}
+a {
+  color: #25417a;
+  border-bottom-color: #25417a;
+  text-decoration: none;
+  border-bottom: 1px dotted #1b611c;
+}
+a.logo {
+  border-bottom: none;
+}
+a:hover {
+  color:#259d45;
+  border-bottom-color: #259d45;
+}
+
+#quicklinks ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+#quicklinks li {
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+  margin-right: 16px;
+}
+#quicklinks li:last-child {
+  margin-right: 0;
+}
+#quicklinks a {
+  display: inline-block;
+  padding: 12px 24px 6px 24px;
+  border: none;
+  border-radius: 24px;
+  background-color: #aaa;
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+#quicklinks a:hover {
+  color: #37753f;
+  background-color: #ccc;
+}
+
+
+#bc {
+  font-size: 15em;
+  margin:0;
+  padding: 0;
+}
+#twitter {
+  font-size: 2.5em;
+}
+#tools {
+  font-size: 1.1em;
+  margin: 0.5em auto;
+  padding: 1em;
+  border-top: 1px solid #999;
+  width: 80%;
+  line-height: 1.5em;
+}
+#tools div {
+  margin-bottom: 0.5em;
+}
+#reload {
+  margin-top: 0.6em;
+}
+.anim {
+  -webkit-animation: bounce-in-top 1.3s both;
+          animation: bounce-in-top 1.3s both;
+}
+@-webkit-keyframes bounce-in-top {
+  0% {
+    -webkit-transform: translateY(-500px);
+            transform: translateY(-500px);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+    opacity: 0;
+  }
+  38% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    opacity: 1;
+  }
+  55% {
+    -webkit-transform: translateY(-65px);
+            transform: translateY(-65px);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  72% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+  81% {
+    -webkit-transform: translateY(-28px);
+            transform: translateY(-28px);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  90% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+  95% {
+    -webkit-transform: translateY(-8px);
+            transform: translateY(-8px);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+}
+@keyframes bounce-in-top {
+  0% {
+    -webkit-transform: translateY(-500px);
+            transform: translateY(-500px);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+    opacity: 0;
+  }
+  38% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+    opacity: 1;
+  }
+  55% {
+    -webkit-transform: translateY(-65px);
+            transform: translateY(-65px);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  72% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+  81% {
+    -webkit-transform: translateY(-28px);
+            transform: translateY(-28px);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  90% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+  95% {
+    -webkit-transform: translateY(-8px);
+            transform: translateY(-8px);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+  }
+}
+
+/* Essays */
+
+header {
+  text-align: center;
+}
+.essay .content {
+  text-align: left;
+  margin: 0 20%;
+  font-size: 1.05em;
+}
+
+.essay .content h1 {
+  text-align: center;
+  margin-bottom: 0;
+  color: #666;
+}
+
+.essay .content .date {
+  text-align: center;
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 2px;
+  color: #666;
+}
+
+.essay .content p, .essay .content li {
+  line-height: 1.8;
+  color: #333;
+}
+
+.essay .content a {
+  color: #2a4d85;
+  border-bottom: 1px dotted;
+}
+
+.essay .content a:visited {
+  color: #083607;
+}
+
+.essay .content a:hover {
+  color:#259d45;
+}
+
+.essay .content strong {
+  background-color: #ffffcf;
+  color: #000;
+  padding:4px 3px 1px 3px;
+}
+.essay .content li {
+  margin-bottom: 0.5em;
+}
+.essay .content img {
+  max-width: 100%;
+}
+.center {
+  text-align: center;
+}
+
+@media only screen and (max-width: 900px) {
+  .essay .content {
+    margin: 0 0.5em;
+  }
+}
+
+@media print {
+  body {
+    background-color: #fff;
+    color: #000;
+  }
+  #layout {
+    margin: 0;
+    width: 100%;
+    padding: 0;
+    border: none;
+    background-color: #fff;
+  }
+  div#bc img {
+    width: 34px;
+    height: 40px;
+    margin-top:0.9em;
+  }
+  div#bc {
+    font-size: 1em;
+    width: 34px;
+    height: 40px;
+    float: left;
+  }
+  .essay .content {
+    margin: 0;
+  }
+  .essay .content p, .essay .content li {
+    color: #000;
+    line-height: 1.5;
+  }
+  .essay .content a {
+    border-bottom: none;
+  }
+  .essay div.leadimage {
+    width: 40%;
+    float: right;
+    margin: 0 1em 1em 1em;
+  }
+  #navigation, #twitterbox {
+    display: none;
+  }
+}
+
+@supports (-webkit-touch-callout: none) {
+  input[type=checkbox] {
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);
+  }
+
+  #layout {
+    margin: 0 auto;
+    width:98%;
+    padding:0.1em 0.1em;
+    border: 1px solid #777;
+    border-radius: 30px;
+    background-color: #ccc;
+  }
+
+  div#tools {
+    font-size: 1.6em;
+    margin: 0.5em auto;
+    padding: 0.5em;
+    border-top: 1px solid #999;
+    line-height: 2em;
+    max-width: 99%;
+  }
+}
