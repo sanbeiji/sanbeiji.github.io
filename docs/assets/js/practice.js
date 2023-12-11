@@ -47,6 +47,7 @@ var excerpts = [
 'Bruckner: Symphony No.7',
 'Dvorak: Symphony No.8',
 'Dvorak: Symphony No.9',
+'Dvorak: Quintet Op.77',
 'Franck: Symphony in D',
 'Ginastera: Concerto for Strings',
 'Ginastera: Variaciones Concertantes',
@@ -99,6 +100,7 @@ var excerpts = [
 'Prokofiev: Cinderella',
 'Rimsky-Korsakov: Scheherazade',
 'Rimsky-Korsakov: Scheherazade',
+'Rossini: Barber of Seville Overture',
 'Saint-Saens: Elephant',
 'Saint-Saens: Elephant',
 'Schoenberg: Kammersymphonie, Op.9',
@@ -117,6 +119,12 @@ var excerpts = [
 'Smetana: Bartered Bride',
 'Smetana: Bartered Bride',
 'Smetana: Ma Vlast',
+'Strauss: Ein Heldenleben',
+'Strauss: Don Juan',
+'Strauss: Der Rosenkavalier Act 2 reh 3',
+'Strauss: Salome act 2 reh 154',
+'Strauss: Also Sprach Zarathustra',
+'Strauss: Don Quixote',
 'Stravinsky: Pulcinella',
 'Stravinsky: Pulcinella',
 'Stravinsky: Pulcinella',
@@ -132,6 +140,7 @@ var excerpts = [
 'Tchaikovsky: Symphony No.5',
 'Tchaikovsky: Symphony No.5',
 'Tchaikovsky: Symphony No.6',
+'Verdi: Falstaff (beginning of act 3)',
 'Verdi: La Forza Del Destino',
 'Verdi: Otello',
 'Verdi: Otello',
@@ -202,6 +211,7 @@ var mandatory = ['Schoenberg Verkarte Nacht', 'Mozart 35', 'Brahms 2', 'Schubert
 var strauss = [
   'Ein Heldenleben', 'Ein Heldenleben', 'Ein Heldenleben', 'Ein Heldenleben', 'Ein Heldenleben', 'Ein Heldenleben',
   'Don Juan', 'Don Juan', 'Don Juan',
+  'Der Rosenkavalier Act 2 reh 3', 'Salome act 2 reh 154',
   'Also Sprach Zarathustra', 'Don Quixote'];
 
 var todays_excerpt = excerpts.sample();
