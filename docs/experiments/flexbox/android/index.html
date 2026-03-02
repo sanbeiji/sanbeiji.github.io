@@ -16,22 +16,27 @@
             padding: 40px 20px;
         }
 
-        a { color:lightblue; }
+        a { color: #93c5fd; text-decoration: none; }
+        a:hover { text-decoration: underline; }
 
         h1 { margin-top: 0; font-size: 28px; margin-bottom: 5px; text-align: center; }
-        p { color: #a1a1aa; margin-bottom: 20px; text-align: center; }
+        p { color: #a1a1aa; margin-bottom: 30px; text-align: center; line-height: 1.5; }
 
+        /* Top Controls */
         .controls {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
+            align-items: flex-end;
             gap: 20px;
             margin-bottom: 20px;
             background: #27272a;
             padding: 20px 30px;
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            max-width: 900px;
+            max-width: 1050px;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .control-group { display: flex; flex-direction: column; gap: 8px; }
@@ -43,7 +48,7 @@
 
         label { font-size: 14px; font-weight: 600; color: #a3e635; /* Compose Green */ }
 
-        select {
+        select, button {
             padding: 10px;
             border-radius: 6px;
             border: 1px solid #3f3f46;
@@ -52,14 +57,31 @@
             font-size: 14px;
             outline: none;
             cursor: pointer;
-            transition: border-color 0.2s;
+            transition: all 0.2s;
         }
 
-        select:focus { border-color: #a3e635; }
+        select:focus, input:focus { border-color: #a3e635; }
 
-        .canvas-container {
+        .btn-group { display: flex; gap: 8px; }
+        
+        button { font-weight: bold; background: #3f3f46; border: none; padding: 10px 14px; }
+        button:hover { background: #52525b; }
+        button:active { background: #a3e635; color: #18181b; }
+
+        /* Main Workspace: Canvas + Side Panel */
+        .main-workspace {
+            display: flex;
+            gap: 20px;
             width: 100%;
-            max-width: 1100px;
+            max-width: 1400px;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* Canvas Area */
+        .canvas-container {
+            flex: 1;
+            min-width: 0; /* Prevents flex blowout */
             background: #09090b;
             border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
@@ -74,13 +96,96 @@
             height: auto;
             aspect-ratio: 16 / 10;
         }
+
+        /* Side Panel Area */
+        .item-panel {
+            width: 320px;
+            background: #27272a;
+            border-radius: 16px;
+            border: 2px solid #3f3f46;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            max-height: calc(100vw * (10/16)); /* Try to match canvas height */
+            overflow-y: auto;
+        }
+
+        .item-panel h3 {
+            margin: 0;
+            color: #f4f4f5;
+            font-size: 18px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3f3f46;
+        }
+
+        .item-card {
+            background: #18181b;
+            border-radius: 8px;
+            padding: 12px;
+            border-left: 6px solid;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .item-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .item-badge {
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .item-inputs {
+            display: flex;
+            gap: 10px;
+        }
+
+        .item-inputs label {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            font-size: 12px;
+            color: #a1a1aa;
+            flex: 1;
+        }
+
+        .item-inputs input {
+            width: 100%;
+            padding: 6px;
+            border-radius: 4px;
+            border: 1px solid #3f3f46;
+            background: #27272a;
+            color: #f4f4f5;
+            box-sizing: border-box;
+        }
+
+        /* Responsive Layout Stacking */
+        @media (max-width: 1024px) {
+            .main-workspace { flex-direction: column; align-items: center; }
+            .item-panel { width: 100%; max-width: 1100px; max-height: 400px; }
+            #itemList { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+        }
     </style>
 </head>
 <body>
 
-    <h1>Compose FlexBox Blueprint</h1>
-    <p>Watch how <code>justifyContent</code> and <code>alignItems</code> distribute <strong>dp</strong> space inside different form factors.
-        <br><a href="https://developer.android.com/develop/ui/compose/layouts/adaptive/flexbox">Read the FlexBox documentation</a> | <a href="/">sanbeiji.com</a></p>
+    <h1>Compose FlexBox Simulator</h1>
+    <p>Watch how <code>wrap</code> forces items to spill into new lines when the device screen is too narrow.<br>
+        Adjust the exact <code>dp</code> basis (width/height) of items in the side panel.<br>
+        <a href="https://developer.android.com/develop/ui/compose/layouts/adaptive/flexbox" target="_blank">Read the FlexBox documentation</a> | <a href="/">sanbeiji.com</a>
+    </p>
 
     <div class="controls">
         <div class="control-group device-group">
@@ -99,6 +204,15 @@
                 <option value="RowReverse">RowReverse</option>
                 <option value="Column">Column</option>
                 <option value="ColumnReverse">ColumnReverse</option>
+            </select>
+        </div>
+
+        <div class="control-group">
+            <label for="flexWrap">wrap</label>
+            <select id="flexWrap">
+                <option value="NoWrap">NoWrap</option>
+                <option value="Wrap">Wrap</option>
+                <option value="WrapReverse">WrapReverse</option>
             </select>
         </div>
 
@@ -123,10 +237,26 @@
                 <option value="Stretch">Stretch</option>
             </select>
         </div>
+
+        <div class="control-group device-group" style="border-right: none; border-left: 2px solid #3f3f46; padding-left: 20px;">
+            <label>Items</label>
+            <div class="btn-group">
+                <button id="addBtn">+ Add</button>
+                <button id="remBtn">- Remove</button>
+            </div>
+        </div>
     </div>
 
-    <div class="canvas-container">
-        <canvas id="flexCanvas" width="1600" height="1000"></canvas>
+    <div class="main-workspace">
+        <div class="canvas-container">
+            <canvas id="flexCanvas" width="1600" height="1000"></canvas>
+        </div>
+        
+        <div class="item-panel">
+            <h3>Item Basis Properties</h3>
+            <div id="itemList" style="display: flex; flex-direction: column; gap: 10px;">
+                </div>
+        </div>
     </div>
 
     <script>
@@ -135,10 +265,13 @@
 
         const deviceSelect = document.getElementById('deviceSelect');
         const dirSelect = document.getElementById('flexDirection');
+        const wrapSelect = document.getElementById('flexWrap');
         const justifySelect = document.getElementById('justifyContent');
         const alignSelect = document.getElementById('alignItems');
+        const addBtn = document.getElementById('addBtn');
+        const remBtn = document.getElementById('remBtn');
+        const itemListDiv = document.getElementById('itemList');
 
-        // Target dp resolutions. Scaled down slightly here so they fit beautifully inside the 1600x1000 stage.
         const devices = {
             'pixel10pro': { w: 412, h: 892, name: 'Pixel 10 Pro' },
             'pixel10fold': { w: 844, h: 800, name: 'Pixel 10 Fold' },
@@ -147,73 +280,141 @@
 
         const screen = { currentW: 412, currentH: 892, targetW: 412, targetH: 892, name: 'Pixel 10 Pro' };
 
-        // Highly distinct colors for the Compose items
-        const items = [
-            { id: '1', baseW: 120, baseH: 80, color: '#ef4444', x: 0, y: 0, w: 120, h: 80, tx: 0, ty: 0, tw: 120, th: 80 },
-            { id: '2', baseW: 100, baseH: 140, color: '#3b82f6', x: 0, y: 0, w: 100, h: 140, tx: 0, ty: 0, tw: 100, th: 140 },
-            { id: '3', baseW: 160, baseH: 100, color: '#10b981', x: 0, y: 0, w: 160, h: 100, tx: 0, ty: 0, tw: 160, th: 100 }
+        const palette = ['#ef4444', '#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#0ea5e9'];
+        
+        let items = [
+            { id: '1', baseW: 120, baseH: 80, color: palette[0], x: 0, y: 0, w: 120, h: 80, tx: 0, ty: 0, tw: 120, th: 80 },
+            { id: '2', baseW: 100, baseH: 140, color: palette[1], x: 0, y: 0, w: 100, h: 140, tx: 0, ty: 0, tw: 100, th: 140 },
+            { id: '3', baseW: 160, baseH: 100, color: palette[2], x: 0, y: 0, w: 160, h: 100, tx: 0, ty: 0, tw: 160, th: 100 }
         ];
 
         let currentDirection = 'Row';
+        let layoutLines = []; 
 
         function lerp(start, end, factor) {
             return start + (end - start) * factor;
         }
 
+        // Generate the UI side panel for the item properties
+        function renderItemPanel() {
+            itemListDiv.innerHTML = '';
+            items.forEach((item) => {
+                const card = document.createElement('div');
+                card.className = 'item-card';
+                card.style.borderLeftColor = item.color;
+                
+                card.innerHTML = `
+                    <div class="item-card-header">
+                        <span class="item-badge" style="background:${item.color}">Item ${item.id}</span>
+                    </div>
+                    <div class="item-inputs">
+                        <label>Width (dp)
+                            <input type="number" min="20" max="800" value="${item.baseW}" data-id="${item.id}" data-prop="w">
+                        </label>
+                        <label>Height (dp)
+                            <input type="number" min="20" max="800" value="${item.baseH}" data-id="${item.id}" data-prop="h">
+                        </label>
+                    </div>
+                `;
+                itemListDiv.appendChild(card);
+            });
+
+            // Add change listeners to the newly created inputs
+            itemListDiv.querySelectorAll('input').forEach(input => {
+                input.addEventListener('input', (e) => {
+                    const id = e.target.getAttribute('data-id');
+                    const prop = e.target.getAttribute('data-prop');
+                    const val = parseInt(e.target.value) || 20; // Default to 20 if cleared
+                    const targetItem = items.find(i => i.id === id);
+                    if (targetItem) {
+                        if (prop === 'w') targetItem.baseW = val;
+                        if (prop === 'h') targetItem.baseH = val;
+                        calculateLayoutTargets();
+                    }
+                });
+            });
+        }
+
         function calculateLayoutTargets() {
             const direction = dirSelect.value;
+            const wrapMode = wrapSelect.value;
             const justify = justifySelect.value;
             const align = alignSelect.value;
             currentDirection = direction;
 
             const isRow = direction.includes('Row');
-            const isReverse = direction.includes('Reverse');
+            const isMainReverse = direction.includes('Reverse');
+            const isWrap = wrapMode !== 'NoWrap';
+            const isWrapReverse = wrapMode === 'WrapReverse';
 
             const mainDim = isRow ? screen.targetW : screen.targetH;
             const crossDim = isRow ? screen.targetH : screen.targetW;
 
-            let totalMainSize = 0;
-            items.forEach(item => { totalMainSize += isRow ? item.baseW : item.baseH; });
+            layoutLines = [];
+            let currentLine = { items: [], mainSize: 0, crossSize: 0 };
 
-            let remainingSpace = mainDim - totalMainSize;
-            let startPos = 0;
-            let gap = 0;
-            const n = items.length;
-
-            // Compose alignment math
-            if (justify === 'Start') { startPos = 0; } 
-            else if (justify === 'End') { startPos = remainingSpace; } 
-            else if (justify === 'Center') { startPos = remainingSpace / 2; } 
-            else if (justify === 'SpaceBetween') { gap = remainingSpace / (n - 1); } 
-            else if (justify === 'SpaceAround') { gap = remainingSpace / n; startPos = gap / 2; } 
-            else if (justify === 'SpaceEvenly') { gap = remainingSpace / (n + 1); startPos = gap; }
-
-            let currentMainPos = startPos;
-            const order = isReverse ? [2, 1, 0] : [0, 1, 2];
-
-            order.forEach(index => {
-                const item = items[index];
+            items.forEach(item => {
                 const itemMainSize = isRow ? item.baseW : item.baseH;
                 const itemCrossSize = isRow ? item.baseH : item.baseW;
 
-                let crossPos = 0;
-                let actualCrossSize = itemCrossSize;
+                if (isWrap && currentLine.items.length > 0 && currentLine.mainSize + itemMainSize > mainDim) {
+                    layoutLines.push(currentLine);
+                    currentLine = { items: [], mainSize: 0, crossSize: 0 };
+                }
+                
+                currentLine.items.push({ item, itemMainSize, itemCrossSize });
+                currentLine.mainSize += itemMainSize;
+                currentLine.crossSize = Math.max(currentLine.crossSize, itemCrossSize);
+            });
+            if (currentLine.items.length > 0) layoutLines.push(currentLine);
 
-                if (align === 'End') { crossPos = crossDim - itemCrossSize; } 
-                else if (align === 'Center') { crossPos = (crossDim - itemCrossSize) / 2; } 
-                else if (align === 'Stretch') { actualCrossSize = crossDim; }
+            if (isWrapReverse) layoutLines.reverse();
+            
+            let currentCrossPos = 0;
+            layoutLines.forEach(line => {
+                line.crossPos = currentCrossPos;
+                currentCrossPos += line.crossSize;
+            });
 
-                let targetX = isRow ? currentMainPos : crossPos;
-                let targetY = isRow ? crossPos : currentMainPos;
-                let targetW = isRow ? itemMainSize : actualCrossSize;
-                let targetH = isRow ? actualCrossSize : itemMainSize;
+            layoutLines.forEach(line => {
+                let remainingSpace = mainDim - line.mainSize;
+                let startPos = 0;
+                let gap = 0;
+                const n = line.items.length;
 
-                // Adjust physical coordinates if layout is reversed
-                if (isReverse && isRow) { targetX = screen.targetW - currentMainPos - targetW; } 
-                else if (isReverse && !isRow) { targetY = screen.targetH - currentMainPos - targetH; }
+                if (justify === 'Start') { startPos = 0; } 
+                else if (justify === 'End') { startPos = remainingSpace; } 
+                else if (justify === 'Center') { startPos = remainingSpace / 2; } 
+                else if (justify === 'SpaceBetween') { gap = n > 1 ? remainingSpace / (n - 1) : 0; } 
+                else if (justify === 'SpaceAround') { gap = n > 0 ? remainingSpace / n : 0; startPos = gap / 2; } 
+                else if (justify === 'SpaceEvenly') { gap = remainingSpace / (n + 1); startPos = gap; }
 
-                item.tx = targetX; item.ty = targetY; item.tw = targetW; item.th = targetH;
-                currentMainPos += itemMainSize + gap;
+                let currentMainPos = startPos;
+                let lineItemsToProcess = isMainReverse ? [...line.items].reverse() : line.items;
+
+                lineItemsToProcess.forEach(wrappedItem => {
+                    const { item, itemMainSize, itemCrossSize } = wrappedItem;
+                    let crossPos = line.crossPos;
+                    let actualCrossSize = itemCrossSize;
+
+                    if (align === 'End') { crossPos += (line.crossSize - itemCrossSize); } 
+                    else if (align === 'Center') { crossPos += (line.crossSize - itemCrossSize) / 2; } 
+                    else if (align === 'Stretch') { actualCrossSize = line.crossSize; }
+
+                    let targetX = isRow ? currentMainPos : crossPos;
+                    let targetY = isRow ? crossPos : currentMainPos;
+                    let targetW = isRow ? itemMainSize : actualCrossSize;
+                    let targetH = isRow ? actualCrossSize : itemMainSize;
+
+                    if (isMainReverse && isRow) { targetX = mainDim - currentMainPos - targetW; } 
+                    else if (isMainReverse && !isRow) { targetY = mainDim - currentMainPos - targetH; }
+
+                    if (isWrapReverse && isRow) { targetY = crossDim - crossPos - targetH; }
+                    else if (isWrapReverse && !isRow) { targetX = crossDim - crossPos - targetW; }
+
+                    item.tx = targetX; item.ty = targetY; item.tw = targetW; item.th = targetH;
+                    currentMainPos += itemMainSize + gap;
+                });
             });
         }
 
@@ -225,9 +426,8 @@
             calculateLayoutTargets();
         }
 
-        // Draw the vibrant dimension lines and labels
         function drawBlueprintArrow(scale, offsetX, offsetY, x1, y1, x2, y2, text) {
-            ctx.strokeStyle = '#fbbf24'; // Amber math color
+            ctx.strokeStyle = '#fbbf24'; 
             ctx.lineWidth = 3;
             
             const px1 = offsetX + (x1 * scale);
@@ -238,10 +438,10 @@
             ctx.beginPath(); ctx.moveTo(px1, py1); ctx.lineTo(px2, py2); ctx.stroke();
 
             const tick = 10;
-            if (Math.abs(py1 - py2) < 1) { // Horizontal line
+            if (Math.abs(py1 - py2) < 1) { 
                 ctx.beginPath(); ctx.moveTo(px1, py1 - tick); ctx.lineTo(px1, py1 + tick); ctx.stroke();
                 ctx.beginPath(); ctx.moveTo(px2, py2 - tick); ctx.lineTo(px2, py2 + tick); ctx.stroke();
-            } else { // Vertical line
+            } else { 
                 ctx.beginPath(); ctx.moveTo(px1 - tick, py1); ctx.lineTo(px1 + tick, py1); ctx.stroke();
                 ctx.beginPath(); ctx.moveTo(px2 - tick, py2); ctx.lineTo(px2 + tick, py2); ctx.stroke();
             }
@@ -249,12 +449,12 @@
             const cx = (px1 + px2) / 2;
             const cy = (py1 + py2) / 2;
             
-            ctx.font = 'bold 16px Consolas, monospace';
+            ctx.font = 'bold 14px Consolas, monospace';
             const metrics = ctx.measureText(text);
-            const pad = 8;
+            const pad = 6;
             
-            ctx.fillStyle = '#1e1e24'; // Match device background
-            ctx.fillRect(cx - metrics.width/2 - pad, cy - 12, metrics.width + pad*2, 24);
+            ctx.fillStyle = '#1e1e24'; 
+            ctx.fillRect(cx - metrics.width/2 - pad, cy - 10, metrics.width + pad*2, 20);
             
             ctx.fillStyle = '#fbbf24';
             ctx.textAlign = 'center';
@@ -263,11 +463,9 @@
         }
 
         function animate() {
-            // Smoothly morph device size
             screen.currentW = lerp(screen.currentW, screen.targetW, 0.08);
             screen.currentH = lerp(screen.currentH, screen.targetH, 0.08);
             
-            // Smoothly move items
             items.forEach(item => {
                 item.x = lerp(item.x, item.tx, 0.15);
                 item.y = lerp(item.y, item.ty, 0.15);
@@ -277,13 +475,12 @@
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Center the animating device inside the canvas stage
             const drawW = screen.currentW;
             const drawH = screen.currentH;
             const offsetX = (canvas.width - drawW) / 2;
             const offsetY = (canvas.height - drawH) / 2;
 
-            // 1. Draw Device Screen Bounds
+            // 1. Draw Device
             ctx.fillStyle = '#1e1e24';
             ctx.strokeStyle = '#52525b';
             ctx.lineWidth = 6;
@@ -295,7 +492,6 @@
                 ctx.strokeRect(offsetX, offsetY, drawW, drawH);
             }
             
-            // Device Label
             ctx.fillStyle = '#d4d4d8';
             ctx.font = 'bold 20px Segoe UI';
             ctx.textAlign = 'center';
@@ -324,65 +520,96 @@
                 ctx.fillText(`${Math.round(item.w)}×${Math.round(item.h)}`, ix + item.w / 2, iy + item.h / 2 + 14);
             });
 
-            // 3. Draw Blueprint Lines & Math
+            // 3. Draw Blueprint Lines (Per Line)
             const isRow = currentDirection.includes('Row');
-            const sorted = [...items].sort((a, b) => isRow ? a.x - b.x : a.y - b.y);
+            const isWrapReverse = wrapSelect.value === 'WrapReverse';
             
-            const midY = screen.currentH / 2;
-            const midX = screen.currentW / 2;
+            layoutLines.forEach((line) => {
+                const sortedItems = [...line.items.map(i => i.item)].sort((a, b) => isRow ? a.x - b.x : a.y - b.y);
+                if(sortedItems.length === 0) return;
 
-            // Draw gap arrows
-            let startSpace = isRow ? sorted[0].x : sorted[0].y;
-            if (startSpace > 2) { 
-                if (isRow) drawBlueprintArrow(1, offsetX, offsetY, 0, midY, startSpace, midY, `${Math.round(startSpace)}dp`);
-                else drawBlueprintArrow(1, offsetX, offsetY, midX, 0, midX, startSpace, `${Math.round(startSpace)}dp`);
-            }
+                let midCross = isWrapReverse ? 
+                    (isRow ? (screen.currentH - line.crossPos - line.crossSize/2) : (screen.currentW - line.crossPos - line.crossSize/2)) :
+                    (line.crossPos + line.crossSize / 2);
 
-            for (let i = 0; i < sorted.length - 1; i++) {
-                let endOfCurrent = isRow ? sorted[i].x + sorted[i].w : sorted[i].y + sorted[i].h;
-                let startOfNext = isRow ? sorted[i+1].x : sorted[i+1].y;
-                let gap = startOfNext - endOfCurrent;
-                
-                if (gap > 2) {
-                    if (isRow) drawBlueprintArrow(1, offsetX, offsetY, endOfCurrent, midY, startOfNext, midY, `${Math.round(gap)}dp`);
-                    else drawBlueprintArrow(1, offsetX, offsetY, midX, endOfCurrent, midX, startOfNext, `${Math.round(gap)}dp`);
+                let startSpace = isRow ? sortedItems[0].x : sortedItems[0].y;
+                if (startSpace > 2) { 
+                    if (isRow) drawBlueprintArrow(1, offsetX, offsetY, 0, midCross, startSpace, midCross, `${Math.round(startSpace)}dp`);
+                    else drawBlueprintArrow(1, offsetX, offsetY, midCross, 0, midCross, startSpace, `${Math.round(startSpace)}dp`);
                 }
-            }
 
-            let lastItem = sorted[sorted.length - 1];
-            let endSpace = isRow ? screen.currentW - (lastItem.x + lastItem.w) : screen.currentH - (lastItem.y + lastItem.h);
-            if (endSpace > 2) {
-                let start = isRow ? lastItem.x + lastItem.w : lastItem.y + lastItem.h;
-                let end = isRow ? screen.currentW : screen.currentH;
-                if (isRow) drawBlueprintArrow(1, offsetX, offsetY, start, midY, end, midY, `${Math.round(endSpace)}dp`);
-                else drawBlueprintArrow(1, offsetX, offsetY, midX, start, midX, end, `${Math.round(endSpace)}dp`);
-            }
+                for (let i = 0; i < sortedItems.length - 1; i++) {
+                    let endOfCurrent = isRow ? sortedItems[i].x + sortedItems[i].w : sortedItems[i].y + sortedItems[i].h;
+                    let startOfNext = isRow ? sortedItems[i+1].x : sortedItems[i+1].y;
+                    let gap = startOfNext - endOfCurrent;
+                    
+                    if (gap > 2) {
+                        if (isRow) drawBlueprintArrow(1, offsetX, offsetY, endOfCurrent, midCross, startOfNext, midCross, `${Math.round(gap)}dp`);
+                        else drawBlueprintArrow(1, offsetX, offsetY, midCross, endOfCurrent, midCross, startOfNext, `${Math.round(gap)}dp`);
+                    }
+                }
 
-            // 4. Equation HUD (Fixed to the bottom-left of the stage)
-            const totalItemSize = isRow ? 380 : 320; 
+                let lastItem = sortedItems[sortedItems.length - 1];
+                let endSpace = isRow ? screen.currentW - (lastItem.x + lastItem.w) : screen.currentH - (lastItem.y + lastItem.h);
+                if (endSpace > 2) {
+                    let start = isRow ? lastItem.x + lastItem.w : lastItem.y + lastItem.h;
+                    let end = isRow ? screen.currentW : screen.currentH;
+                    if (isRow) drawBlueprintArrow(1, offsetX, offsetY, start, midCross, end, midCross, `${Math.round(endSpace)}dp`);
+                    else drawBlueprintArrow(1, offsetX, offsetY, midCross, start, midCross, end, `${Math.round(endSpace)}dp`);
+                }
+            });
+
+            // 4. Equation HUD Update
+            const totalItemSize = items.reduce((sum, item) => sum + (isRow ? item.baseW : item.baseH), 0);
             const containerSize = isRow ? screen.currentW : screen.currentH;
-            const remaining = Math.max(0, containerSize - totalItemSize);
             
             ctx.fillStyle = 'rgba(0,0,0,0.85)';
             ctx.fillRect(20, canvas.height - 60, 480, 40);
             ctx.strokeStyle = '#3f3f46';
             ctx.strokeRect(20, canvas.height - 60, 480, 40);
             
-            ctx.fillStyle = '#a3e635'; // Compose Green text
-            ctx.font = '18px Consolas, monospace';
+            ctx.fillStyle = wrapSelect.value !== 'NoWrap' && totalItemSize > containerSize ? '#fbbf24' : '#a3e635'; 
+            ctx.font = '16px Consolas, monospace';
             ctx.textAlign = 'left';
-            ctx.fillText(`Free Space = ${Math.round(containerSize)}dp - ${totalItemSize}dp = ${Math.round(remaining)}dp`, 40, canvas.height - 40);
+            ctx.fillText(`Container: ${Math.round(containerSize)}dp | Total Items Main Size: ${totalItemSize}dp`, 40, canvas.height - 35);
 
             requestAnimationFrame(animate);
         }
 
+        // Add/Remove Logic
+        addBtn.addEventListener('click', () => {
+            if(items.length >= 15) return; 
+            const newId = (items.length + 1).toString();
+            const newW = Math.floor(Math.random() * 80) + 80;
+            const newH = Math.floor(Math.random() * 80) + 80;
+            const newColor = palette[items.length % palette.length];
+            
+            items.push({ 
+                id: newId, baseW: newW, baseH: newH, color: newColor, 
+                x: screen.currentW/2, y: screen.currentH/2, w: 0, h: 0, 
+                tx: 0, ty: 0, tw: newW, th: newH 
+            });
+            renderItemPanel();
+            calculateLayoutTargets();
+        });
+
+        remBtn.addEventListener('click', () => {
+            if(items.length > 1) {
+                items.pop();
+                renderItemPanel();
+                calculateLayoutTargets();
+            }
+        });
+
         // Listeners
         deviceSelect.addEventListener('change', setDevice);
         dirSelect.addEventListener('change', calculateLayoutTargets);
+        wrapSelect.addEventListener('change', calculateLayoutTargets);
         justifySelect.addEventListener('change', calculateLayoutTargets);
         alignSelect.addEventListener('change', calculateLayoutTargets);
 
         // Init Layout Math
+        renderItemPanel();
         setDevice();
         screen.currentW = screen.targetW;
         screen.currentH = screen.targetH;
