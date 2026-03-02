@@ -4,9 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compose FlexBox Visualizer</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -49,7 +46,7 @@
             padding-right: 20px;
         }
 
-        label { font-size: 14px; font-weight: 600; color: #a3e635; /* Compose Green */ }
+        label { font-size: 14px; font-weight: 600; color: #a3e635; }
 
         select, button {
             padding: 10px;
@@ -79,12 +76,13 @@
             max-width: 1400px;
             justify-content: center;
             align-items: flex-start;
+            margin-bottom: 20px;
         }
 
         /* Canvas Area */
         .canvas-container {
             flex: 1;
-            min-width: 0; /* Prevents flex blowout */
+            min-width: 0;
             background: #09090b;
             border-radius: 16px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
@@ -112,7 +110,7 @@
             flex-direction: column;
             gap: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            max-height: calc(100vw * (10/16)); /* Try to match canvas height */
+            max-height: calc(100vw * (10/16));
             overflow-y: auto;
         }
 
@@ -174,7 +172,58 @@
             box-sizing: border-box;
         }
 
-        /* Responsive Layout Stacking */
+        /* Code Generation Panel */
+        .code-panel {
+            width: 100%;
+            max-width: 1400px;
+            background: #1e1e24;
+            border-radius: 16px;
+            border: 2px solid #3f3f46;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: #27272a;
+            border-bottom: 1px solid #3f3f46;
+        }
+
+        .code-header h3 {
+            margin: 0;
+            color: #a3e635;
+            font-size: 16px;
+        }
+
+        .code-header button {
+            background: #4f46e5; /* Indigo */
+            color: white;
+            padding: 8px 16px;
+        }
+
+        .code-header button:hover { background: #6366f1; }
+        .code-header button.copied { background: #10b981; }
+
+        pre {
+            margin: 0;
+            padding: 20px;
+            overflow-x: auto;
+            color: #e4e4e7;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .keyword { color: #c678dd; } /* Purple */
+        .type { color: #e5c07b; } /* Yellow */
+        .property { color: #e06c75; } /* Red */
+        .string { color: #98c379; } /* Green */
+        .number { color: #d19a66; } /* Orange */
+
         @media (max-width: 1024px) {
             .main-workspace { flex-direction: column; align-items: center; }
             .item-panel { width: 100%; max-width: 1100px; max-height: 400px; }
@@ -187,7 +236,7 @@
     <h1>Compose FlexBox Simulator</h1>
     <p>Watch how <code>wrap</code> forces items to spill into new lines when the device screen is too narrow.<br>
         Adjust the exact <code>dp</code> basis (width/height) of items in the side panel.<br>
-        <a href="https://developer.android.com/develop/ui/compose/layouts/adaptive/flexbox" target="_blank">Read the Jetpack Compose FlexBox documentation</a> | <a href="/">Return to sanbeiji.com</a>
+        <a href="https://developer.android.com/develop/ui/compose/layouts/adaptive/flexbox" target="_blank">Read the FlexBox documentation</a>
     </p>
 
     <div class="controls">
@@ -262,6 +311,14 @@
         </div>
     </div>
 
+    <div class="code-panel">
+        <div class="code-header">
+            <h3>Generated Kotlin Code</h3>
+            <button id="copyBtn">Copy Code</button>
+        </div>
+        <pre><code id="codeSnippet"></code></pre>
+    </div>
+
     <script>
         const canvas = document.getElementById('flexCanvas');
         const ctx = canvas.getContext('2d');
@@ -274,6 +331,8 @@
         const addBtn = document.getElementById('addBtn');
         const remBtn = document.getElementById('remBtn');
         const itemListDiv = document.getElementById('itemList');
+        const codeSnippet = document.getElementById('codeSnippet');
+        const copyBtn = document.getElementById('copyBtn');
 
         const devices = {
             'pixel10pro': { w: 412, h: 892, name: 'Pixel 10 Pro' },
@@ -282,7 +341,6 @@
         };
 
         const screen = { currentW: 412, currentH: 892, targetW: 412, targetH: 892, name: 'Pixel 10 Pro' };
-
         const palette = ['#ef4444', '#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#0ea5e9'];
         
         let items = [
@@ -322,12 +380,11 @@
                 itemListDiv.appendChild(card);
             });
 
-            // Add change listeners to the newly created inputs
             itemListDiv.querySelectorAll('input').forEach(input => {
                 input.addEventListener('input', (e) => {
                     const id = e.target.getAttribute('data-id');
                     const prop = e.target.getAttribute('data-prop');
-                    const val = parseInt(e.target.value) || 20; // Default to 20 if cleared
+                    const val = parseInt(e.target.value) || 20; 
                     const targetItem = items.find(i => i.id === id);
                     if (targetItem) {
                         if (prop === 'w') targetItem.baseW = val;
@@ -336,6 +393,46 @@
                     }
                 });
             });
+        }
+
+        // NEW: Dynamically generate Jetpack Compose Kotlin Code
+        function updateCodeSnippet() {
+            const dir = dirSelect.value;
+            const wrap = wrapSelect.value;
+            const justify = justifySelect.value;
+            const align = alignSelect.value;
+            const isRow = dir.includes('Row');
+
+            let configLines = [];
+            if (dir !== 'Row') configLines.push(`        direction = FlexDirection.<span class="property">${dir}</span>`);
+            if (wrap !== 'NoWrap') configLines.push(`        wrap = FlexWrap.<span class="property">${wrap}</span>`);
+            if (justify !== 'Start') configLines.push(`        justifyContent = JustifyContent.<span class="property">${justify}</span>`);
+            if (align !== 'Start') configLines.push(`        alignItems = AlignItems.<span class="property">${align}</span>`);
+
+            let htmlCode = '';
+
+            if (configLines.length > 0) {
+                htmlCode += `<span class="type">FlexBox</span>(\n    config = <span class="type">FlexBoxConfig</span> {\n${configLines.join('\n')}\n    }\n) {\n`;
+            } else {
+                htmlCode += `<span class="type">FlexBox</span> {\n`;
+            }
+
+            items.forEach(item => {
+                // Determine basis according to main axis
+                const basisVal = isRow ? item.baseW : item.baseH;
+                const crossSizeStr = isRow ? `height = <span class="number">${item.baseH}</span>.dp` : `width = <span class="number">${item.baseW}</span>.dp`;
+                const hexColor = item.color.replace('#', '0xFF');
+
+                htmlCode += `    <span class="type">Box</span>(\n`;
+                htmlCode += `        modifier = <span class="type">Modifier</span>\n`;
+                htmlCode += `            .flex { basis(<span class="number">${basisVal}</span>.dp) }\n`;
+                htmlCode += `            .size(${crossSizeStr})\n`;
+                htmlCode += `            .background(<span class="type">Color</span>(${hexColor}))\n`;
+                htmlCode += `    ) { /* Item ${item.id} Content */ }\n`;
+            });
+
+            htmlCode += `}`;
+            codeSnippet.innerHTML = htmlCode;
         }
 
         function calculateLayoutTargets() {
@@ -419,6 +516,9 @@
                     currentMainPos += itemMainSize + gap;
                 });
             });
+
+            // Refresh the code snippet whenever layout calculates
+            updateCodeSnippet();
         }
 
         function setDevice() {
@@ -602,6 +702,21 @@
                 renderItemPanel();
                 calculateLayoutTargets();
             }
+        });
+
+        // Copy Code Logic
+        copyBtn.addEventListener('click', () => {
+            // Use innerText to grab the actual code string without HTML span tags
+            const textToCopy = codeSnippet.innerText;
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const originalText = copyBtn.innerText;
+                copyBtn.innerText = 'Copied!';
+                copyBtn.classList.add('copied');
+                setTimeout(() => {
+                    copyBtn.innerText = originalText;
+                    copyBtn.classList.remove('copied');
+                }, 2000);
+            });
         });
 
         // Listeners
