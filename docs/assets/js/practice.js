@@ -214,12 +214,29 @@ var strauss = [
   'Der Rosenkavalier Act 2 reh 3', 'Salome act 2 reh 154',
   'Also Sprach Zarathustra', 'Don Quixote'];
 
-var todays_excerpt = excerpts.sample();
-var todays_excerpt2 = excerpts.sample();
-var todays_excerpt3 = excerpts.sample();
-var todays_excerpt4 = excerpts.sample();
-var todays_excerpt5 = excerpts.sample();
 var todays_key = keys.sample() + " " + modes.sample();
 var todays_strauss = strauss.sample();
-var todays_shiftpattern = shiftpatterns.sample();
-var todays_shiftpattern2 = shiftpatterns.sample();
+
+// Get unique samples from an array
+function getUniqueSamples(arr, count) {
+  let pool = [...arr];
+  let results = [];
+  for (let i = 0; i < count; i++) {
+    if (pool.length === 0) break;
+    let pick = pool.sample();
+    results.push(pick);
+    pool = pool.filter(item => item !== pick);
+  }
+  return results;
+}
+
+var randomExcerpts = getUniqueSamples(excerpts, 5);
+var todays_excerpt = randomExcerpts[0];
+var todays_excerpt2 = randomExcerpts[1];
+var todays_excerpt3 = randomExcerpts[2];
+var todays_excerpt4 = randomExcerpts[3];
+var todays_excerpt5 = randomExcerpts[4];
+
+var randomShiftPatterns = getUniqueSamples(shiftpatterns, 2);
+var todays_shiftpattern = randomShiftPatterns[0];
+var todays_shiftpattern2 = randomShiftPatterns[1];

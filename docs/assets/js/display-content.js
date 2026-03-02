@@ -1,14 +1,19 @@
-document.getElementById("show_key").innerHTML = "<a href='https://www.google.com/search?q=bass+clef+scale+" + todays_key + "&oq=" + todays_key + "' title='Practice every day! Good job!' class='scale' target='_blank'>" + todays_key + "</a>";
-document.getElementById("show_excerpt").innerHTML = "<a href='https://www.google.com/search?q=double+bass+excerpt+" + todays_excerpt + "&oq=" + todays_excerpt + "' title='That&apos;s the spirit!' class='excerpt' target='_blank'>" + todays_excerpt + "</a>";
-document.getElementById("show_excerpt2").innerHTML = "<a href='https://www.google.com/search?q=double+bass+excerpt+" + todays_excerpt2 + "&oq=" + todays_excerpt2 + "' title='That&apos;s the spirit!' class='excerpt' target='_blank'>" + todays_excerpt2 + "</a>";
-document.getElementById("show_excerpt3").innerHTML = "<a href='https://www.google.com/search?q=double+bass+excerpt+" + todays_excerpt3 + "&oq=" + todays_excerpt3 + "' title='That&apos;s the spirit!' class='excerpt' target='_blank'>" + todays_excerpt3 + "</a>";
-document.getElementById("show_excerpt4").innerHTML = "<a href='https://www.google.com/search?q=double+bass+excerpt+" + todays_excerpt4 + "&oq=" + todays_excerpt4 + "' title='That&apos;s the spirit!' class='excerpt' target='_blank'>" + todays_excerpt4 + "</a>";
-document.getElementById("show_excerpt5").innerHTML = "<a href='https://www.google.com/search?q=double+bass+excerpt+" + todays_excerpt5 + "&oq=" + todays_excerpt5 + "' title='That&apos;s the spirit!' class='excerpt' target='_blank'>" + todays_excerpt5 + "</a>";
-document.getElementById("show_strauss").innerHTML = "<a href='https://www.google.com/search?q=double+bass+excerpt+" + todays_strauss + "&oq=" + todays_strauss + "' title='Daily dosage' class='excerpt' target='_blank'>" + todays_strauss + "</a>";
-document.getElementById("mandatory1").innerHTML = "<a href='https://www.google.com/search?q=double+bass+excerpt+" + mandatory[0] + "&oq=" + mandatory[0] + "' title='Daily dosage' class='excerpt' target='_blank'>" + mandatory[0] + "</a>";
-document.getElementById("mandatory2").innerHTML = "<a href='https://www.google.com/search?q=double+bass+excerpt+" + mandatory[1] + "&oq=" + mandatory[1] + "' title='Daily dosage' class='excerpt' target='_blank'>" + mandatory[1] + "</a>";
-document.getElementById("mandatory3").innerHTML = "<a href='https://www.google.com/search?q=double+bass+excerpt+" + mandatory[2] + "&oq=" + mandatory[2] + "' title='Daily dosage' class='excerpt' target='_blank'>" + mandatory[2] + "</a>";
-document.getElementById("mandatory4").innerHTML = "<a href='https://www.google.com/search?q=double+bass+excerpt+" + mandatory[3] + "&oq=" + mandatory[3] + "' title='Daily dosage' class='excerpt' target='_blank'>" + mandatory[3] + "</a>";
+function setHTML(id, html) {
+  const el = document.getElementById(id);
+  if (el) el.innerHTML = html;
+}
+
+setHTML("show_key", "<a href='https://www.google.com/search?q=bass+clef+scale+" + todays_key + "&oq=" + todays_key + "' title='Practice every day! Good job!' class='scale' target='_blank'>" + todays_key + "</a>");
+setHTML("show_excerpt", "<a href='https://www.google.com/search?q=double+bass+excerpt+" + todays_excerpt + "&oq=" + todays_excerpt + "' title='That&apos;s the spirit!' class='excerpt' target='_blank'>" + todays_excerpt + "</a>");
+setHTML("show_excerpt2", "<a href='https://www.google.com/search?q=double+bass+excerpt+" + todays_excerpt2 + "&oq=" + todays_excerpt2 + "' title='That&apos;s the spirit!' class='excerpt' target='_blank'>" + todays_excerpt2 + "</a>");
+setHTML("show_excerpt3", "<a href='https://www.google.com/search?q=double+bass+excerpt+" + todays_excerpt3 + "&oq=" + todays_excerpt3 + "' title='That&apos;s the spirit!' class='excerpt' target='_blank'>" + todays_excerpt3 + "</a>");
+setHTML("show_excerpt4", "<a href='https://www.google.com/search?q=double+bass+excerpt+" + todays_excerpt4 + "&oq=" + todays_excerpt4 + "' title='That&apos;s the spirit!' class='excerpt' target='_blank'>" + todays_excerpt4 + "</a>");
+setHTML("show_excerpt5", "<a href='https://www.google.com/search?q=double+bass+excerpt+" + todays_excerpt5 + "&oq=" + todays_excerpt5 + "' title='That&apos;s the spirit!' class='excerpt' target='_blank'>" + todays_excerpt5 + "</a>");
+setHTML("show_strauss", "<a href='https://www.google.com/search?q=double+bass+excerpt+" + todays_strauss + "&oq=" + todays_strauss + "' title='Daily dosage' class='excerpt' target='_blank'>" + todays_strauss + "</a>");
+setHTML("mandatory1", "<a href='https://www.google.com/search?q=double+bass+excerpt+" + mandatory[0] + "&oq=" + mandatory[0] + "' title='Daily dosage' class='excerpt' target='_blank'>" + mandatory[0] + "</a>");
+setHTML("mandatory2", "<a href='https://www.google.com/search?q=double+bass+excerpt+" + mandatory[1] + "&oq=" + mandatory[1] + "' title='Daily dosage' class='excerpt' target='_blank'>" + mandatory[1] + "</a>");
+setHTML("mandatory3", "<a href='https://www.google.com/search?q=double+bass+excerpt+" + mandatory[2] + "&oq=" + mandatory[2] + "' title='Daily dosage' class='excerpt' target='_blank'>" + mandatory[2] + "</a>");
+setHTML("mandatory4", "<a href='https://www.google.com/search?q=double+bass+excerpt+" + mandatory[3] + "&oq=" + mandatory[3] + "' title='Daily dosage' class='excerpt' target='_blank'>" + mandatory[3] + "</a>");
 
 var monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
@@ -20,11 +25,13 @@ var mm = monthNames[today.getMonth()]
 var yyyy = today.getFullYear();
 
 today = 'Practice plan for ' + mm + ' ' + dd + ', ' + yyyy;
-document.getElementById("date").innerHTML = today;
-document.getElementById("pattern").innerHTML = todays_shiftpattern;
-document.getElementById("pattern2").innerHTML = todays_shiftpattern2;
+setHTML("date", today);
+setHTML("pattern", todays_shiftpattern);
+setHTML("pattern2", todays_shiftpattern2);
 
-document.getElementById("show_pushups").innerHTML = todays_pushups;
+if (typeof todays_pushups !== 'undefined') {
+  setHTML("show_pushups", todays_pushups);
+}
 
 // refresh button
 
@@ -34,7 +41,9 @@ const refreshPage = () => {
   window.location.reload();
 }
 
-refreshButton.addEventListener('click', refreshPage);
+if (refreshButton) {
+  refreshButton.addEventListener('click', refreshPage);
+}
 
 
 
