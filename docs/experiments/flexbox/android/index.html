@@ -149,7 +149,8 @@
         }
 
         .item-inputs {
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 10px;
         }
 
@@ -159,7 +160,6 @@
             gap: 4px;
             font-size: 12px;
             color: #a1a1aa;
-            flex: 1;
         }
 
         .item-inputs input {
@@ -201,7 +201,7 @@
         }
 
         .code-header button {
-            background: #4f46e5; /* Indigo */
+            background: #4f46e5;
             color: white;
             padding: 8px 16px;
         }
@@ -218,11 +218,9 @@
             line-height: 1.6;
         }
 
-        .keyword { color: #c678dd; } /* Purple */
-        .type { color: #e5c07b; } /* Yellow */
-        .property { color: #e06c75; } /* Red */
-        .string { color: #98c379; } /* Green */
-        .number { color: #d19a66; } /* Orange */
+        .type { color: #e5c07b; }
+        .property { color: #e06c75; }
+        .number { color: #d19a66; }
 
         @media (max-width: 1024px) {
             .main-workspace { flex-direction: column; align-items: center; }
@@ -234,9 +232,11 @@
 <body>
 
     <h1>Compose FlexBox Simulator</h1>
-    <p>Watch how <code>wrap</code> forces items to spill into new lines when the device screen is too narrow.<br>
-        Adjust the exact <code>dp</code> basis (width/height) of items in the side panel.<br>
-        <a href="https://developer.android.com/develop/ui/compose/layouts/adaptive/flexbox" target="_blank">Read the FlexBox documentation</a>
+    <p>
+        FlexBox is an experimental Compose container that lays out items in a single direction, dynamically resizing, wrapping, and aligning them to optimally fill the available space. Use this interactive visualizer to see how properties like <code>basis</code>, <code>grow</code>, and <code>shrink</code> affect your layout across different Android form factors, and copy the generated Kotlin code for your own app.<br>
+        <br>
+        <a href="https://developer.android.com/develop/ui/compose/layouts/adaptive/flexbox" target="_blank">Read the FlexBox documentation</a> | <a href="/">sanbeiji.com</a>
+    </p>
     </p>
 
     <div class="controls">
@@ -305,7 +305,7 @@
         </div>
         
         <div class="item-panel">
-            <h3>Item Basis Properties</h3>
+            <h3>Item Properties</h3>
             <div id="itemList" style="display: flex; flex-direction: column; gap: 10px;">
                 </div>
         </div>
@@ -343,10 +343,11 @@
         const screen = { currentW: 412, currentH: 892, targetW: 412, targetH: 892, name: 'Pixel 10 Pro' };
         const palette = ['#ef4444', '#3b82f6', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#0ea5e9'];
         
+        // Items now include grow and shrink weights
         let items = [
-            { id: '1', baseW: 120, baseH: 80, color: palette[0], x: 0, y: 0, w: 120, h: 80, tx: 0, ty: 0, tw: 120, th: 80 },
-            { id: '2', baseW: 100, baseH: 140, color: palette[1], x: 0, y: 0, w: 100, h: 140, tx: 0, ty: 0, tw: 100, th: 140 },
-            { id: '3', baseW: 160, baseH: 100, color: palette[2], x: 0, y: 0, w: 160, h: 100, tx: 0, ty: 0, tw: 160, th: 100 }
+            { id: '1', baseW: 120, baseH: 80, grow: 0, shrink: 1, color: palette[0], x: 0, y: 0, w: 120, h: 80, tx: 0, ty: 0, tw: 120, th: 80 },
+            { id: '2', baseW: 100, baseH: 140, grow: 0, shrink: 1, color: palette[1], x: 0, y: 0, w: 100, h: 140, tx: 0, ty: 0, tw: 100, th: 140 },
+            { id: '3', baseW: 160, baseH: 100, grow: 0, shrink: 1, color: palette[2], x: 0, y: 0, w: 160, h: 100, tx: 0, ty: 0, tw: 160, th: 100 }
         ];
 
         let currentDirection = 'Row';
@@ -356,7 +357,7 @@
             return start + (end - start) * factor;
         }
 
-        // Generate the UI side panel for the item properties
+        // Render Panel now includes inputs for Grow and Shrink
         function renderItemPanel() {
             itemListDiv.innerHTML = '';
             items.forEach((item) => {
@@ -369,11 +370,17 @@
                         <span class="item-badge" style="background:${item.color}">Item ${item.id}</span>
                     </div>
                     <div class="item-inputs">
-                        <label>Width (dp)
+                        <label>Basis W (dp)
                             <input type="number" min="20" max="800" value="${item.baseW}" data-id="${item.id}" data-prop="w">
                         </label>
-                        <label>Height (dp)
+                        <label>Basis H (dp)
                             <input type="number" min="20" max="800" value="${item.baseH}" data-id="${item.id}" data-prop="h">
+                        </label>
+                        <label>Grow (Weight)
+                            <input type="number" min="0" step="0.1" value="${item.grow}" data-id="${item.id}" data-prop="g">
+                        </label>
+                        <label>Shrink (Weight)
+                            <input type="number" min="0" step="0.1" value="${item.shrink}" data-id="${item.id}" data-prop="s">
                         </label>
                     </div>
                 `;
@@ -384,18 +391,20 @@
                 input.addEventListener('input', (e) => {
                     const id = e.target.getAttribute('data-id');
                     const prop = e.target.getAttribute('data-prop');
-                    const val = parseInt(e.target.value) || 20; 
+                    const val = parseFloat(e.target.value) || 0; 
                     const targetItem = items.find(i => i.id === id);
                     if (targetItem) {
-                        if (prop === 'w') targetItem.baseW = val;
-                        if (prop === 'h') targetItem.baseH = val;
+                        if (prop === 'w') targetItem.baseW = Math.max(20, val);
+                        if (prop === 'h') targetItem.baseH = Math.max(20, val);
+                        if (prop === 'g') targetItem.grow = val;
+                        if (prop === 's') targetItem.shrink = val;
                         calculateLayoutTargets();
                     }
                 });
             });
         }
 
-        // NEW: Dynamically generate Jetpack Compose Kotlin Code
+        // Kotlin Code Generation
         function updateCodeSnippet() {
             const dir = dirSelect.value;
             const wrap = wrapSelect.value;
@@ -418,14 +427,17 @@
             }
 
             items.forEach(item => {
-                // Determine basis according to main axis
                 const basisVal = isRow ? item.baseW : item.baseH;
                 const crossSizeStr = isRow ? `height = <span class="number">${item.baseH}</span>.dp` : `width = <span class="number">${item.baseW}</span>.dp`;
                 const hexColor = item.color.replace('#', '0xFF');
 
+                let flexModifiers = [`basis(<span class="number">${basisVal}</span>.dp)`];
+                if (item.grow > 0) flexModifiers.push(`grow(<span class="number">${item.grow}</span>f)`);
+                if (item.shrink !== 1) flexModifiers.push(`shrink(<span class="number">${item.shrink}</span>f)`);
+
                 htmlCode += `    <span class="type">Box</span>(\n`;
                 htmlCode += `        modifier = <span class="type">Modifier</span>\n`;
-                htmlCode += `            .flex { basis(<span class="number">${basisVal}</span>.dp) }\n`;
+                htmlCode += `            .flex { ${flexModifiers.join('; ')} }\n`;
                 htmlCode += `            .size(${crossSizeStr})\n`;
                 htmlCode += `            .background(<span class="type">Color</span>(${hexColor}))\n`;
                 htmlCode += `    ) { /* Item ${item.id} Content */ }\n`;
@@ -451,19 +463,20 @@
             const crossDim = isRow ? screen.targetH : screen.targetW;
 
             layoutLines = [];
-            let currentLine = { items: [], mainSize: 0, crossSize: 0 };
+            let currentLine = { items: [], baseMainSize: 0, crossSize: 0 };
 
+            // 1. Build Lines (using base size to determine wrapping)
             items.forEach(item => {
-                const itemMainSize = isRow ? item.baseW : item.baseH;
+                const itemBaseMainSize = isRow ? item.baseW : item.baseH;
                 const itemCrossSize = isRow ? item.baseH : item.baseW;
 
-                if (isWrap && currentLine.items.length > 0 && currentLine.mainSize + itemMainSize > mainDim) {
+                if (isWrap && currentLine.items.length > 0 && currentLine.baseMainSize + itemBaseMainSize > mainDim) {
                     layoutLines.push(currentLine);
-                    currentLine = { items: [], mainSize: 0, crossSize: 0 };
+                    currentLine = { items: [], baseMainSize: 0, crossSize: 0 };
                 }
                 
-                currentLine.items.push({ item, itemMainSize, itemCrossSize });
-                currentLine.mainSize += itemMainSize;
+                currentLine.items.push({ item, itemBaseMainSize, itemCrossSize });
+                currentLine.baseMainSize += itemBaseMainSize;
                 currentLine.crossSize = Math.max(currentLine.crossSize, itemCrossSize);
             });
             if (currentLine.items.length > 0) layoutLines.push(currentLine);
@@ -476,24 +489,46 @@
                 currentCrossPos += line.crossSize;
             });
 
+            // 2. Distribute Extra Space or Space Deficit (Grow / Shrink)
             layoutLines.forEach(line => {
-                let remainingSpace = mainDim - line.mainSize;
+                let remainingSpace = mainDim - line.baseMainSize;
+                let totalGrow = line.items.reduce((sum, wrapped) => sum + wrapped.item.grow, 0);
+                let totalShrink = line.items.reduce((sum, wrapped) => sum + wrapped.item.shrink, 0);
+
+                line.items.forEach(wrapped => {
+                    wrapped.actualMainSize = wrapped.itemBaseMainSize;
+                    
+                    if (remainingSpace > 0 && totalGrow > 0) {
+                        // Apply Grow
+                        wrapped.actualMainSize += (wrapped.item.grow / totalGrow) * remainingSpace;
+                    } else if (remainingSpace < 0 && totalShrink > 0) {
+                        // Apply Shrink (Remaining Space is negative, so adding it shrinks the item)
+                        wrapped.actualMainSize += (wrapped.item.shrink / totalShrink) * remainingSpace;
+                        wrapped.actualMainSize = Math.max(0, wrapped.actualMainSize); // Don't shrink below 0
+                    }
+                });
+
+                // Calculate NEW remaining space after grow/shrink for justifyContent math
+                let finalLineMainSize = line.items.reduce((sum, wrapped) => sum + wrapped.actualMainSize, 0);
+                let finalRemainingSpace = mainDim - finalLineMainSize;
+
                 let startPos = 0;
                 let gap = 0;
                 const n = line.items.length;
 
                 if (justify === 'Start') { startPos = 0; } 
-                else if (justify === 'End') { startPos = remainingSpace; } 
-                else if (justify === 'Center') { startPos = remainingSpace / 2; } 
-                else if (justify === 'SpaceBetween') { gap = n > 1 ? remainingSpace / (n - 1) : 0; } 
-                else if (justify === 'SpaceAround') { gap = n > 0 ? remainingSpace / n : 0; startPos = gap / 2; } 
-                else if (justify === 'SpaceEvenly') { gap = remainingSpace / (n + 1); startPos = gap; }
+                else if (justify === 'End') { startPos = finalRemainingSpace; } 
+                else if (justify === 'Center') { startPos = finalRemainingSpace / 2; } 
+                else if (justify === 'SpaceBetween') { gap = n > 1 ? finalRemainingSpace / (n - 1) : 0; } 
+                else if (justify === 'SpaceAround') { gap = n > 0 ? finalRemainingSpace / n : 0; startPos = gap / 2; } 
+                else if (justify === 'SpaceEvenly') { gap = finalRemainingSpace / (n + 1); startPos = gap; }
 
                 let currentMainPos = startPos;
                 let lineItemsToProcess = isMainReverse ? [...line.items].reverse() : line.items;
 
+                // 3. Pinpoint Coordinates
                 lineItemsToProcess.forEach(wrappedItem => {
-                    const { item, itemMainSize, itemCrossSize } = wrappedItem;
+                    const { item, actualMainSize, itemCrossSize } = wrappedItem;
                     let crossPos = line.crossPos;
                     let actualCrossSize = itemCrossSize;
 
@@ -503,8 +538,8 @@
 
                     let targetX = isRow ? currentMainPos : crossPos;
                     let targetY = isRow ? crossPos : currentMainPos;
-                    let targetW = isRow ? itemMainSize : actualCrossSize;
-                    let targetH = isRow ? actualCrossSize : itemMainSize;
+                    let targetW = isRow ? actualMainSize : actualCrossSize;
+                    let targetH = isRow ? actualCrossSize : actualMainSize;
 
                     if (isMainReverse && isRow) { targetX = mainDim - currentMainPos - targetW; } 
                     else if (isMainReverse && !isRow) { targetY = mainDim - currentMainPos - targetH; }
@@ -513,11 +548,10 @@
                     else if (isWrapReverse && !isRow) { targetX = crossDim - crossPos - targetW; }
 
                     item.tx = targetX; item.ty = targetY; item.tw = targetW; item.th = targetH;
-                    currentMainPos += itemMainSize + gap;
+                    currentMainPos += actualMainSize + gap;
                 });
             });
 
-            // Refresh the code snippet whenever layout calculates
             updateCodeSnippet();
         }
 
@@ -583,7 +617,6 @@
             const offsetX = (canvas.width - drawW) / 2;
             const offsetY = (canvas.height - drawH) / 2;
 
-            // 1. Draw Device
             ctx.fillStyle = '#1e1e24';
             ctx.strokeStyle = '#52525b';
             ctx.lineWidth = 6;
@@ -600,7 +633,6 @@
             ctx.textAlign = 'center';
             ctx.fillText(`${screen.name} Screen`, canvas.width / 2, offsetY - 25);
 
-            // 2. Draw Items
             items.forEach(item => {
                 const ix = offsetX + item.x;
                 const iy = offsetY + item.y;
@@ -623,7 +655,6 @@
                 ctx.fillText(`${Math.round(item.w)}×${Math.round(item.h)}`, ix + item.w / 2, iy + item.h / 2 + 14);
             });
 
-            // 3. Draw Blueprint Lines (Per Line)
             const isRow = currentDirection.includes('Row');
             const isWrapReverse = wrapSelect.value === 'WrapReverse';
             
@@ -662,8 +693,8 @@
                 }
             });
 
-            // 4. Equation HUD Update
-            const totalItemSize = items.reduce((sum, item) => sum + (isRow ? item.baseW : item.baseH), 0);
+            // HUD
+            const totalItemBaseSize = items.reduce((sum, item) => sum + (isRow ? item.baseW : item.baseH), 0);
             const containerSize = isRow ? screen.currentW : screen.currentH;
             
             ctx.fillStyle = 'rgba(0,0,0,0.85)';
@@ -671,15 +702,14 @@
             ctx.strokeStyle = '#3f3f46';
             ctx.strokeRect(20, canvas.height - 60, 480, 40);
             
-            ctx.fillStyle = wrapSelect.value !== 'NoWrap' && totalItemSize > containerSize ? '#fbbf24' : '#a3e635'; 
+            ctx.fillStyle = wrapSelect.value !== 'NoWrap' && totalItemBaseSize > containerSize ? '#fbbf24' : '#a3e635'; 
             ctx.font = '16px Consolas, monospace';
             ctx.textAlign = 'left';
-            ctx.fillText(`Container: ${Math.round(containerSize)}dp | Total Items Main Size: ${totalItemSize}dp`, 40, canvas.height - 35);
+            ctx.fillText(`Container: ${Math.round(containerSize)}dp | Total Basis Main Size: ${totalItemBaseSize}dp`, 40, canvas.height - 35);
 
             requestAnimationFrame(animate);
         }
 
-        // Add/Remove Logic
         addBtn.addEventListener('click', () => {
             if(items.length >= 15) return; 
             const newId = (items.length + 1).toString();
@@ -688,7 +718,7 @@
             const newColor = palette[items.length % palette.length];
             
             items.push({ 
-                id: newId, baseW: newW, baseH: newH, color: newColor, 
+                id: newId, baseW: newW, baseH: newH, grow: 0, shrink: 1, color: newColor, 
                 x: screen.currentW/2, y: screen.currentH/2, w: 0, h: 0, 
                 tx: 0, ty: 0, tw: newW, th: newH 
             });
@@ -704,9 +734,7 @@
             }
         });
 
-        // Copy Code Logic
         copyBtn.addEventListener('click', () => {
-            // Use innerText to grab the actual code string without HTML span tags
             const textToCopy = codeSnippet.innerText;
             navigator.clipboard.writeText(textToCopy).then(() => {
                 const originalText = copyBtn.innerText;
@@ -719,14 +747,13 @@
             });
         });
 
-        // Listeners
         deviceSelect.addEventListener('change', setDevice);
         dirSelect.addEventListener('change', calculateLayoutTargets);
         wrapSelect.addEventListener('change', calculateLayoutTargets);
         justifySelect.addEventListener('change', calculateLayoutTargets);
         alignSelect.addEventListener('change', calculateLayoutTargets);
 
-        // Init Layout Math
+        // Init
         renderItemPanel();
         setDevice();
         screen.currentW = screen.targetW;
