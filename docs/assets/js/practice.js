@@ -1,5 +1,5 @@
-Array.prototype.sample = function(){
-  return this[Math.floor(Math.random() * this.length)];
+function getRandomItem(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
 }
 
 // Commented out excerpts are added to the mandatory array.
@@ -214,8 +214,8 @@ var strauss = [
   'Der Rosenkavalier Act 2 reh 3', 'Salome act 2 reh 154',
   'Also Sprach Zarathustra', 'Don Quixote'];
 
-var todays_key = keys.sample() + " " + modes.sample();
-var todays_strauss = strauss.sample();
+var todays_key = getRandomItem(keys) + " " + getRandomItem(modes);
+var todays_strauss = getRandomItem(strauss);
 
 // Get unique samples from an array
 function getUniqueSamples(arr, count) {
@@ -223,7 +223,7 @@ function getUniqueSamples(arr, count) {
   let results = [];
   for (let i = 0; i < count; i++) {
     if (pool.length === 0) break;
-    let pick = pool.sample();
+    let pick = getRandomItem(pool);
     results.push(pick);
     pool = pool.filter(item => item !== pick);
   }
