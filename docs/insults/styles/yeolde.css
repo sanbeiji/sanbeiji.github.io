@@ -74,3 +74,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0b7a1', end
 		min-height: 33em;
 	}
 }
+
+.fade-in {
+	animation: fadeIn 1.2s;
+}
+
+@keyframes fadeIn {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
