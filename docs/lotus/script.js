@@ -30,7 +30,8 @@ const DEFAULT_SETTINGS = {
     studyMode: false,
     showTranslation: false,
     history: [],
-    themePreference: 'system'
+    themePreference: 'system',
+    fontSizePreference: 'normal'
 };
 
 // ─── App State ────────────────────────────────────────────────
@@ -65,8 +66,11 @@ const elements = {
     resultSection: document.getElementById('result-section'),
     storyContent: document.getElementById('story-content'),
     storyHeading: document.getElementById('story-heading'),
+    toggleStorySettingsBtn: document.getElementById('toggle-story-settings'),
+    storySettingsPanel: document.getElementById('story-settings-panel'),
     showPronunciationToggle: document.getElementById('show-pronunciation'),
     showTranslationToggle: document.getElementById('show-translation'),
+    fontSizeRadios: document.querySelectorAll('input[name="font-size"]'),
     copyBtn: document.getElementById('copy-btn'),
     
     historyList: document.getElementById('history-list'),
@@ -150,6 +154,15 @@ function loadState() {
     if (elements.studyModeToggle) elements.studyModeToggle.checked = state.studyMode;
     if (elements.showTranslationToggle) elements.showTranslationToggle.checked = state.showTranslation;
     
+    if (elements.fontSizeRadios) {
+        elements.fontSizeRadios.forEach(radio => {
+            if (radio.value === (state.fontSizePreference || 'normal')) {
+                radio.checked = true;
+            }
+        });
+    }
+    applyFontSize();
+    
     updateModelFooter();
     
     // If no API key, show settings
@@ -173,6 +186,15 @@ function applyTheme() {
     }
 }
 
+function applyFontSize() {
+    elements.storyContent.className = 'story-content';
+    if (state.fontSizePreference === 'larger') {
+        elements.storyContent.classList.add('font-size-larger');
+    } else if (state.fontSizePreference === 'largest') {
+        elements.storyContent.classList.add('font-size-largest');
+    }
+}
+
 function updateModelFooter() {
     const modelDisplay = document.getElementById('model-version');
     if (modelDisplay) modelDisplay.textContent = state.selectedModel || 'gemini-2.5-flash-lite';
@@ -190,6 +212,26 @@ function setupEventListeners() {
     elements.toggleSettingsBtn.addEventListener('click', () => {
         elements.settingsContent.hidden = !elements.settingsContent.hidden;
     });
+
+    if (elements.toggleStorySettingsBtn && elements.storySettingsPanel) {
+        elements.toggleStorySettingsBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            elements.storySettingsPanel.classList.toggle('show');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (elements.storySettingsPanel.classList.contains('show') && 
+                !elements.storySettingsPanel.contains(e.target) && 
+                e.target !== elements.toggleStorySettingsBtn) {
+                elements.storySettingsPanel.classList.remove('show');
+            }
+        });
+
+        // Prevent clicks inside the panel from closing it
+        elements.storySettingsPanel.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    }
     
     elements.apiKeyInput.addEventListener('change', (e) => {
         state.apiKey = e.target.value.trim();
@@ -234,6 +276,18 @@ function setupEventListeners() {
         saveState();
         updateTranslationVisibility();
     });
+    
+    if (elements.fontSizeRadios) {
+        elements.fontSizeRadios.forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                if (e.target.checked) {
+                    state.fontSizePreference = e.target.value;
+                    saveState();
+                    applyFontSize();
+                }
+            });
+        });
+    }
 
     if (elements.showPronunciationToggle) {
         elements.showPronunciationToggle.addEventListener('change', updatePronunciationVisibility);
@@ -497,6 +551,7 @@ function renderStory(storyData) {
         playBtn.className = 'sentence-play-btn';
         playBtn.innerHTML = '🔊';
         playBtn.title = 'Read aloud';
+        playBtn.hidden = !elements.showPronunciationToggle.checked;
         playBtn.onclick = () => speak(s.mandarin);
         
         const mandarin = document.createElement('div');
@@ -534,6 +589,8 @@ function updatePronunciationVisibility() {
     const show = elements.showPronunciationToggle.checked;
     const prons = elements.storyContent.querySelectorAll('.pronunciation');
     prons.forEach(p => p.hidden = !show);
+    const playBtns = elements.storyContent.querySelectorAll('.sentence-play-btn');
+    playBtns.forEach(btn => btn.hidden = !show);
 }
 
 function updateTranslationVisibility() {
