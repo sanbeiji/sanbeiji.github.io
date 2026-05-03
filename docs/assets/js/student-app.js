@@ -9,6 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const nameEdit = document.getElementById('student-name-edit');
   const nameInput = document.getElementById('student-name-input');
   
+  const btnStartSession = document.getElementById('btn-start-session');
+  const startTimeDisplay = document.getElementById('start-time-display');
+  const btnCompleteSession = document.getElementById('btn-complete-session');
+  const completeTimeDisplay = document.getElementById('complete-time-display');
+
   const btnGetLink = document.getElementById('btn-get-link');
   const linkContainer = document.getElementById('link-container');
   const shareLinkInput = document.getElementById('share-link');
@@ -221,6 +226,46 @@ document.addEventListener('DOMContentLoaded', () => {
     appData.items.push({ id: Date.now().toString(), text: '' });
     saveData();
     renderChecklist();
+  });
+
+  // Session tracking
+  let sessionStartTime = null;
+
+  function formatTimestamp(date) {
+    const yyyy = date.getFullYear();
+    const mm = String(date.getMonth() + 1).padStart(2, '0');
+    const dd = String(date.getDate()).padStart(2, '0');
+    let hours = date.getHours();
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12; 
+    return `${yyyy}/${mm}/${dd} ${String(hours).padStart(2, '0')}:${minutes} ${ampm}`;
+  }
+
+  btnStartSession.addEventListener('click', () => {
+    sessionStartTime = new Date();
+    startTimeDisplay.innerText = `Practice session started at ${formatTimestamp(sessionStartTime)}`;
+    btnStartSession.style.display = 'none';
+    btnCompleteSession.style.display = 'inline-block';
+    completeTimeDisplay.innerText = '';
+  });
+
+  btnCompleteSession.addEventListener('click', () => {
+    if (!sessionStartTime) return;
+    const endTime = new Date();
+    const diffMs = endTime - sessionStartTime;
+    const diffMins = Math.floor(diffMs / 60000);
+    
+    let text = `Practice session finished at ${formatTimestamp(endTime)}. You practiced for ${diffMins} minutes!`;
+    if (diffMins < 10) {
+      text += " You should really practice a bit more.";
+    }
+    completeTimeDisplay.innerText = text;
+    
+    btnStartSession.style.display = 'inline-block';
+    btnCompleteSession.style.display = 'none';
+    sessionStartTime = null;
   });
 
   // Get Link functionality
