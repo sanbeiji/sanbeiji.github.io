@@ -46,10 +46,10 @@ const KEYS = ['A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'Ab'];
 const MODES = ['major', 'major', 'major', 'major', 'major', 'major', 'harmonic minor', 'melodic minor', 'whole tone', 'chromatic'];
 
 const SHIFTPATTERNS = [
-  'I-A-1-1', 'I-A-1-2', 'I-A-1-4', 'I-Bb-2-1', 'I-Bb-2-2', 'I-Bb-2-4', 'I-B-4-1', 'I-B-4-2', 'I-B-4-4',
-  'II-E-1-1', 'II-E-1-2', 'II-E-1-4', 'II-F-2-1', 'II-F-2-2', 'II-F-2-4', 'II-F#-4-1', 'II-F#-4-2', 'II-F#-4-4',
-  'III-B-1-1', 'III-B-1-2', 'III-B-1-4', 'III-C-2-1', 'III-C-2-2', 'III-C-2-4', 'III-C#-4-1', 'III-C#-4-2', 'III-C#-4-4',
-  'IV-F#-1-1', 'IV-F#-1-2', 'IV-F#-1-4', 'IV-G-2-1', 'IV-G-2-2', 'IV-G-2-4', 'IV-G#-4-1', 'IV-G#-4-2', 'IV-G#-4-4'
+  { name: 'I-A-1-1', weight: 4 }, { name: 'I-A-1-2', weight: 4 }, { name: 'I-A-1-4', weight: 4 }, { name: 'I-Bb-2-1', weight: 4 }, { name: 'I-Bb-2-2', weight: 4 }, { name: 'I-Bb-2-4', weight: 4 }, { name: 'I-B-4-1', weight: 4 }, { name: 'I-B-4-2', weight: 4 }, { name: 'I-B-4-4', weight: 4 },
+  { name: 'II-E-1-1', weight: 3 }, { name: 'II-E-1-2', weight: 3 }, { name: 'II-E-1-4', weight: 3 }, { name: 'II-F-2-1', weight: 3 }, { name: 'II-F-2-2', weight: 3 }, { name: 'II-F-2-4', weight: 3 }, { name: 'II-F#-4-1', weight: 3 }, { name: 'II-F#-4-2', weight: 3 }, { name: 'II-F#-4-4', weight: 3 },
+  { name: 'III-B-1-1', weight: 2 }, { name: 'III-B-1-2', weight: 2 }, { name: 'III-B-1-4', weight: 2 }, { name: 'III-C-2-1', weight: 2 }, { name: 'III-C-2-2', weight: 2 }, { name: 'III-C-2-4', weight: 2 }, { name: 'III-C#-4-1', weight: 2 }, { name: 'III-C#-4-2', weight: 2 }, { name: 'III-C#-4-4', weight: 2 },
+  { name: 'IV-F#-1-1', weight: 1 }, { name: 'IV-F#-1-2', weight: 1 }, { name: 'IV-F#-1-4', weight: 1 }, { name: 'IV-G-2-1', weight: 1 }, { name: 'IV-G-2-2', weight: 1 }, { name: 'IV-G-2-4', weight: 1 }, { name: 'IV-G#-4-1', weight: 1 }, { name: 'IV-G#-4-2', weight: 1 }, { name: 'IV-G#-4-4', weight: 1 }
 ];
 
 // 2. LOCAL STORAGE MANAGEMENT
@@ -130,9 +130,9 @@ window.generateDailyList = function(force = false) {
     const fallbackExcerpts = [...todays_excerpts];
     while(fallbackExcerpts.length < 5) fallbackExcerpts.push("None");
 
-    const shift1 = getRandomItem(SHIFTPATTERNS);
-    let shift2 = getRandomItem(SHIFTPATTERNS);
-    while(shift1 === shift2) shift2 = getRandomItem(SHIFTPATTERNS);
+    const shift1 = getWeightedItem(SHIFTPATTERNS);
+    let shift2 = getWeightedItem(SHIFTPATTERNS);
+    while(shift1 === shift2) shift2 = getWeightedItem(SHIFTPATTERNS);
 
     state = {
       date: todayStr,
