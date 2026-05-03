@@ -56,6 +56,7 @@ const SHIFTPATTERNS = [
 function loadData() {
   const defaults = {
     userFields: { concerto: '', bach: '', otherSolo: '' },
+    customExcerpts: [],
     pools: { strauss: DEFAULT_STRAUSS, excerpts: DEFAULT_EXCERPTS },
     settings: { excerptCount: 5 }
   };
@@ -65,6 +66,7 @@ function loadData() {
   // Ensure we have all properties to avoid crashes
   return {
     userFields: { ...defaults.userFields, ...(parsed.userFields || {}) },
+    customExcerpts: parsed.customExcerpts || [],
     pools: { ...defaults.pools, ...(parsed.pools || {}) },
     settings: { ...defaults.settings, ...(parsed.settings || {}) }
   };

@@ -29,6 +29,22 @@ document.addEventListener('DOMContentLoaded', () => {
     return `<a href="${url}" target="_blank" title="Watch shifting exercise video">Shift exercise ${pattern}</a>`;
   }
 
+  // Inject CSS for del-btn if not present
+  const style = document.createElement('style');
+  style.innerHTML = `
+    .del-btn {
+      margin-left: 10px;
+      background: #ff4444;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      padding: 6px 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+  `;
+  document.head.appendChild(style);
+
   function saveDailyState() {
     localStorage.setItem('practiceDailyState', JSON.stringify(window.dailyState));
   }
@@ -43,24 +59,49 @@ document.addEventListener('DOMContentLoaded', () => {
       { id: 'scale', label: `Daily scale: ${getSearchLink('bass clef scale ' + state.todays_key, state.todays_key)}<br><span class="small" style="font-size:0.8em;">Whole note, quarter tonic + 8ths, 8 notes per bow, 16th notes spicatto, hoe-down vars.</span>` },
       { id: 'shift1', label: getShiftLink(state.shift1) },
       { id: 'shift2', label: getShiftLink(state.shift2) },
-      { id: 'bowing', label: getSearchLink('Zimmerman bowing patterns double bass', 'Zimmerman bowing patterns') },
-      
+      { id: 'bowing', label: getSearchLink('Zimmerman bowing patterns double bass', 'Zimmerman bowing patterns') }
+    ];
+
+    items.push(
       // User Editable Fields
       { id: 'concerto', isInput: true, placeholder: 'Concerto...', value: userFields.concerto },
       { id: 'bach', isInput: true, placeholder: 'Bach...', value: userFields.bach },
       { id: 'otherSolo', isInput: true, placeholder: 'Other solo piece...', value: userFields.otherSolo },
 
       { id: 'strauss', label: `Daily Strauss: ${getSearchLink('double bass excerpt ' + state.todays_strauss, state.todays_strauss)}` }
-    ];
+    );
 
     state.actual_excerpts.forEach((exc, index) => {
       items.push({
         id: `excerpt_${index}`,
-        label: `Excerpt No.${index + 1}: ${getSearchLink('double bass excerpt ' + exc, exc)}`
+        label: `Random Excerpt №${index + 1}: ${getSearchLink('double bass excerpt ' + exc, exc)}`
       });
     });
 
+    window.practiceAppData.customExcerpts.forEach((item, index) => {
+      items.push({ id: `custom_${item.id}`, isCustomExcerpt: true, index: index, value: item.text, placeholder: `Custom Excerpt №${index + 1}...` });
+    });
+
+    items.push({ id: 'add_custom_excerpt', isAddButton: true });
+
     items.forEach(item => {
+      if (item.isAddButton) {
+        const btnContainer = document.createElement('div');
+        btnContainer.style.textAlign = 'center';
+        btnContainer.style.marginBottom = '20px';
+        const addBtn = document.createElement('button');
+        addBtn.className = 'btn';
+        addBtn.innerText = window.practiceAppData.customExcerpts.length === 0 ? 'Add custom excerpts' : 'Add excerpt';
+        addBtn.addEventListener('click', () => {
+          window.practiceAppData.customExcerpts.push({ id: Date.now().toString(), text: '' });
+          localStorage.setItem('practiceAppData', JSON.stringify(window.practiceAppData));
+          renderChecklist();
+        });
+        btnContainer.appendChild(addBtn);
+        container.appendChild(btnContainer);
+        return;
+      }
+
       const div = document.createElement('div');
       div.className = 'practice-item';
       
@@ -80,60 +121,80 @@ document.addEventListener('DOMContentLoaded', () => {
       const content = document.createElement('div');
       content.className = 'practice-item-content';
 
-      if (item.isInput) {
+      if (item.isInput || item.isCustomExcerpt) {
+        if (item.isCustomExcerpt) content.style.flexWrap = 'wrap';
+
         const prefix = item.placeholder.replace('...', '');
-        
+
         const viewMode = document.createElement('div');
         viewMode.style.display = 'flex';
         viewMode.style.alignItems = 'center';
         viewMode.style.width = '100%';
-        
+
         const label = document.createElement('label');
         label.htmlFor = `chk_${item.id}`;
-        
+
         const textSpan = document.createElement('span');
-        const renderText = (val) => `${prefix}: ${val ? getSearchLink(val, val) : '<span style="color:#888;font-style:italic">Click edit icon to add</span>'}`;
+        const renderText = (val) => `${prefix}: ` + (val ? getSearchLink(val, val) : 
+          (item.isCustomExcerpt ? '<span style="color:#888;font-style:italic">Click edit icon to add custom excerpt</span>' : '<span style="color:#888;font-style:italic">Click edit icon to add</span>'));
         textSpan.innerHTML = renderText(item.value);
         label.appendChild(textSpan);
         viewMode.appendChild(label);
-        
+
         const editIcon = document.createElement('span');
         editIcon.innerHTML = '✏️';
         editIcon.style.cursor = 'pointer';
         editIcon.style.marginLeft = '10px';
         editIcon.title = 'Edit ' + prefix;
         viewMode.appendChild(editIcon);
-        
+
         const editMode = document.createElement('div');
         editMode.style.display = 'none';
         editMode.style.width = '100%';
-        
+        if (item.isCustomExcerpt) editMode.style.alignItems = 'center';
+
         const lbl = document.createElement('div');
         lbl.style.fontWeight = 'bold';
         lbl.style.marginBottom = '2px';
         lbl.innerText = prefix;
-        
+
         const input = document.createElement('input');
         input.type = 'text';
         input.className = 'practice-input';
         input.placeholder = item.placeholder;
         input.value = item.value;
-        
-        editMode.appendChild(lbl);
+
+        if (!item.isCustomExcerpt) editMode.appendChild(lbl);
         editMode.appendChild(input);
-        
+
+        let delBtn = null;
+        if (item.isCustomExcerpt) {
+          delBtn = document.createElement('button');
+          delBtn.className = 'del-btn';
+          delBtn.innerText = 'X';
+          delBtn.title = 'Remove item';
+          delBtn.tabIndex = 0;
+          delBtn.addEventListener('click', () => {
+            window.practiceAppData.customExcerpts.splice(item.index, 1);
+            localStorage.setItem('practiceAppData', JSON.stringify(window.practiceAppData));
+            renderChecklist();
+          });
+          editMode.appendChild(delBtn);
+        }
+
         editIcon.addEventListener('click', () => {
           viewMode.style.display = 'none';
-          editMode.style.display = 'block';
+          editMode.style.display = item.isCustomExcerpt ? 'flex' : 'block';
           input.focus();
         });
-        
-        input.addEventListener('blur', () => {
+
+        input.addEventListener('focusout', (e) => {
+          if (item.isCustomExcerpt && e.relatedTarget === delBtn) return;
           editMode.style.display = 'none';
           viewMode.style.display = 'flex';
           textSpan.innerHTML = renderText(input.value);
         });
-        
+
         input.addEventListener('keypress', (e) => {
           if (e.key === 'Enter') {
             input.blur();
@@ -141,14 +202,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         input.addEventListener('input', (e) => {
-          window.practiceAppData.userFields[item.id] = e.target.value;
+          if (item.isCustomExcerpt) {
+            window.practiceAppData.customExcerpts[item.index].text = e.target.value;
+          } else {
+            window.practiceAppData.userFields[item.id] = e.target.value;
+          }
           localStorage.setItem('practiceAppData', JSON.stringify(window.practiceAppData));
         });
-        
+
         content.appendChild(viewMode);
         content.appendChild(editMode);
-      } else {
-        const label = document.createElement('label');
+      } else {        const label = document.createElement('label');
         label.htmlFor = `chk_${item.id}`;
         label.innerHTML = item.label;
         content.appendChild(label);
