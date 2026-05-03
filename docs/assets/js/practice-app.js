@@ -15,6 +15,20 @@ document.addEventListener('DOMContentLoaded', () => {
     return `<a href="https://www.google.com/search?q=${encoded}" target="_blank" title="Search for this item">${display}</a>`;
   }
 
+  function getShiftLink(pattern) {
+    const map = {
+      'I-A': 1, 'I-Bb': 2, 'I-B': 3,
+      'II-E': 4, 'II-F': 5, 'II-F#': 6,
+      'III-B': 7, 'III-C': 8, 'III-C#': 9,
+      'IV-F#': 10, 'IV-G': 11, 'IV-G#': 12
+    };
+    const parts = pattern.split('-');
+    const key = parts[0] + '-' + parts[1];
+    const index = map[key] || 1;
+    const url = `https://youtu.be/vH7rsMUMbfE?list=PLepnI3lzfWKa0NJAdLQ8j-5zO74HvYVIV&index=${index}`;
+    return `<a href="${url}" target="_blank" title="Watch shifting exercise video">Shift exercise ${pattern}</a>`;
+  }
+
   function saveDailyState() {
     localStorage.setItem('practiceDailyState', JSON.stringify(window.dailyState));
   }
@@ -27,8 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const items = [
       { id: 'scale', label: `Daily scale: ${getSearchLink('bass clef scale ' + state.todays_key, state.todays_key)}<br><span class="small" style="font-size:0.8em;">Whole note, quarter tonic + 8ths, 8 notes per bow, 16th notes spicatto, hoe-down vars.</span>` },
-      { id: 'shift1', label: getSearchLink('double bass shift exercise ' + state.shift1, `Shift exercise ${state.shift1}`) },
-      { id: 'shift2', label: getSearchLink('double bass shift exercise ' + state.shift2, `Shift exercise ${state.shift2}`) },
+      { id: 'shift1', label: getShiftLink(state.shift1) },
+      { id: 'shift2', label: getShiftLink(state.shift2) },
       { id: 'bowing', label: getSearchLink('Zimmerman bowing patterns double bass', 'Zimmerman bowing patterns') },
       
       // User Editable Fields
