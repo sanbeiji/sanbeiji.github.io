@@ -203,6 +203,7 @@
 
     if (preferredVoice) {
       utterance.voice = preferredVoice;
+      utterance.lang = preferredVoice.lang;
     }
 
     window.speechSynthesis.speak(utterance);
