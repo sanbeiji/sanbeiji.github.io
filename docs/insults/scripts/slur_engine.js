@@ -109,68 +109,80 @@
     }, 2500);
   }
 
-  // HELPERS FOR HIGH QUALITY TTS VOICES
-  function getHighQualityUKVoice() {
+  // Caching the selected voice to prevent unnecessary calculations
+  let cachedVoice = null;
+
+  // COMPOSITE SCORING ALGORITHM FOR HIGHEST QUALITY VOICES
+  function getBestVoice() {
+    if (cachedVoice) return cachedVoice;
     if (!('speechSynthesis' in window)) return null;
     const voices = window.speechSynthesis.getVoices();
-    
-    // Filter for British English voices
-    const ukVoices = voices.filter(voice => {
-      const lang = voice.lang.toLowerCase().replace('_', '-');
-      const name = voice.name.toLowerCase();
-      return lang === 'en-gb' || lang.startsWith('en-gb') || name.includes('united kingdom') || name.includes('uk english') || name.includes('great britain');
-    });
+    if (!voices || voices.length === 0) return null;
 
-    if (ukVoices.length === 0) {
-      // Fallback to any English voice
-      return voices.find(v => v.lang.toLowerCase().startsWith('en')) || null;
-    }
-
-    // Score the UK voices to find the absolute best high-fidelity voice
-    const scored = ukVoices.map(voice => {
+    const scored = voices.map(voice => {
       const nameLower = voice.name.toLowerCase();
+      const langLower = voice.lang.toLowerCase().replace('_', '-');
+      
+      // Filter out non-English voices
+      if (!langLower.startsWith('en')) {
+        return { voice, score: -1 };
+      }
+
       let score = 0;
 
-      // Prioritize male voices if explicitly available
-      const isMale = nameLower.includes('male') || nameLower.includes('daniel') || nameLower.includes('oliver') || nameLower.includes('george') || nameLower.includes('gbd') || nameLower.includes('gbi') || nameLower.includes('gbj') || nameLower.includes('gbr');
-      if (isMale) {
-        score += 100;
+      // 1. Accent Category Score (British English gets maximum bonus)
+      const isBritish = langLower === 'en-gb' || 
+                        langLower.startsWith('en-gb') || 
+                        nameLower.includes('united kingdom') || 
+                        nameLower.includes('uk english') || 
+                        nameLower.includes('great britain');
+      
+      if (isBritish) {
+        score += 1000;
+      } else {
+        score += 500; // Other English accents (US, AU, CA, IN, etc.)
       }
 
-      // High-quality premium keywords (prefer natural neural/network/wavenet voices)
-      const premiumKeywords = ['natural', 'neural', 'wavenet', 'premium', 'enhanced', 'high', 'networked', 'network'];
-      premiumKeywords.forEach(kw => {
-        if (nameLower.includes(kw)) {
-          score += 50;
-        }
-      });
+      // 2. Quality Tier Classification Heuristics
+      const premiumKeywords = ['natural', 'neural', 'wavenet', 'premium', 'enhanced', 'online', 'network'];
+      const roboticKeywords = ['legacy', 'standard', 'compact', 'samantha', 'zira', 'david', 'local', 'fallback'];
+      
+      const hasPremiumKeyword = premiumKeywords.some(kw => nameLower.includes(kw));
+      const hasRoboticKeyword = roboticKeywords.some(kw => nameLower.includes(kw));
 
-      // Prefer Google/Siri high-quality voices
-      if (nameLower.includes('google')) {
-        score += 40;
-      }
-      if (nameLower.includes('siri')) {
-        score += 30;
+      if (hasRoboticKeyword) {
+        score -= 500;
+      } else if (hasPremiumKeyword) {
+        score += 1000;
+      } else if ((nameLower.includes('google') || nameLower.includes('siri') || voice.localService === false) && !nameLower.includes('local')) {
+        // Google/Siri online voices are high-quality high-fidelity neural voices
+        score += 600;
+      } else {
+        // Standard basic system voice
+        score += 200;
       }
 
-      // Avoid the old, tinny/metallic legacy Daniel voice unless it's the Premium/Enhanced version
-      if (nameLower.includes('daniel')) {
-        if (nameLower.includes('premium') || nameLower.includes('enhanced')) {
-          score += 20;
-        } else {
-          score -= 20; // Penalize standard metallic legacy Daniel voice!
+      // Specifically penalize legacy metallic non-premium Daniel & Kate voices
+      if (nameLower.includes('daniel') || nameLower.includes('kate')) {
+        const isEnhanced = nameLower.includes('premium') || nameLower.includes('enhanced') || nameLower.includes('natural');
+        if (!isEnhanced) {
+          score -= 400; // Strong penalty to avoid the legacy robotic versions
         }
       }
 
       return { voice, score };
     });
 
-    // Sort descending by score
-    scored.sort((a, b) => b.score - a.score);
+    // Filter out invalid and sort descending
+    const validScored = scored.filter(s => s.score >= 0);
+    if (validScored.length === 0) return null;
 
-    console.log("Scored UK voices:", scored.map(s => `${s.voice.name} (score: ${s.score})`));
+    validScored.sort((a, b) => b.score - a.score);
 
-    return scored[0].voice;
+    console.log("Antigravity TTS Scored Voices:", validScored.map(s => `${s.voice.name} (${s.voice.lang}) -> score: ${s.score}`));
+
+    cachedVoice = validScored[0].voice;
+    return cachedVoice;
   }
 
   // TEXT TO SPEECH ENGINE (Speech Synthesis)
@@ -186,8 +198,8 @@
     utterance.rate = 0.82;
     utterance.pitch = 0.85;
 
-    // Locate high quality British voice
-    const preferredVoice = getHighQualityUKVoice();
+    // Locate high quality voice using our priority scoring
+    const preferredVoice = getBestVoice();
 
     if (preferredVoice) {
       utterance.voice = preferredVoice;
@@ -277,6 +289,10 @@
     // Speech Synthesis voice list loading safety
     if ('speechSynthesis' in window) {
       window.speechSynthesis.getVoices();
+      window.speechSynthesis.onvoiceschanged = () => {
+        cachedVoice = null; // Reset cached voice to re-evaluate when voices change
+        getBestVoice();
+      };
     }
 
     // Secondary Control Event Listeners
