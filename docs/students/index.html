@@ -41,6 +41,28 @@
         margin-bottom: 20px;
         font-size: 1.1em;
         text-align: left;
+        position: relative;
+      }
+      .drag-handle {
+        cursor: grab;
+        margin-right: 10px;
+        padding: 0 5px;
+        color: #aaa;
+        font-size: 1.2em;
+        user-select: none;
+        display: flex;
+        align-items: center;
+        height: 28px;
+        align-self: flex-start;
+        flex-shrink: 0;
+      }
+      .drag-handle:active {
+        cursor: grabbing;
+        color: #555;
+      }
+      .practice-item.dragging {
+        opacity: 0.4;
+        background-color: rgba(0, 0, 0, 0.02);
       }
       .practice-item-content {
         flex-grow: 1;
@@ -65,11 +87,20 @@
         padding: 10px 15px;
         font-size: 1em;
         cursor: pointer;
-        border: none;
+        border: 1px solid #ccc;
         border-radius: 5px;
         background-color: #eee;
         color: #333;
         margin-bottom: 10px;
+        transition: all 0.2s ease;
+      }
+      #btn-toggle-edit {
+        font-weight: bold;
+      }
+      #btn-toggle-edit.active {
+        background-color: #28a745;
+        color: white;
+        border-color: #28a745;
       }
       .btn-primary {
         background-color: #0066cc;
@@ -135,10 +166,13 @@
           </div>
         </div>
 
-        <!-- SESSION START -->
-        <div style="text-align: center; margin-bottom: 20px;">
-          <button id="btn-start-session" class="btn btn-primary" style="background-color: #28a745;">Start practice session</button>
-          <div id="start-time-display" style="margin-top: 10px; font-style: italic; color: #555;"></div>
+        <!-- SESSION START & EDIT TOGGLE -->
+        <div style="display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 20px; flex-wrap: wrap;">
+          <button id="btn-start-session" class="btn btn-primary" style="background-color: #28a745; margin-bottom: 0;">Start practice session</button>
+          <button id="btn-toggle-edit" class="btn" style="margin-bottom: 0;">✏️ Edit List</button>
+        </div>
+        <div style="text-align: center; margin-top: -10px; margin-bottom: 20px;">
+          <div id="start-time-display" style="font-style: italic; color: #555;"></div>
         </div>
 
         <!-- CHECKLIST -->
