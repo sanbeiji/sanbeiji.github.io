@@ -295,10 +295,12 @@ document.addEventListener('DOMContentLoaded', () => {
     isEditMode = !isEditMode;
     if (isEditMode) {
       btnToggleEdit.classList.add('active');
-      btnToggleEdit.innerText = '✔️ Done editing';
+      btnToggleEdit.querySelector('.button-icon').innerText = '✔️';
+      btnToggleEdit.querySelector('.button-text').innerText = ' Done editing';
     } else {
       btnToggleEdit.classList.remove('active');
-      btnToggleEdit.innerText = '✏️ Edit List';
+      btnToggleEdit.querySelector('.button-icon').innerText = '✏️';
+      btnToggleEdit.querySelector('.button-text').innerText = ' Edit List';
     }
     renderChecklist();
   });
@@ -333,7 +335,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     defaultActions.style.display = 'none';
     sessionActions.style.display = 'flex';
-    btnPauseResume.innerText = '⏸️ Pause';
+    btnPauseResume.querySelector('.button-icon').innerText = '⏸️';
+    btnPauseResume.querySelector('.button-text').innerText = ' Pause';
     stopwatchDisplay.innerText = '00:00';
 
     timerInterval = setInterval(() => {
@@ -345,11 +348,13 @@ document.addEventListener('DOMContentLoaded', () => {
   btnPauseResume.addEventListener('click', () => {
     if (!isPaused) {
       isPaused = true;
-      btnPauseResume.innerText = '▶️ Resume';
+      btnPauseResume.querySelector('.button-icon').innerText = '▶️';
+      btnPauseResume.querySelector('.button-text').innerText = ' Resume';
       clearInterval(timerInterval);
     } else {
       isPaused = false;
-      btnPauseResume.innerText = '⏸️ Pause';
+      btnPauseResume.querySelector('.button-icon').innerText = '⏸️';
+      btnPauseResume.querySelector('.button-text').innerText = ' Pause';
       timerInterval = setInterval(() => {
         secondsElapsed++;
         stopwatchDisplay.innerText = formatStopwatch(secondsElapsed);

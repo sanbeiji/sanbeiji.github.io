@@ -229,6 +229,24 @@
         from { transform: scale(0.95); opacity: 0; }
         to { transform: scale(1); opacity: 1; }
       }
+      /* Font Synchronization & Responsive Mobile Adaptations */
+      .m3-button, .m3-button *, .stopwatch, .m3-dialog, .m3-dialog-title, .practice-input {
+        font-family: 'Special Elite', 'Noto Serif SC', 'Kaiti TC', monospace !important;
+      }
+      @media screen and (max-width: 480px) {
+        .m3-button-group .button-text {
+          display: none !important;
+        }
+        .m3-button {
+          padding: 0 16px !important;
+        }
+        .action-bar-container {
+          gap: 10px !important;
+        }
+        .session-actions-group {
+          gap: 10px !important;
+        }
+      }
       .btn-primary {
         background-color: #0066cc;
         color: white;
@@ -297,16 +315,16 @@
         <div class="action-bar-container">
           <!-- Default Mode: Start / Edit List / Share -->
           <div id="default-actions" class="m3-button-group">
-            <button id="btn-start-session" class="m3-button m3-button-filled left-btn" title="Click to begin practice session timer">▶️ Start</button>
-            <button id="btn-toggle-edit" class="m3-button m3-button-outlined middle-btn">✏️ Edit List</button>
-            <button id="btn-get-link" class="m3-button m3-button-outlined right-btn">🔗 Share</button>
+            <button id="btn-start-session" class="m3-button m3-button-filled left-btn" title="Click to begin practice session timer"><span class="button-icon">▶️</span><span class="button-text"> Start</span></button>
+            <button id="btn-toggle-edit" class="m3-button m3-button-outlined middle-btn"><span class="button-icon">✏️</span><span class="button-text"> Edit List</span></button>
+            <button id="btn-get-link" class="m3-button m3-button-outlined right-btn"><span class="button-icon">🔗</span><span class="button-text"> Share</span></button>
           </div>
 
           <!-- Active Practice Session Mode: Pause/Resume / End Buttons + Stopwatch -->
           <div id="session-actions" class="session-actions-group" style="display: none;">
             <div class="m3-button-group">
-              <button id="btn-pause-resume" class="m3-button m3-button-filled left-btn">⏸️ Pause</button>
-              <button id="btn-end-session" class="m3-button m3-button-outlined right-btn">⏹️ End</button>
+              <button id="btn-pause-resume" class="m3-button m3-button-filled left-btn"><span class="button-icon">⏸️</span><span class="button-text"> Pause</span></button>
+              <button id="btn-end-session" class="m3-button m3-button-outlined right-btn"><span class="button-icon">⏹️</span><span class="button-text"> End</span></button>
             </div>
             <div id="stopwatch-display" class="stopwatch">00:00</div>
           </div>
@@ -319,7 +337,7 @@
         <div id="checklist-container"></div>
         
         <div style="text-align: center; margin-top: 20px;">
-          <button id="btn-add-item" class="btn btn-primary">+ Add Practice Item</button>
+          <button id="btn-add-item" class="m3-button m3-button-filled" style="border-radius: 100px;">+ Add Practice Item</button>
           <div id="complete-time-display" style="margin-top: 10px; font-style: italic; color: #555;"></div>
         </div>
 
