@@ -30,8 +30,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const nameInput = document.getElementById('student-name-input');
   
   const btnStartSession = document.getElementById('btn-start-session');
+  const btnPauseResume = document.getElementById('btn-pause-resume');
+  const btnEndSession = document.getElementById('btn-end-session');
+  const stopwatchDisplay = document.getElementById('stopwatch-display');
+  const defaultActions = document.getElementById('default-actions');
+  const sessionActions = document.getElementById('session-actions');
   const startTimeDisplay = document.getElementById('start-time-display');
-  const btnCompleteSession = document.getElementById('btn-complete-session');
   const completeTimeDisplay = document.getElementById('complete-time-display');
 
   const btnGetLink = document.getElementById('btn-get-link');
@@ -102,6 +106,18 @@ document.addEventListener('DOMContentLoaded', () => {
   let dailyState = loadDailyState();
   let isEditMode = false;
   let newlyAddedItemId = null;
+
+  // Stopwatch State
+  let secondsElapsed = 0;
+  let timerInterval = null;
+  let isPaused = false;
+  let sessionStartTime = null;
+
+  function formatStopwatch(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+  }
 
   // Setup student name field
   function renderStudentName() {
@@ -278,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
     isEditMode = !isEditMode;
     if (isEditMode) {
       btnToggleEdit.classList.add('active');
-      btnToggleEdit.innerText = '✔️ Done';
+      btnToggleEdit.innerText = '✔️ Done editing';
     } else {
       btnToggleEdit.classList.remove('active');
       btnToggleEdit.innerText = '✏️ Edit List';
@@ -294,9 +310,6 @@ document.addEventListener('DOMContentLoaded', () => {
     renderChecklist();
   });
 
-  // Session tracking
-  let sessionStartTime = null;
-
   function formatTimestamp(date) {
     const yyyy = date.getFullYear();
     const mm = String(date.getMonth() + 1).padStart(2, '0');
@@ -311,27 +324,66 @@ document.addEventListener('DOMContentLoaded', () => {
 
   btnStartSession.addEventListener('click', () => {
     sessionStartTime = new Date();
+    secondsElapsed = 0;
+    isPaused = false;
+    
     startTimeDisplay.innerText = `Practice session started at ${formatTimestamp(sessionStartTime)}`;
-    btnStartSession.style.display = 'none';
-    btnCompleteSession.style.display = 'inline-block';
     completeTimeDisplay.innerText = '';
+    
+    defaultActions.style.display = 'none';
+    sessionActions.style.display = 'flex';
+    btnPauseResume.innerText = 'Pause';
+    stopwatchDisplay.innerText = '00:00';
+
+    timerInterval = setInterval(() => {
+      secondsElapsed++;
+      stopwatchDisplay.innerText = formatStopwatch(secondsElapsed);
+    }, 1000);
   });
 
-  btnCompleteSession.addEventListener('click', () => {
+  btnPauseResume.addEventListener('click', () => {
+    if (!isPaused) {
+      isPaused = true;
+      btnPauseResume.innerText = 'Resume';
+      clearInterval(timerInterval);
+    } else {
+      isPaused = false;
+      btnPauseResume.innerText = 'Pause';
+      timerInterval = setInterval(() => {
+        secondsElapsed++;
+        stopwatchDisplay.innerText = formatStopwatch(secondsElapsed);
+      }, 1000);
+    }
+  });
+
+  btnEndSession.addEventListener('click', () => {
     if (!sessionStartTime) return;
+    clearInterval(timerInterval);
+    
+    defaultActions.style.display = 'flex';
+    sessionActions.style.display = 'none';
+
     const endTime = new Date();
     const diffMs = endTime - sessionStartTime;
     const diffMins = Math.floor(diffMs / 60000);
+    const remainingSecs = Math.floor((diffMs % 60000) / 1000);
     
-    let text = `Practice session finished at ${formatTimestamp(endTime)}. You practiced for ${diffMins} minutes!`;
+    let durationText = "";
+    if (diffMins > 0) {
+      durationText = `${diffMins} minute${diffMins === 1 ? '' : 's'} and ${remainingSecs} second${remainingSecs === 1 ? '' : 's'}`;
+    } else {
+      durationText = `${remainingSecs} second${remainingSecs === 1 ? '' : 's'}`;
+    }
+
+    let text = `Practice session finished at ${formatTimestamp(endTime)}. You practiced for ${durationText}!`;
     if (diffMins < 10) {
       text += " You should really practice a bit more.";
     }
     completeTimeDisplay.innerText = text;
     
-    btnStartSession.style.display = 'inline-block';
-    btnCompleteSession.style.display = 'none';
     sessionStartTime = null;
+    timerInterval = null;
+    secondsElapsed = 0;
   });
 
   // Get Link functionality

@@ -94,13 +94,87 @@
         margin-bottom: 10px;
         transition: all 0.2s ease;
       }
-      #btn-toggle-edit {
-        font-weight: bold;
+      /* Material 3 Action Bar & Stopwatch styles */
+      .action-bar-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 25px;
+        flex-wrap: wrap;
       }
-      #btn-toggle-edit.active {
-        background-color: #28a745;
+      .session-actions-group {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+      .m3-button-group {
+        display: flex;
+        align-items: center;
+      }
+      .m3-button {
+        height: 40px;
+        padding: 0 24px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        letter-spacing: 0.1px;
+        cursor: pointer;
+        border: 1px solid #ccc;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+      }
+      .m3-button.left-btn {
+        border-top-left-radius: 100px;
+        border-bottom-left-radius: 100px;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+      .m3-button.right-btn {
+        border-top-right-radius: 100px;
+        border-bottom-right-radius: 100px;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        margin-left: -1px;
+      }
+      .m3-button-filled {
+        background-color: #0066cc;
         color: white;
-        border-color: #28a745;
+        border-color: #0066cc;
+      }
+      .m3-button-filled:hover {
+        background-color: #0052a3;
+        border-color: #0052a3;
+      }
+      .m3-button-filled:active {
+        background-color: #003d7a;
+        border-color: #003d7a;
+      }
+      .m3-button-outlined {
+        background-color: transparent;
+        color: #0066cc;
+        border-color: #79747e;
+      }
+      .m3-button-outlined:hover {
+        background-color: rgba(0, 102, 204, 0.08);
+      }
+      .m3-button-outlined:active {
+        background-color: rgba(0, 102, 204, 0.16);
+      }
+      .stopwatch {
+        font-family: monospace;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #333;
+        padding: 4px 12px;
+        background-color: #f1f3f4;
+        border-radius: 8px;
+        border: 1px solid #dadce0;
+        min-width: 80px;
+        text-align: center;
+        box-shadow: inset 0 1px 2px rgba(0,0,0,0.06);
       }
       .btn-primary {
         background-color: #0066cc;
@@ -166,10 +240,22 @@
           </div>
         </div>
 
-        <!-- SESSION START & EDIT TOGGLE -->
-        <div style="display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 20px; flex-wrap: wrap;">
-          <button id="btn-start-session" class="btn btn-primary" style="background-color: #28a745; margin-bottom: 0;">Start practice session</button>
-          <button id="btn-toggle-edit" class="btn" style="margin-bottom: 0;">✏️ Edit List</button>
+        <!-- ACTION BAR CONTAINER -->
+        <div class="action-bar-container">
+          <!-- Default Mode: Start / Edit List -->
+          <div id="default-actions" class="m3-button-group">
+            <button id="btn-start-session" class="m3-button m3-button-filled left-btn" title="Click to begin practice session timer">Start</button>
+            <button id="btn-toggle-edit" class="m3-button m3-button-outlined right-btn">✏️ Edit List</button>
+          </div>
+
+          <!-- Active Practice Session Mode: Pause/Resume / End Buttons + Stopwatch -->
+          <div id="session-actions" class="session-actions-group" style="display: none;">
+            <div class="m3-button-group">
+              <button id="btn-pause-resume" class="m3-button m3-button-filled left-btn">Pause</button>
+              <button id="btn-end-session" class="m3-button m3-button-outlined right-btn">End</button>
+            </div>
+            <div id="stopwatch-display" class="stopwatch">00:00</div>
+          </div>
         </div>
         <div style="text-align: center; margin-top: -10px; margin-bottom: 20px;">
           <div id="start-time-display" style="font-style: italic; color: #555;"></div>
@@ -180,8 +266,6 @@
         
         <div style="text-align: center; margin-top: 20px;">
           <button id="btn-add-item" class="btn btn-primary">+ Add Practice Item</button>
-          <br>
-          <button id="btn-complete-session" class="btn btn-primary" style="background-color: #dc3545; display: none; margin-top: 20px;">Complete practice session</button>
           <div id="complete-time-display" style="margin-top: 10px; font-style: italic; color: #555;"></div>
         </div>
 
