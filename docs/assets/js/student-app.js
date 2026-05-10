@@ -330,6 +330,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   btnStartSession.addEventListener('click', () => {
+    if (isEditMode) {
+      isEditMode = false;
+      btnToggleEdit.classList.remove('active');
+      btnToggleEdit.classList.remove('m3-button-blue-pulsate');
+      btnToggleEdit.classList.add('m3-button-blue');
+      btnToggleEdit.querySelector('.button-icon').innerText = '✏️';
+      btnToggleEdit.querySelector('.button-text').innerText = ' Edit List';
+      renderChecklist();
+    }
+
     sessionStartTime = new Date();
     secondsElapsed = 0;
     isPaused = false;
