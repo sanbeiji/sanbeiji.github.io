@@ -295,12 +295,14 @@ document.addEventListener('DOMContentLoaded', () => {
     isEditMode = !isEditMode;
     if (isEditMode) {
       btnToggleEdit.classList.add('active');
+      btnToggleEdit.classList.remove('m3-button-blue');
       btnToggleEdit.classList.add('m3-button-blue-pulsate');
       btnToggleEdit.querySelector('.button-icon').innerText = '✔️';
       btnToggleEdit.querySelector('.button-text').innerText = ' Done editing';
     } else {
       btnToggleEdit.classList.remove('active');
       btnToggleEdit.classList.remove('m3-button-blue-pulsate');
+      btnToggleEdit.classList.add('m3-button-blue');
       btnToggleEdit.querySelector('.button-icon').innerText = '✏️';
       btnToggleEdit.querySelector('.button-text').innerText = ' Edit List';
     }
