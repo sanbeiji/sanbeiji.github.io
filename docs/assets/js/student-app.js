@@ -295,10 +295,12 @@ document.addEventListener('DOMContentLoaded', () => {
     isEditMode = !isEditMode;
     if (isEditMode) {
       btnToggleEdit.classList.add('active');
+      btnToggleEdit.classList.add('m3-button-blue-pulsate');
       btnToggleEdit.querySelector('.button-icon').innerText = '✔️';
       btnToggleEdit.querySelector('.button-text').innerText = ' Done editing';
     } else {
       btnToggleEdit.classList.remove('active');
+      btnToggleEdit.classList.remove('m3-button-blue-pulsate');
       btnToggleEdit.querySelector('.button-icon').innerText = '✏️';
       btnToggleEdit.querySelector('.button-text').innerText = ' Edit List';
     }
@@ -350,11 +352,15 @@ document.addEventListener('DOMContentLoaded', () => {
       isPaused = true;
       btnPauseResume.querySelector('.button-icon').innerText = '▶️';
       btnPauseResume.querySelector('.button-text').innerText = ' Resume';
+      btnPauseResume.classList.remove('m3-button-yellow');
+      btnPauseResume.classList.add('m3-button-green');
       clearInterval(timerInterval);
     } else {
       isPaused = false;
       btnPauseResume.querySelector('.button-icon').innerText = '⏸️';
       btnPauseResume.querySelector('.button-text').innerText = ' Pause';
+      btnPauseResume.classList.remove('m3-button-green');
+      btnPauseResume.classList.add('m3-button-yellow');
       timerInterval = setInterval(() => {
         secondsElapsed++;
         stopwatchDisplay.innerText = formatStopwatch(secondsElapsed);
@@ -368,6 +374,10 @@ document.addEventListener('DOMContentLoaded', () => {
     
     defaultActions.style.display = 'flex';
     sessionActions.style.display = 'none';
+
+    // Reset Pause/Resume button styling for next session
+    btnPauseResume.classList.remove('m3-button-green');
+    btnPauseResume.classList.add('m3-button-yellow');
 
     const endTime = new Date();
     const diffMs = endTime - sessionStartTime;
