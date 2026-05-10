@@ -186,77 +186,19 @@
         box-sizing: border-box;
       }
       /* Material 3 Color Tones and Animations */
-      .m3-button-green {
-        background-color: #388e3c !important;
-        color: white !important;
-        border-color: #388e3c !important;
-      }
-      .m3-button-green:hover {
-        background-color: #2e7d32 !important;
-        border-color: #2e7d32 !important;
-      }
-      .m3-button-yellow {
-        background-color: #fbc02d !important;
-        color: #222 !important;
-        border-color: #fbc02d !important;
-      }
-      .m3-button-yellow:hover {
-        background-color: #f9a825 !important;
-        border-color: #f9a825 !important;
-      }
-      .m3-button-red {
-        background-color: #d32f2f !important;
-        color: white !important;
-        border-color: #d32f2f !important;
-      }
-      .m3-button-red:hover {
-        background-color: #c62828 !important;
-        border-color: #c62828 !important;
-      }
-      .m3-button-red:active {
-        background-color: #b71c1c !important;
-        border-color: #b71c1c !important;
-      }
-      .m3-button-purple {
-        background-color: #673ab7 !important;
-        color: white !important;
-        border-color: #673ab7 !important;
-      }
-      .m3-button-purple:hover {
-        background-color: #5e35b1 !important;
-        border-color: #5e35b1 !important;
-      }
-      .m3-button-purple:active {
-        background-color: #512da8 !important;
-        border-color: #512da8 !important;
-      }
-      .m3-button-blue {
-        background-color: #4f8dd6 !important;
-        color: white !important;
-        border-color: #4f8dd6 !important;
-      }
-      .m3-button-blue:hover {
-        background-color: #3a7bc8 !important;
-        border-color: #3a7bc8 !important;
-      }
-      .m3-button-blue:active {
-        background-color: #2b63a7 !important;
-        border-color: #2b63a7 !important;
-      }
       .m3-button-blue-pulsate {
-        background-color: #4f8dd6 !important;
-        color: white !important;
-        border-color: #4f8dd6 !important;
-        animation: m3Pulsate 1.8s infinite ease-in-out !important;
+        color: #0066cc !important;
+        border-color: #0066cc !important;
+        animation: m3PulsateOutlined 1.8s infinite ease-in-out !important;
       }
-      @keyframes m3Pulsate {
+      @keyframes m3PulsateOutlined {
         0%, 100% {
-          box-shadow: 0 0 0 0 rgba(79, 141, 214, 0.6);
+          box-shadow: 0 0 0 0 rgba(0, 102, 204, 0.3);
           transform: scale(1);
         }
         50% {
-          box-shadow: 0 0 0 8px rgba(79, 141, 214, 0);
-          transform: scale(1.02);
+          box-shadow: 0 0 0 6px rgba(0, 102, 204, 0);
+          transform: scale(1.01);
         }
       }
       /* Material 3 Dialog Modal */
@@ -416,16 +358,16 @@
         <div class="action-bar-container">
           <!-- Default Mode: Start / Edit List / Share -->
           <div id="default-actions" class="m3-button-group">
-            <button id="btn-start-session" class="m3-button m3-button-filled m3-button-green left-btn" title="Click to begin practice session timer"><span class="button-icon">▶️</span><span class="button-text"> Start</span></button>
-            <button id="btn-toggle-edit" class="m3-button m3-button-filled m3-button-blue middle-btn"><span class="button-icon">✏️</span><span class="button-text"> Edit List</span></button>
-            <button id="btn-get-link" class="m3-button m3-button-filled m3-button-purple right-btn"><span class="button-icon">🔗</span><span class="button-text"> Share</span></button>
+            <button id="btn-start-session" class="m3-button m3-button-outlined left-btn" title="Click to begin practice session timer"><span class="button-icon">▶️</span><span class="button-text"> Start</span></button>
+            <button id="btn-toggle-edit" class="m3-button m3-button-outlined middle-btn"><span class="button-icon">✏️</span><span class="button-text"> Edit List</span></button>
+            <button id="btn-get-link" class="m3-button m3-button-outlined right-btn"><span class="button-icon">🔗</span><span class="button-text"> Share</span></button>
           </div>
 
           <!-- Active Practice Session Mode: Pause/Resume / End Buttons + Stopwatch -->
           <div id="session-actions" class="session-actions-group" style="display: none;">
             <div class="m3-button-group">
-              <button id="btn-pause-resume" class="m3-button m3-button-filled m3-button-yellow left-btn"><span class="button-icon">⏸️</span><span class="button-text"> Pause</span></button>
-              <button id="btn-end-session" class="m3-button m3-button-filled m3-button-red right-btn"><span class="button-icon">⏹️</span><span class="button-text"> End</span></button>
+              <button id="btn-pause-resume" class="m3-button m3-button-outlined left-btn"><span class="button-icon">⏸️</span><span class="button-text"> Pause</span></button>
+              <button id="btn-end-session" class="m3-button m3-button-outlined right-btn"><span class="button-icon">⏹️</span><span class="button-text"> End</span></button>
             </div>
             <div id="stopwatch-display" class="stopwatch">00:00</div>
           </div>
