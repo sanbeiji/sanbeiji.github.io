@@ -123,11 +123,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // Setup student name field
   function renderStudentName() {
     if (appData.name.trim() === '') {
-      nameText.innerHTML = '<span style="color:#888;font-style:italic">Student Name</span>';
+      nameText.innerHTML = '<span style="color:#888;font-style:italic">Student name</span>';
     } else {
       nameText.innerText = appData.name;
     }
     nameInput.value = appData.name;
+    nameEditIcon.style.display = isEditMode ? 'inline' : 'none';
   }
 
   renderStudentName();
@@ -302,9 +303,10 @@ document.addEventListener('DOMContentLoaded', () => {
       btnToggleEdit.classList.remove('active');
       btnToggleEdit.classList.remove('m3-button-blue-pulsate');
       btnToggleEdit.querySelector('.button-icon').innerText = '✏️';
-      btnToggleEdit.querySelector('.button-text').innerText = ' Edit List';
+      btnToggleEdit.querySelector('.button-text').innerText = ' Edit';
     }
     renderChecklist();
+    renderStudentName();
   });
 
   btnAddItem.addEventListener('click', () => {
@@ -333,8 +335,9 @@ document.addEventListener('DOMContentLoaded', () => {
       btnToggleEdit.classList.remove('active');
       btnToggleEdit.classList.remove('m3-button-blue-pulsate');
       btnToggleEdit.querySelector('.button-icon').innerText = '✏️';
-      btnToggleEdit.querySelector('.button-text').innerText = ' Edit List';
+      btnToggleEdit.querySelector('.button-text').innerText = ' Edit';
       renderChecklist();
+      renderStudentName();
     }
 
     sessionStartTime = new Date();
