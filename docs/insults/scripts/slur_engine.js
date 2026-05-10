@@ -32,19 +32,44 @@
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
+  function getAOrAn(word) {
+    if (!word) return "a";
+    const firstChar = word.charAt(0).toLowerCase();
+    return ['a', 'e', 'i', 'o', 'u'].includes(firstChar) ? "an" : "a";
+  }
+
   function generateInsultString() {
+    if (Math.random() < 0.01) {
+      const exactQuotes = [
+        "Away, you starveling, you elf-skin, you dried neat’s-tongue, bull’s-pizzle, you stock-fish!",
+        "Thou art a boil, a plague sore, an embossed carbuncle in my corrupted blood.",
+        "A knave; a rascal; an eater of broken meats; a base, proud, shallow, beggarly, three-suited, hundred-pound, filthy, worsted-stocking knave...",
+        "You beastly knave, know you no reverence?",
+        "A milksop, one that never in his life felt so much cold as over shoes in snow.",
+        "Thou sodden-witted lord! Thou hast no more brain than I have in my elbows.",
+        "Villain, I have done thy mother.",
+        "You puppyish and scurvy lout!",
+        "Hence, rotten thing! or I shall shake thy bones out of thy garments.",
+        "The tartness of his face sours ripe grapes."
+      ];
+      return getRandomItem(exactQuotes);
+    }
+
     const adj1 = getRandomItem(insult1);
     const adj2 = getRandomItem(insult2);
     const noun = getRandomItem(insult3);
     const targetPart = getRandomItem(["wit", "face", "soul", "virtue"]);
 
-    // Five Shakespearean sentence structures with weighted probabilities
+    // Shakespearean sentence structures with weighted probabilities
     const templates = [
-      { weight: 45, fn: () => `Thou ${adj1}, ${adj2} ${noun}!` },
-      { weight: 30, fn: () => `Thy ${targetPart} is a ${adj2} ${noun}!` },
-      { weight: 15, fn: () => `Thou art as ${adj1} as a ${adj2} ${noun}!` },
+      { weight: 40, fn: () => `Thou ${adj1}, ${adj2} ${noun}!` },
+      { weight: 40, fn: () => `Thy ${targetPart} is ${getAOrAn(adj2)} ${adj2} ${noun}!` },
+      { weight: 25, fn: () => `Thou art as ${adj1} as ${getAOrAn(adj2)} ${adj2} ${noun}!` },
       { weight: 5,  fn: () => `Out of my sight, thou ${adj1}, ${adj2} ${noun}!` },
-      { weight: 5,  fn: () => `I do desire we may be better strangers, thou ${adj1} ${noun}!` }
+      { weight: 3,  fn: () => `I do desire we may be better strangers, thou ${adj1} ${noun}!` },
+      { weight: 3,  fn: () => `Would thou wert clean enough to spit upon, thou ${adj1} ${noun}!` },
+      { weight: 3,  fn: () => `More of thy conversation would infect my brain, thou ${adj2} ${noun}!` },
+      { weight: 3,  fn: () => `I am sick when I do look on thee, thou ${adj1}, ${adj2} ${noun}!` }
     ];
 
     const totalWeight = templates.reduce((sum, t) => sum + t.weight, 0);
@@ -300,6 +325,86 @@
     speakBtn.addEventListener("click", speakInsult);
     copyBtn.addEventListener("click", () => copyToClipboard(currentInsultText));
     shareBtn.addEventListener("click", shareOnBluesky);
+
+    // Fullscreen toggle logic
+    const fullscreenBtn = document.getElementById("btn_fullscreen");
+    if (fullscreenBtn) {
+      const isFullscreenSupported = document.fullscreenEnabled || 
+                                    document.webkitFullscreenEnabled || 
+                                    document.mozFullScreenEnabled || 
+                                    document.msFullscreenEnabled;
+                                    
+      if (!isFullscreenSupported) {
+        fullscreenBtn.style.display = 'none';
+      } else {
+        fullscreenBtn.addEventListener("click", () => {
+          if (!document.fullscreenElement && 
+              !document.webkitFullscreenElement && 
+              !document.mozFullScreenElement && 
+              !document.msFullscreenElement) {
+            
+            const req = document.documentElement.requestFullscreen || 
+                        document.documentElement.webkitRequestFullscreen || 
+                        document.documentElement.mozRequestFullScreen || 
+                        document.documentElement.msRequestFullscreen;
+                        
+            if (req) {
+              req.call(document.documentElement)
+                .then(() => {
+                  fullscreenBtn.setAttribute("title", "Exit Fullscreen");
+                  fullscreenBtn.setAttribute("aria-label", "Exit Fullscreen");
+                  fullscreenBtn.innerHTML = `
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                      <path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>
+                    </svg>
+                  `;
+                })
+                .catch(err => console.error(`Error enabling fullscreen: ${err.message}`));
+            }
+          } else {
+            const exit = document.exitFullscreen || 
+                         document.webkitExitFullscreen || 
+                         document.mozCancelFullScreen || 
+                         document.msExitFullscreen;
+                         
+            if (exit) {
+              exit.call(document)
+                .then(() => {
+                  fullscreenBtn.setAttribute("title", "Enter Fullscreen");
+                  fullscreenBtn.setAttribute("aria-label", "Enter Fullscreen");
+                  fullscreenBtn.innerHTML = `
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                      <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                    </svg>
+                  `;
+                });
+            }
+          }
+        });
+
+        // Keep button icon in sync if exited via Esc key
+        const syncIcon = () => {
+          const isCurrentlyFullscreen = document.fullscreenElement || 
+                                         document.webkitFullscreenElement || 
+                                         document.mozFullScreenElement || 
+                                         document.msFullscreenElement;
+          if (!isCurrentlyFullscreen) {
+            fullscreenBtn.setAttribute("title", "Enter Fullscreen");
+            fullscreenBtn.setAttribute("aria-label", "Enter Fullscreen");
+            fullscreenBtn.innerHTML = `
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+              </svg>
+            `;
+          }
+        };
+
+        document.addEventListener("fullscreenchange", syncIcon);
+        document.addEventListener("webkitfullscreenchange", syncIcon);
+        document.addEventListener("mozfullscreenchange", syncIcon);
+        document.addEventListener("MSFullscreenChange", syncIcon);
+      }
+    }
 
     // History Drawer Toggle
     historyToggle.addEventListener("click", () => {
