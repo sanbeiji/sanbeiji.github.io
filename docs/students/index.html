@@ -233,9 +233,16 @@
       .m3-button, .m3-button *, .stopwatch, .m3-dialog, .m3-dialog-title, .practice-input {
         font-family: 'Special Elite', 'Noto Serif SC', 'Kaiti TC', monospace !important;
       }
+      .m3-button .button-icon {
+        margin-right: 6px;
+        display: inline-block;
+      }
       @media screen and (max-width: 480px) {
         .m3-button-group .button-text {
           display: none !important;
+        }
+        .m3-button .button-icon {
+          margin-right: 0 !important;
         }
         .m3-button {
           padding: 0 16px !important;
