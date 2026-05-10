@@ -2,6 +2,26 @@ document.addEventListener('DOMContentLoaded', () => {
   const container = document.getElementById('checklist-container');
   const dateEl = document.getElementById('date');
   const btnAddItem = document.getElementById('btn-add-item');
+  const btnToggleEdit = document.getElementById('btn-toggle-edit');
+
+  // Handle dragover sorting on container
+  container.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    const draggingElement = container.querySelector('.dragging');
+    if (!draggingElement) return;
+    
+    const siblings = [...container.querySelectorAll('.practice-item:not(.dragging)')];
+    const nextSibling = siblings.find(sibling => {
+      const box = sibling.getBoundingClientRect();
+      return e.clientY <= box.top + box.height / 2;
+    });
+    
+    if (nextSibling) {
+      container.insertBefore(draggingElement, nextSibling);
+    } else {
+      container.appendChild(draggingElement);
+    }
+  });
   
   const nameView = document.getElementById('student-name-view');
   const nameText = document.getElementById('student-name-text');
@@ -80,6 +100,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let appData = loadData();
   let dailyState = loadDailyState();
+  let isEditMode = false;
+  let newlyAddedItemId = null;
 
   // Setup student name field
   function renderStudentName() {
@@ -116,114 +138,158 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderChecklist() {
     container.innerHTML = '';
     
+    // Toggle Add Item button visibility
+    btnAddItem.style.display = isEditMode ? 'inline-block' : 'none';
+
     appData.items.forEach((item, index) => {
       const div = document.createElement('div');
       div.className = 'practice-item';
-      
-      // Checkbox
-      const checkbox = document.createElement('input');
-      checkbox.type = 'checkbox';
-      checkbox.className = 'practice-checkbox';
-      checkbox.id = `chk_${item.id}`;
-      checkbox.checked = !!dailyState.checked[item.id];
-      
-      checkbox.addEventListener('change', (e) => {
-        dailyState.checked[item.id] = e.target.checked;
-        saveDailyState();
-      });
+      div.dataset.id = item.id;
+      div.draggable = false;
 
-      div.appendChild(checkbox);
+      if (isEditMode) {
+        // --- EDIT MODE ---
+        // Drag handle
+        const dragHandle = document.createElement('div');
+        dragHandle.className = 'drag-handle';
+        dragHandle.innerHTML = '⋮⋮';
+        dragHandle.title = 'Drag to reorder';
+        
+        dragHandle.addEventListener('mousedown', () => {
+          div.draggable = true;
+        });
+        dragHandle.addEventListener('mouseup', () => {
+          div.draggable = false;
+        });
+        dragHandle.addEventListener('touchstart', () => {
+          div.draggable = true;
+        });
+        dragHandle.addEventListener('touchend', () => {
+          div.draggable = false;
+        });
 
-      // Content area
-      const content = document.createElement('div');
-      content.className = 'practice-item-content';
-      content.style.flexWrap = 'wrap';
+        // Drag events
+        div.addEventListener('dragstart', (e) => {
+          div.classList.add('dragging');
+          e.dataTransfer.effectAllowed = 'move';
+        });
 
-      // View mode
-      const viewMode = document.createElement('div');
-      viewMode.style.display = 'flex';
-      viewMode.style.alignItems = 'center';
-      viewMode.style.width = '100%';
-      
-      const label = document.createElement('label');
-      label.htmlFor = `chk_${item.id}`;
-      
-      const textSpan = document.createElement('span');
-      textSpan.innerHTML = item.text ? item.text : '<span style="color:#888;font-style:italic">Click edit icon to add</span>';
-      label.appendChild(textSpan);
-      viewMode.appendChild(label);
-      
-      const editIcon = document.createElement('span');
-      editIcon.innerHTML = '✏️';
-      editIcon.style.cursor = 'pointer';
-      editIcon.style.marginLeft = '10px';
-      editIcon.title = 'Edit item';
-      viewMode.appendChild(editIcon);
+        div.addEventListener('dragend', () => {
+          div.classList.remove('dragging');
+          div.draggable = false;
+          
+          // Reorder items based on DOM order
+          const itemElements = [...container.querySelectorAll('.practice-item')];
+          const newItems = itemElements.map(el => {
+            const id = el.dataset.id;
+            return appData.items.find(it => it.id === id);
+          }).filter(Boolean);
+          
+          appData.items = newItems;
+          saveData();
+          renderChecklist();
+        });
 
-      // Edit mode
-      const editMode = document.createElement('div');
-      editMode.style.display = 'none';
-      editMode.style.width = '100%';
-      editMode.style.alignItems = 'center';
+        div.appendChild(dragHandle);
 
-      const input = document.createElement('input');
-      input.type = 'text';
-      input.className = 'practice-input';
-      input.placeholder = 'Practice item...';
-      input.value = item.text;
-      
-      // Delete button
-      const delBtn = document.createElement('button');
-      delBtn.className = 'del-btn';
-      delBtn.innerText = 'X';
-      delBtn.title = 'Remove item';
-      // Ensure the button can get focus so focusout can detect it
-      delBtn.tabIndex = 0; 
-      
-      delBtn.addEventListener('click', () => {
-        appData.items.splice(index, 1);
-        saveData();
-        renderChecklist();
-      });
+        // Content area
+        const content = document.createElement('div');
+        content.className = 'practice-item-content';
 
-      editMode.appendChild(input);
-      editMode.appendChild(delBtn);
-
-      // Event listeners for toggle
-      editIcon.addEventListener('click', () => {
-        viewMode.style.display = 'none';
-        editMode.style.display = 'flex';
-        input.focus();
-      });
-
-      input.addEventListener('focusout', (e) => {
-        // If clicking the delete button, let its click handler run instead of blurring back to view mode
-        if (e.relatedTarget === delBtn) {
-          return;
+        // Text Input
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.className = 'practice-input';
+        input.placeholder = 'Practice item...';
+        input.value = item.text;
+        
+        if (item.id === newlyAddedItemId) {
+          setTimeout(() => input.focus(), 0);
+          newlyAddedItemId = null;
         }
-        editMode.style.display = 'none';
-        viewMode.style.display = 'flex';
-        item.text = input.value.trim();
-        saveData();
-        textSpan.innerHTML = item.text ? item.text : '<span style="color:#888;font-style:italic">Click edit icon to add</span>';
-      });
+        
+        input.addEventListener('input', () => {
+          item.text = input.value.trim();
+          saveData();
+        });
 
-      input.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-          input.blur();
+        input.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') {
+            input.blur();
+          }
+        });
+
+        // Delete button
+        const delBtn = document.createElement('button');
+        delBtn.className = 'del-btn';
+        delBtn.innerText = 'X';
+        delBtn.title = 'Remove item';
+        
+        delBtn.addEventListener('click', () => {
+          appData.items.splice(index, 1);
+          saveData();
+          renderChecklist();
+        });
+
+        content.appendChild(input);
+        content.appendChild(delBtn);
+        div.appendChild(content);
+
+      } else {
+        // --- VIEW MODE (DEFAULT) ---
+        // Checkbox
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.className = 'practice-checkbox';
+        checkbox.id = `chk_${item.id}`;
+        checkbox.checked = !!dailyState.checked[item.id];
+        
+        checkbox.addEventListener('change', (e) => {
+          dailyState.checked[item.id] = e.target.checked;
+          saveDailyState();
+        });
+
+        div.appendChild(checkbox);
+
+        // Content area
+        const content = document.createElement('div');
+        content.className = 'practice-item-content';
+
+        const label = document.createElement('label');
+        label.htmlFor = `chk_${item.id}`;
+        
+        const textSpan = document.createElement('span');
+        textSpan.innerText = item.text ? item.text : 'Empty item';
+        if (!item.text) {
+          textSpan.style.color = '#888';
+          textSpan.style.fontStyle = 'italic';
         }
-      });
+        
+        label.appendChild(textSpan);
+        content.appendChild(label);
+        div.appendChild(content);
+      }
 
-      content.appendChild(viewMode);
-      content.appendChild(editMode);
-
-      div.appendChild(content);
       container.appendChild(div);
     });
   }
 
+  btnToggleEdit.addEventListener('click', () => {
+    isEditMode = !isEditMode;
+    if (isEditMode) {
+      btnToggleEdit.classList.add('active');
+      btnToggleEdit.innerText = '✔️ Done';
+    } else {
+      btnToggleEdit.classList.remove('active');
+      btnToggleEdit.innerText = '✏️ Edit List';
+    }
+    renderChecklist();
+  });
+
   btnAddItem.addEventListener('click', () => {
-    appData.items.push({ id: Date.now().toString(), text: '' });
+    const newId = Date.now().toString();
+    newlyAddedItemId = newId;
+    appData.items.push({ id: newId, text: '' });
     saveData();
     renderChecklist();
   });
