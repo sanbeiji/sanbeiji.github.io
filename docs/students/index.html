@@ -139,6 +139,10 @@
         border-bottom-left-radius: 0;
         margin-left: -1px;
       }
+      .m3-button.middle-btn {
+        border-radius: 0;
+        margin-left: -1px;
+      }
       .m3-button-filled {
         background-color: #0066cc;
         color: white;
@@ -175,6 +179,55 @@
         min-width: 80px;
         text-align: center;
         box-shadow: inset 0 1px 2px rgba(0,0,0,0.06);
+      }
+      /* Material 3 Dialog Modal */
+      .m3-dialog-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.32);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2000;
+        animation: m3FadeIn 0.2s cubic-bezier(0.2, 0, 0, 1);
+      }
+      .m3-dialog {
+        background-color: #fff;
+        border-radius: 28px;
+        padding: 24px;
+        width: 100%;
+        max-width: 360px;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        animation: m3ZoomIn 0.25s cubic-bezier(0.2, 0, 0, 1);
+      }
+      .m3-dialog-title {
+        font-size: 1.5rem;
+        font-weight: 500;
+        color: #1c1b1f;
+        margin-bottom: 12px;
+        margin-top: 0;
+      }
+      .m3-dialog-actions {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-top: 16px;
+      }
+      @keyframes m3FadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      @keyframes m3ZoomIn {
+        from { transform: scale(0.95); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
       }
       .btn-primary {
         background-color: #0066cc;
@@ -242,17 +295,18 @@
 
         <!-- ACTION BAR CONTAINER -->
         <div class="action-bar-container">
-          <!-- Default Mode: Start / Edit List -->
+          <!-- Default Mode: Start / Edit List / Share -->
           <div id="default-actions" class="m3-button-group">
-            <button id="btn-start-session" class="m3-button m3-button-filled left-btn" title="Click to begin practice session timer">Start</button>
-            <button id="btn-toggle-edit" class="m3-button m3-button-outlined right-btn">✏️ Edit List</button>
+            <button id="btn-start-session" class="m3-button m3-button-filled left-btn" title="Click to begin practice session timer">▶️ Start</button>
+            <button id="btn-toggle-edit" class="m3-button m3-button-outlined middle-btn">✏️ Edit List</button>
+            <button id="btn-get-link" class="m3-button m3-button-outlined right-btn">🔗 Share</button>
           </div>
 
           <!-- Active Practice Session Mode: Pause/Resume / End Buttons + Stopwatch -->
           <div id="session-actions" class="session-actions-group" style="display: none;">
             <div class="m3-button-group">
-              <button id="btn-pause-resume" class="m3-button m3-button-filled left-btn">Pause</button>
-              <button id="btn-end-session" class="m3-button m3-button-outlined right-btn">End</button>
+              <button id="btn-pause-resume" class="m3-button m3-button-filled left-btn">⏸️ Pause</button>
+              <button id="btn-end-session" class="m3-button m3-button-outlined right-btn">⏹️ End</button>
             </div>
             <div id="stopwatch-display" class="stopwatch">00:00</div>
           </div>
@@ -269,14 +323,18 @@
           <div id="complete-time-display" style="margin-top: 10px; font-style: italic; color: #555;"></div>
         </div>
 
-        <div style="text-align: center; margin-top: 30px; border-top: 1px solid #ccc; padding-top: 20px;">
-          <button id="btn-get-link" class="btn" style="background-color: #ddd;">Get link to this list</button>
-          <div id="link-container" style="display:none; margin-top: 10px;">
-            <input type="text" id="share-link" readonly style="width: 100%; max-width: 400px; padding: 10px; text-align: center; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">
-            <br>
-            <button id="btn-copy-link" class="btn">Copy Link</button>
-          </div>
-        </div>
+       <!-- MATERIAL 3 SHARE DIALOG -->
+       <div id="share-dialog-overlay" class="m3-dialog-overlay" style="display: none;">
+         <div class="m3-dialog">
+           <h3 class="m3-dialog-title">Share Checklist</h3>
+           <p style="margin-bottom: 16px; color: #555; font-size: 0.95em;">Copy the link below to share this practice checklist with others:</p>
+           <input type="text" id="share-link-m3" readonly class="practice-input" style="text-align: center; margin-bottom: 20px; font-family: monospace;">
+           <div class="m3-dialog-actions">
+             <button id="btn-dialog-close" class="m3-button m3-button-outlined" style="border: none; border-radius: 100px; height: 36px;">Close</button>
+             <button id="btn-copy-link-m3" class="m3-button m3-button-filled" style="border-radius: 100px; height: 36px; margin-left: 8px;">Copy Link</button>
+           </div>
+         </div>
+       </div>
 
       </div>
     </div>

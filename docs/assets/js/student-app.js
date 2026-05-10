@@ -39,9 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const completeTimeDisplay = document.getElementById('complete-time-display');
 
   const btnGetLink = document.getElementById('btn-get-link');
-  const linkContainer = document.getElementById('link-container');
-  const shareLinkInput = document.getElementById('share-link');
-  const btnCopyLink = document.getElementById('btn-copy-link');
+  const shareDialogOverlay = document.getElementById('share-dialog-overlay');
+  const shareLinkM3 = document.getElementById('share-link-m3');
+  const btnDialogClose = document.getElementById('btn-dialog-close');
+  const btnCopyLinkM3 = document.getElementById('btn-copy-link-m3');
   
   const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   const today = new Date();
@@ -332,7 +333,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     defaultActions.style.display = 'none';
     sessionActions.style.display = 'flex';
-    btnPauseResume.innerText = 'Pause';
+    btnPauseResume.innerText = '⏸️ Pause';
     stopwatchDisplay.innerText = '00:00';
 
     timerInterval = setInterval(() => {
@@ -344,11 +345,11 @@ document.addEventListener('DOMContentLoaded', () => {
   btnPauseResume.addEventListener('click', () => {
     if (!isPaused) {
       isPaused = true;
-      btnPauseResume.innerText = 'Resume';
+      btnPauseResume.innerText = '▶️ Resume';
       clearInterval(timerInterval);
     } else {
       isPaused = false;
-      btnPauseResume.innerText = 'Pause';
+      btnPauseResume.innerText = '⏸️ Pause';
       timerInterval = setInterval(() => {
         secondsElapsed++;
         stopwatchDisplay.innerText = formatStopwatch(secondsElapsed);
@@ -386,19 +387,38 @@ document.addEventListener('DOMContentLoaded', () => {
     secondsElapsed = 0;
   });
 
-  // Get Link functionality
+  // M3 Dialog Share Modal functionality
   btnGetLink.addEventListener('click', () => {
     const encoded = encodeData(appData);
     const url = window.location.origin + window.location.pathname + '?data=' + encoded;
-    shareLinkInput.value = url;
-    linkContainer.style.display = 'block';
+    shareLinkM3.value = url;
+    shareDialogOverlay.style.display = 'flex';
   });
 
-  btnCopyLink.addEventListener('click', () => {
-    shareLinkInput.select();
-    document.execCommand('copy');
-    btnCopyLink.innerText = 'Copied!';
-    setTimeout(() => { btnCopyLink.innerText = 'Copy Link'; }, 2000);
+  btnDialogClose.addEventListener('click', () => {
+    shareDialogOverlay.style.display = 'none';
+  });
+
+  // Close overlay on backdrop click
+  shareDialogOverlay.addEventListener('click', (e) => {
+    if (e.target === shareDialogOverlay) {
+      shareDialogOverlay.style.display = 'none';
+    }
+  });
+
+  btnCopyLinkM3.addEventListener('click', () => {
+    shareLinkM3.select();
+    shareLinkM3.setSelectionRange(0, 99999);
+    navigator.clipboard.writeText(shareLinkM3.value)
+      .then(() => {
+        btnCopyLinkM3.innerText = 'Copied!';
+        setTimeout(() => { btnCopyLinkM3.innerText = 'Copy Link'; }, 2000);
+      })
+      .catch(() => {
+        document.execCommand('copy');
+        btnCopyLinkM3.innerText = 'Copied!';
+        setTimeout(() => { btnCopyLinkM3.innerText = 'Copy Link'; }, 2000);
+      });
   });
 
   renderChecklist();
