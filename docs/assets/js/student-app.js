@@ -108,6 +108,37 @@ document.addEventListener('DOMContentLoaded', () => {
   let isEditMode = false;
   let newlyAddedItemId = null;
 
+  function hasPracticeItemsInDataStorage() {
+    const data = localStorage.getItem('studentAppData');
+    if (!data) {
+      return false;
+    }
+    try {
+      const parsed = JSON.parse(data);
+      if (!parsed || !parsed.items || parsed.items.length === 0) {
+        return false;
+      }
+      return parsed.items.some(item => item.text && item.text.trim() !== '');
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function updateOnboardingState() {
+    const onboardingBubble = document.getElementById('edit-onboarding-bubble');
+    if (!onboardingBubble) return;
+
+    if (!isEditMode && !hasPracticeItemsInDataStorage()) {
+      onboardingBubble.style.display = 'block';
+      btnToggleEdit.classList.add('m3-button-blue-pulsate');
+    } else {
+      onboardingBubble.style.display = 'none';
+      if (!isEditMode) {
+        btnToggleEdit.classList.remove('m3-button-blue-pulsate');
+      }
+    }
+  }
+
   // Stopwatch State
   let secondsElapsed = 0;
   let timerInterval = null;
@@ -206,6 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
           appData.items = newItems;
           saveData();
           renderChecklist();
+          updateOnboardingState();
         });
 
         div.appendChild(dragHandle);
@@ -229,6 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
         input.addEventListener('input', () => {
           item.text = input.value.trim();
           saveData();
+          updateOnboardingState();
         });
 
         input.addEventListener('keypress', (e) => {
@@ -247,6 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
           appData.items.splice(index, 1);
           saveData();
           renderChecklist();
+          updateOnboardingState();
         });
 
         content.appendChild(input);
@@ -307,6 +341,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     renderChecklist();
     renderStudentName();
+    updateOnboardingState();
   });
 
   btnAddItem.addEventListener('click', () => {
@@ -315,6 +350,7 @@ document.addEventListener('DOMContentLoaded', () => {
     appData.items.push({ id: newId, text: '' });
     saveData();
     renderChecklist();
+    updateOnboardingState();
   });
 
   function formatTimestamp(date) {
@@ -338,6 +374,7 @@ document.addEventListener('DOMContentLoaded', () => {
       btnToggleEdit.querySelector('.button-text').innerText = ' Edit';
       renderChecklist();
       renderStudentName();
+      updateOnboardingState();
     }
 
     sessionStartTime = new Date();
@@ -382,6 +419,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     defaultActions.style.display = 'flex';
     sessionActions.style.display = 'none';
+    updateOnboardingState();
 
     const endTime = new Date();
     const diffMs = endTime - sessionStartTime;
@@ -441,4 +479,5 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   renderChecklist();
+  updateOnboardingState();
 });

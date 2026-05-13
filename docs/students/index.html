@@ -252,8 +252,47 @@
         from { transform: scale(0.95); opacity: 0; }
         to { transform: scale(1); opacity: 1; }
       }
+      /* Onboarding Bubble */
+      .onboarding-bubble {
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-bottom: 14px;
+        background: linear-gradient(135deg, #0066cc, #004080);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        box-shadow: 0 8px 20px rgba(0, 102, 204, 0.3);
+        pointer-events: none;
+        white-space: nowrap;
+        z-index: 100;
+        animation: bounceBubble 2s infinite ease-in-out;
+      }
+      .onboarding-bubble::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 6px;
+        border-style: solid;
+        border-color: #004080 transparent transparent transparent;
+      }
+      @keyframes bounceBubble {
+        0%, 100% {
+          transform: translateX(-50%) translateY(0);
+        }
+        50% {
+          transform: translateX(-50%) translateY(-6px);
+        }
+      }
+
       /* Font Synchronization & Responsive Mobile Adaptations */
-      .m3-button, .m3-button *, .stopwatch, .m3-dialog, .m3-dialog-title, .practice-input {
+      .m3-button, .m3-button *, .stopwatch, .m3-dialog, .m3-dialog-title, .practice-input, .onboarding-bubble {
         font-family: 'Special Elite', 'Noto Serif SC', 'Kaiti TC', monospace !important;
       }
       .m3-button .button-icon {
@@ -377,10 +416,11 @@
         <!-- ACTION BAR CONTAINER -->
         <div class="action-bar-container">
           <!-- Default Mode: Start / Edit List / Share -->
-          <div id="default-actions" class="m3-button-group">
+          <div id="default-actions" class="m3-button-group" style="position: relative;">
             <button id="btn-start-session" class="m3-button m3-button-outlined left-btn" title="Click to begin practice session timer"><span class="button-icon">▶️</span><span class="button-text"> Start</span></button>
             <button id="btn-toggle-edit" class="m3-button m3-button-outlined middle-btn"><span class="button-icon">✏️</span><span class="button-text"> Edit</span></button>
             <button id="btn-get-link" class="m3-button m3-button-outlined right-btn"><span class="button-icon">🔗</span><span class="button-text"> Share</span></button>
+            <div id="edit-onboarding-bubble" class="onboarding-bubble" style="display: none;">Click here to get started</div>
           </div>
 
           <!-- Active Practice Session Mode: Pause/Resume / End Buttons + Stopwatch -->
