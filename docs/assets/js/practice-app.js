@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const editPoolContainer = document.getElementById('edit-pool-container');
   const excerptCountInput = document.getElementById('excerpt-count');
   
-  const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const monthNames = window.SanbeijiDocs ? window.SanbeijiDocs.monthNames : ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   const today = new Date();
   dateEl.innerHTML = `Practice plan for ${monthNames[today.getMonth()]} ${today.getDate()}, ${today.getFullYear()}`;
 
@@ -29,22 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
     return `<a href="${url}" target="_blank" title="Watch shifting exercise video">Shift exercise ${pattern}</a>`;
   }
 
-  // Inject CSS for del-btn if not present
-  const style = document.createElement('style');
-  style.innerHTML = `
-    .del-btn {
-      margin-left: 10px;
-      background: #ff4444;
-      color: white;
-      border: none;
-      border-radius: 3px;
-      padding: 6px 10px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-  `;
-  document.head.appendChild(style);
-
   function saveDailyState() {
     localStorage.setItem('practiceDailyState', JSON.stringify(window.dailyState));
   }
@@ -63,11 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     items.push(
-      // User Editable Fields
       { id: 'concerto', isInput: true, placeholder: 'Concerto...', value: userFields.concerto },
       { id: 'bach', isInput: true, placeholder: 'Bach...', value: userFields.bach },
       { id: 'otherSolo', isInput: true, placeholder: 'Other solo piece...', value: userFields.otherSolo },
-
       { id: 'strauss', label: `Daily Strauss: ${getSearchLink('double bass excerpt ' + state.todays_strauss, state.todays_strauss)}` }
     );
 
@@ -212,7 +194,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         content.appendChild(viewMode);
         content.appendChild(editMode);
-      } else {        const label = document.createElement('label');
+      } else {
+        const label = document.createElement('label');
         label.htmlFor = `chk_${item.id}`;
         label.innerHTML = item.label;
         content.appendChild(label);
@@ -223,7 +206,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- Pool Management ---
   function renderPool(poolName, containerId) {
     const poolContainer = document.getElementById(containerId);
     poolContainer.innerHTML = '';
@@ -294,7 +276,6 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('form-add-strauss').addEventListener('submit', (e) => handleAddPoolItem(e, 'strauss'));
   document.getElementById('form-add-excerpt').addEventListener('submit', (e) => handleAddPoolItem(e, 'excerpts'));
 
-  // --- Initial Setup ---
   excerptCountInput.value = window.practiceAppData.settings.excerptCount || 5;
   excerptCountInput.addEventListener('change', (e) => {
     let c = parseInt(e.target.value, 10);

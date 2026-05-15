@@ -44,17 +44,30 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnDialogClose = document.getElementById('btn-dialog-close');
   const btnCopyLinkM3 = document.getElementById('btn-copy-link-m3');
   
-  const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const monthNames = window.SanbeijiDocs ? window.SanbeijiDocs.monthNames : ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   const today = new Date();
   const todayStr = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`;
   dateEl.innerHTML = `Practice checklist for ${monthNames[today.getMonth()]} ${today.getDate()}, ${today.getFullYear()}`;
 
   function encodeData(data) {
-    return btoa(unescape(encodeURIComponent(JSON.stringify(data))));
+    return window.SanbeijiDocs ? window.SanbeijiDocs.encodeData(data) : btoa(unescape(encodeURIComponent(JSON.stringify(data))));
   }
 
   function decodeData(str) {
-    return JSON.parse(decodeURIComponent(escape(atob(str))));
+    return window.SanbeijiDocs ? window.SanbeijiDocs.decodeData(str) : JSON.parse(decodeURIComponent(escape(atob(str))));
+  }
+
+  function formatTimestamp(date) {
+    if (window.SanbeijiDocs) return window.SanbeijiDocs.formatTimestamp(date);
+    const yyyy = date.getFullYear();
+    const mm = String(date.getMonth() + 1).padStart(2, '0');
+    const dd = String(date.getDate()).padStart(2, '0');
+    let hours = date.getHours();
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12; 
+    return `${yyyy}/${mm}/${dd} ${String(hours).padStart(2, '0')}:${minutes} ${ampm}`;
   }
 
   // Load configuration (name and list of items)
@@ -64,9 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (dataParam) {
       try {
         const decoded = decodeData(dataParam);
-        // Clear URL parameters to keep address bar clean
         window.history.replaceState({}, document.title, window.location.pathname);
-        // Save imported list to local storage
         localStorage.setItem('studentAppData', JSON.stringify(decoded));
         return decoded;
       } catch (e) {
@@ -78,7 +89,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (data) {
       return JSON.parse(data);
     }
-    // Default state: empty name, one blank item
     return { name: '', items: [{ id: Date.now().toString(), text: '' }] };
   }
 
@@ -91,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const state = localStorage.getItem('studentDailyState');
     if (state) {
       const parsed = JSON.parse(state);
-      // Reset if it's a new day
       if (parsed.date === todayStr) {
         return parsed;
       }
@@ -110,14 +119,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function hasPracticeItemsInDataStorage() {
     const data = localStorage.getItem('studentAppData');
-    if (!data) {
-      return false;
-    }
+    if (!data) return false;
     try {
       const parsed = JSON.parse(data);
-      if (!parsed || !parsed.items || parsed.items.length === 0) {
-        return false;
-      }
+      if (!parsed || !parsed.items || parsed.items.length === 0) return false;
       return parsed.items.some(item => item.text && item.text.trim() !== '');
     } catch (e) {
       return false;
@@ -187,7 +192,6 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderChecklist() {
     container.innerHTML = '';
     
-    // Toggle Add Item button visibility
     btnAddItem.style.display = isEditMode ? 'inline-block' : 'none';
 
     appData.items.forEach((item, index) => {
@@ -197,27 +201,16 @@ document.addEventListener('DOMContentLoaded', () => {
       div.draggable = false;
 
       if (isEditMode) {
-        // --- EDIT MODE ---
-        // Drag handle
         const dragHandle = document.createElement('div');
         dragHandle.className = 'drag-handle';
         dragHandle.innerHTML = '⋮⋮';
         dragHandle.title = 'Drag to reorder';
         
-        dragHandle.addEventListener('mousedown', () => {
-          div.draggable = true;
-        });
-        dragHandle.addEventListener('mouseup', () => {
-          div.draggable = false;
-        });
-        dragHandle.addEventListener('touchstart', () => {
-          div.draggable = true;
-        });
-        dragHandle.addEventListener('touchend', () => {
-          div.draggable = false;
-        });
+        dragHandle.addEventListener('mousedown', () => { div.draggable = true; });
+        dragHandle.addEventListener('mouseup', () => { div.draggable = false; });
+        dragHandle.addEventListener('touchstart', () => { div.draggable = true; });
+        dragHandle.addEventListener('touchend', () => { div.draggable = false; });
 
-        // Drag events
         div.addEventListener('dragstart', (e) => {
           div.classList.add('dragging');
           e.dataTransfer.effectAllowed = 'move';
@@ -227,7 +220,6 @@ document.addEventListener('DOMContentLoaded', () => {
           div.classList.remove('dragging');
           div.draggable = false;
           
-          // Reorder items based on DOM order
           const itemElements = [...container.querySelectorAll('.practice-item')];
           const newItems = itemElements.map(el => {
             const id = el.dataset.id;
@@ -242,11 +234,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         div.appendChild(dragHandle);
 
-        // Content area
         const content = document.createElement('div');
         content.className = 'practice-item-content';
 
-        // Text Input
         const input = document.createElement('input');
         input.type = 'text';
         input.className = 'practice-input';
@@ -265,12 +255,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         input.addEventListener('keypress', (e) => {
-          if (e.key === 'Enter') {
-            input.blur();
-          }
+          if (e.key === 'Enter') input.blur();
         });
 
-        // Delete button
         const delBtn = document.createElement('button');
         delBtn.className = 'del-btn';
         delBtn.innerText = 'X';
@@ -288,8 +275,6 @@ document.addEventListener('DOMContentLoaded', () => {
         div.appendChild(content);
 
       } else {
-        // --- VIEW MODE (DEFAULT) ---
-        // Checkbox
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         checkbox.className = 'practice-checkbox';
@@ -303,7 +288,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         div.appendChild(checkbox);
 
-        // Content area
         const content = document.createElement('div');
         content.className = 'practice-item-content';
 
@@ -352,18 +336,6 @@ document.addEventListener('DOMContentLoaded', () => {
     renderChecklist();
     updateOnboardingState();
   });
-
-  function formatTimestamp(date) {
-    const yyyy = date.getFullYear();
-    const mm = String(date.getMonth() + 1).padStart(2, '0');
-    const dd = String(date.getDate()).padStart(2, '0');
-    let hours = date.getHours();
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-    const ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12;
-    hours = hours ? hours : 12; 
-    return `${yyyy}/${mm}/${dd} ${String(hours).padStart(2, '0')}:${minutes} ${ampm}`;
-  }
 
   btnStartSession.addEventListener('click', () => {
     if (isEditMode) {
@@ -444,7 +416,6 @@ document.addEventListener('DOMContentLoaded', () => {
     secondsElapsed = 0;
   });
 
-  // M3 Dialog Share Modal functionality
   btnGetLink.addEventListener('click', () => {
     const encoded = encodeData(appData);
     const url = window.location.origin + window.location.pathname + '?data=' + encoded;
@@ -456,7 +427,6 @@ document.addEventListener('DOMContentLoaded', () => {
     shareDialogOverlay.style.display = 'none';
   });
 
-  // Close overlay on backdrop click
   shareDialogOverlay.addEventListener('click', (e) => {
     if (e.target === shareDialogOverlay) {
       shareDialogOverlay.style.display = 'none';
