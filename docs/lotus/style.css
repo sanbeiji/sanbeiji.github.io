@@ -101,27 +101,7 @@ header {
   letter-spacing: 0.02em;
 }
 
-.header-about-btn {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background-color: rgba(255, 255, 255, 0.15);
-    color: #ebd7ce;
-    font-size: 1.1rem;
-    padding: 0.25rem 0.75rem;
-    border-radius: 16px;
-    margin: 0;
-    text-decoration: none;
-    font-weight: 600;
-    cursor: pointer;
-    border: none;
-    transition: background-color 0.2s, color 0.2s;
-}
-
-.header-about-btn:hover {
-    background-color: rgba(255, 255, 255, 0.25);
-    color: #fff;
-}
+/* Removed header-about-btn */
 
 /* ─── Main layout ────────────────────────────────────────────── */
 main {
@@ -251,12 +231,49 @@ main {
     animation: tooltipFade 2.5s forwards;
 }
 
-/* ─── History sidebar ───────────────────────────────────────── */
-.history-sidebar {
+/* ─── Sidebar & About Box ───────────────────────────────────── */
+.desktop-sidebar {
     position: sticky;
     top: 2rem;
     display: flex;
     flex-direction: column;
+    gap: 1.5rem;
+}
+
+.about-card {
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    padding: 1.1rem 1.5rem;
+    margin-bottom: 0;
+}
+
+.about-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="dark"] .about-card:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.about-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.about-card-header h2 {
+    margin-bottom: 0;
+}
+
+.about-card-header .about-icon {
+    font-size: 1.35rem;
+}
+
+.history-sidebar {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
 }
 
 .history-list {
@@ -326,9 +343,18 @@ main {
     color: var(--primary);
 }
 
-.history-mobile-toggle {
+.mobile-navigation-row {
     display: none;
-    margin-bottom: 1rem;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.mobile-navigation-row button {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
 }
 
 /* ─── Form elements ──────────────────────────────────────────── */
@@ -677,11 +703,29 @@ input.invalid {
     line-height: 1.6;
 }
 
-.pronunciation {
+.pronunciation, .pinyin-text, .zhuyin-text {
     font-size: 0.8rem;
     color: var(--text-muted);
     font-style: italic;
     margin-top: 0.25rem;
+}
+
+.zhuyin-text {
+    font-style: normal;
+}
+
+.inline-loading {
+    font-size: 0.8rem;
+    color: var(--primary);
+    font-weight: 500;
+    margin-top: 0.25rem;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.4; }
+    50% { opacity: 1; }
+    100% { opacity: 0.4; }
 }
 
 .english-translation {
@@ -691,7 +735,7 @@ input.invalid {
     line-height: 1.5;
 }
 
-.english-translation[hidden] {
+.english-translation[hidden], .pinyin-text[hidden], .zhuyin-text[hidden], .inline-loading[hidden] {
     display: none;
 }
 
@@ -709,7 +753,7 @@ input.invalid {
     line-height: 1.6;
 }
 
-.story-content.font-size-medium .pronunciation {
+.story-content.font-size-medium .pronunciation, .story-content.font-size-medium .pinyin-text, .story-content.font-size-medium .zhuyin-text {
     font-size: 1rem;
 }
 
@@ -731,7 +775,7 @@ input.invalid {
     line-height: 1.7;
 }
 
-.story-content.font-size-large .pronunciation {
+.story-content.font-size-large .pronunciation, .story-content.font-size-large .pinyin-text, .story-content.font-size-large .zhuyin-text {
     font-size: 1.2rem;
 }
 
@@ -830,18 +874,45 @@ footer a:hover {
     color: var(--primary);
 }
 
+/* ─── Toast Notification ─────────────────────────────────────── */
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary-dark);
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    font-size: 0.9rem;
+    font-weight: 600;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+.toast.show {
+    opacity: 1;
+}
+
+.toast[hidden] {
+    display: none;
+}
+
 /* ─── Responsive ─────────────────────────────────────────────── */
 @media (max-width: 850px) {
     .main-layout {
         grid-template-columns: 1fr;
     }
 
-    .history-sidebar {
+    .desktop-sidebar {
         display: none;
     }
 
-    .history-mobile-toggle {
-        display: block;
+    .mobile-navigation-row {
+        display: flex;
     }
 }
 
