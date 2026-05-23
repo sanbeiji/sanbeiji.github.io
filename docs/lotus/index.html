@@ -100,15 +100,6 @@
               </select>
             </div>
             <div class="form-group">
-              <label>Pronunciation style</label>
-              <div class="toggle-group">
-                <input type="radio" id="pinyin-toggle" name="pronunciation" value="pinyin" checked>
-                <label for="pinyin-toggle">Pinyin</label>
-                <input type="radio" id="zhuyin-toggle" name="pronunciation" value="zhuyin">
-                <label for="zhuyin-toggle">Zhuyin</label>
-              </div>
-            </div>
-            <div class="form-group">
               <label for="theme-select">App theme</label>
               <select id="theme-select">
                 <option value="system" selected>System default</option>
@@ -213,8 +204,12 @@
                     <label for="study-mode">Highlight required vocabulary</label>
                   </div>
                   <div class="toggle-switch">
-                    <input type="checkbox" id="show-pronunciation" checked>
-                    <label for="show-pronunciation">Show pronunciation</label>
+                    <input type="checkbox" id="show-pinyin" checked>
+                    <label for="show-pinyin">Show Pinyin</label>
+                  </div>
+                  <div class="toggle-switch">
+                    <input type="checkbox" id="show-zhuyin">
+                    <label for="show-zhuyin">Show Zhuyin</label>
                   </div>
                   <div class="font-size-controls">
                     <label>Font size:</label>
@@ -228,15 +223,17 @@
                     </div>
                   </div>
                   <div class="speech-rate-controls">
-                    <label for="speech-rate">Speech speed:</label>
-                    <select id="speech-rate">
-                      <option value="1.0">100%</option>
-                      <option value="0.9" selected>90%</option>
-                      <option value="0.8">80%</option>
-                      <option value="0.7">70%</option>
-                      <option value="0.6">60%</option>
-                      <option value="0.5">50%</option>
-                    </select>
+                    <label>Speech speed:</label>
+                    <div class="toggle-group">
+                      <input type="radio" id="speech-100" name="speech-rate" value="1.0">
+                      <label for="speech-100">100%</label>
+                      <input type="radio" id="speech-90" name="speech-rate" value="0.9" checked>
+                      <label for="speech-90">90%</label>
+                      <input type="radio" id="speech-75" name="speech-rate" value="0.75">
+                      <label for="speech-75">75%</label>
+                      <input type="radio" id="speech-50" name="speech-rate" value="0.5">
+                      <label for="speech-50">50%</label>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -302,6 +299,9 @@
           </div>
       </div>
   </div>
+
+  <!-- Toast message -->
+  <div id="toast" class="toast" hidden></div>
 
   <script src="script.js"></script>
 </body>
