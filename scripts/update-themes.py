@@ -23,23 +23,37 @@ new_years_svg = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
   <circle cx="23" cy="52" r="1.5" fill="#ffd700"/>
 </svg>"""
 
-# 2. Thanksgiving: Turkey icon + more food icons in floaters
+# 2. Thanksgiving: Roasted turkey on platter with pumpkin pie
 thanksgiving_svg = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
   <circle cx="40" cy="40" r="36" fill="#3e1f0d" stroke="#ffb300" stroke-width="3"/>
-  <path d="M 20 44 C 14 30, 24 16, 40 16 C 56 16, 66 30, 60 44 Z" fill="#d97706"/>
-  <path d="M 23 44 C 18 32, 28 21, 40 21 C 52 21, 62 32, 57 44 Z" fill="#dc2626"/>
-  <path d="M 26 44 C 22 35, 30 26, 40 26 C 50 26, 58 35, 54 44 Z" fill="#fbbf24"/>
-  <ellipse cx="40" cy="50" rx="16" ry="14" fill="#78350f"/>
-  <path d="M 32 46 C 36 54, 44 54, 48 46" fill="none" stroke="#92400e" stroke-width="2"/>
-  <ellipse cx="40" cy="38" rx="8" ry="9" fill="#9a3412"/>
-  <path d="M 42 38 C 45 40, 45 46, 42 48 C 40 48, 40 42, 42 38 Z" fill="#ef4444"/>
-  <polygon points="38,37 44,37 41,43" fill="#f59e0b"/>
-  <circle cx="37" cy="35" r="1.8" fill="#ffffff"/>
-  <circle cx="37" cy="35" r="0.9" fill="#1c1917"/>
-  <circle cx="43" cy="35" r="1.8" fill="#ffffff"/>
-  <circle cx="43" cy="35" r="0.9" fill="#1c1917"/>
-  <line x1="36" y1="64" x2="36" y2="69" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round"/>
-  <line x1="44" y1="64" x2="44" y2="69" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Silver Platter -->
+  <ellipse cx="36" cy="56" rx="26" ry="8" fill="#cfd8dc" stroke="#90a4ae" stroke-width="1.5"/>
+  <ellipse cx="36" cy="55" rx="22" ry="6" fill="#eceff1"/>
+  <!-- Garnishes on Platter -->
+  <circle cx="16" cy="54" r="2.5" fill="#dc2626"/>
+  <circle cx="19" cy="56" r="2" fill="#dc2626"/>
+  <ellipse cx="17" cy="51" rx="3" ry="1.5" fill="#16a34a"/>
+  <!-- Roasted Turkey Body -->
+  <path d="M 18 52 C 16 41, 26 33, 38 33 C 48 33, 52 40, 52 49 C 52 54, 46 56, 36 56 C 26 56, 20 54, 18 52 Z" fill="#d97706" stroke="#b45309" stroke-width="1"/>
+  <!-- Golden Roast Shading -->
+  <path d="M 23 48 C 24 39, 32 35, 40 36 C 46 37, 49 42, 49 48" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+  <path d="M 26 45 C 30 42, 36 43, 38 47" fill="none" stroke="#92400e" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- Drumstick with Chef Paper Frill -->
+  <path d="M 40 43 C 44 37, 50 39, 52 43 C 50 47, 44 47, 40 43 Z" fill="#b45309"/>
+  <line x1="49" y1="39" x2="56" y2="32" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="56" cy="32" r="2.2" fill="#ffffff" stroke="#cbd5e1" stroke-width="0.8"/>
+  <!-- Appetizing Steam Curls -->
+  <path d="M 28 28 Q 26 21 30 16 M 38 27 Q 41 20 37 14" fill="none" stroke="#fff8e1" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+  <!-- Pumpkin Pie Slice on Plate -->
+  <ellipse cx="60" cy="56" rx="14" ry="5" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+  <!-- Crust Back -->
+  <path d="M 50 56 L 68 50 L 71 53 L 53 58 Z" fill="#b45309"/>
+  <!-- Filling -->
+  <polygon points="51,57 68,50 64,57" fill="#ea580c"/>
+  <polygon points="51,57 64,57 58,58" fill="#c2410c"/>
+  <!-- Whipped Cream Dollop -->
+  <circle cx="61" cy="53" r="2" fill="#ffffff"/>
+  <path d="M 61 51 Q 62 49 61 48" fill="none" stroke="#ffffff" stroke-width="1" stroke-linecap="round"/>
 </svg>"""
 
 # 3. May the 4th: Lightsabers with handles + planets & spaceships
@@ -102,9 +116,9 @@ for t in themes:
         t["svg"] = new_years_svg
         t["symbols"] = ["⏳", "🥂", "👶", "🎉", "✨", "🎇", "⋆", "•"]
     elif t["id"] == "thanksgiving":
-        t["icon"] = "🦃"
+        t["icon"] = "🍗"
         t["svg"] = thanksgiving_svg
-        t["symbols"] = ["🦃", "🥧", "🍗", "🌽", "🍠", "🍁", "🍂", "🌾", "✨"]
+        t["symbols"] = ["🥧", "🍗", "🌽", "🍠", "🥖", "🍁", "🍂", "🌾", "✨"]
     elif t["id"] == "may-fourth":
         t["svg"] = may_fourth_svg
         t["symbols"] = ["🪐", "🚀", "🛸", "⭐", "✦", "⋆", "•"]
