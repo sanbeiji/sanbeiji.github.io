@@ -1,0 +1,49 @@
+/* Holiday Theme Stylesheet: 端午節 Dragon Boat (dragon-boat) */
+:root {
+  --theme-accent: #80cbc4;
+  --theme-banner-bg: #f9fbf7;
+  --theme-banner-fg: #006064;
+  --theme-banner-border: #2a9d8f;
+}
+
+html.theme-dragon-boat,
+body.theme-dragon-boat {
+  background: linear-gradient(160deg, #0d3b3e 0%, #16697a 55%, #2a9d8f 100%);
+  background-attachment: fixed;
+  color: #1c1b1f;
+}
+
+body.theme-dragon-boat #layout {
+  background-color: #f9fbf7;
+  border: 2px solid #2a9d8f;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
+}
+
+body.theme-dragon-boat h2 {
+  color: #006064;
+}
+
+body.theme-dragon-boat a {
+  color: #1b5e20;
+  border-bottom-color: #1b5e20;
+}
+
+body.theme-dragon-boat a:hover {
+  color: #bf360c;
+  border-bottom-color: #bf360c;
+}
+
+body.theme-dragon-boat #quicklinks a {
+  background-color: #006064;
+  color: #ffffff;
+}
+
+body.theme-dragon-boat #quicklinks a:hover {
+  background-color: #2a9d8f;
+  color: #ffffff;
+}
+
+body.theme-dragon-boat #lessons {
+  border-color: #2a9d8f;
+  background-color: rgba(255, 255, 255, 0.72);
+}

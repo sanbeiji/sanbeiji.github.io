@@ -1,0 +1,49 @@
+/* Holiday Theme Stylesheet: 中元節 Ghost Festival (ghost-festival) */
+:root {
+  --theme-accent: #f48fb1;
+  --theme-banner-bg: #faf8fc;
+  --theme-banner-fg: #4527a0;
+  --theme-banner-border: #9575cd;
+}
+
+html.theme-ghost-festival,
+body.theme-ghost-festival {
+  background: linear-gradient(180deg, #120d2b 0%, #241948 55%, #1a3a4a 100%);
+  background-attachment: fixed;
+  color: #1c1b1f;
+}
+
+body.theme-ghost-festival #layout {
+  background-color: #faf8fc;
+  border: 2px solid #9575cd;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
+}
+
+body.theme-ghost-festival h2 {
+  color: #4527a0;
+}
+
+body.theme-ghost-festival a {
+  color: #311b92;
+  border-bottom-color: #311b92;
+}
+
+body.theme-ghost-festival a:hover {
+  color: #ad1457;
+  border-bottom-color: #ad1457;
+}
+
+body.theme-ghost-festival #quicklinks a {
+  background-color: #4527a0;
+  color: #ffffff;
+}
+
+body.theme-ghost-festival #quicklinks a:hover {
+  background-color: #ad1457;
+  color: #ffffff;
+}
+
+body.theme-ghost-festival #lessons {
+  border-color: #9575cd;
+  background-color: rgba(255, 255, 255, 0.72);
+}

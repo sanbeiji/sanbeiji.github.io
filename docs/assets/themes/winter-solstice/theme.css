@@ -1,0 +1,49 @@
+/* Holiday Theme Stylesheet: 冬至 Winter Solstice (winter-solstice) */
+:root {
+  --theme-accent: #ffccd5;
+  --theme-banner-bg: #fcfaf7;
+  --theme-banner-fg: #9b2226;
+  --theme-banner-border: #e07a5f;
+}
+
+html.theme-winter-solstice,
+body.theme-winter-solstice {
+  background: linear-gradient(180deg, #0d1b2a 0%, #1b263b 60%, #415a77 100%);
+  background-attachment: fixed;
+  color: #1c1b1f;
+}
+
+body.theme-winter-solstice #layout {
+  background-color: #fcfaf7;
+  border: 2px solid #e07a5f;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
+}
+
+body.theme-winter-solstice h2 {
+  color: #9b2226;
+}
+
+body.theme-winter-solstice a {
+  color: #1d3557;
+  border-bottom-color: #1d3557;
+}
+
+body.theme-winter-solstice a:hover {
+  color: #ae2012;
+  border-bottom-color: #ae2012;
+}
+
+body.theme-winter-solstice #quicklinks a {
+  background-color: #415a77;
+  color: #ffffff;
+}
+
+body.theme-winter-solstice #quicklinks a:hover {
+  background-color: #9b2226;
+  color: #ffffff;
+}
+
+body.theme-winter-solstice #lessons {
+  border-color: #e07a5f;
+  background-color: rgba(255, 255, 255, 0.72);
+}

@@ -1,0 +1,49 @@
+/* Holiday Theme Stylesheet: Juneteenth (juneteenth) */
+:root {
+  --theme-accent: #facc15;
+  --theme-banner-bg: #fffdf9;
+  --theme-banner-fg: #991b1b;
+  --theme-banner-border: #b45309;
+}
+
+html.theme-juneteenth,
+body.theme-juneteenth {
+  background: linear-gradient(135deg, #1b4332 0%, #7f1d1d 50%, #1c1917 100%);
+  background-attachment: fixed;
+  color: #1c1b1f;
+}
+
+body.theme-juneteenth #layout {
+  background-color: #fffdf9;
+  border: 2px solid #b45309;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
+}
+
+body.theme-juneteenth h2 {
+  color: #991b1b;
+}
+
+body.theme-juneteenth a {
+  color: #166534;
+  border-bottom-color: #166534;
+}
+
+body.theme-juneteenth a:hover {
+  color: #b45309;
+  border-bottom-color: #b45309;
+}
+
+body.theme-juneteenth #quicklinks a {
+  background-color: #7f1d1d;
+  color: #ffffff;
+}
+
+body.theme-juneteenth #quicklinks a:hover {
+  background-color: #166534;
+  color: #ffffff;
+}
+
+body.theme-juneteenth #lessons {
+  border-color: #b45309;
+  background-color: rgba(255, 255, 255, 0.72);
+}

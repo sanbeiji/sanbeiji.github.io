@@ -1,0 +1,49 @@
+/* Holiday Theme Stylesheet: Happy Halloween (halloween) */
+:root {
+  --theme-accent: #ff9100;
+  --theme-banner-bg: #fdf8f0;
+  --theme-banner-fg: #bf360c;
+  --theme-banner-border: #e65100;
+}
+
+html.theme-halloween,
+body.theme-halloween {
+  background: linear-gradient(180deg, #12081c 0%, #261238 60%, #3d1c0a 100%);
+  background-attachment: fixed;
+  color: #1c1b1f;
+}
+
+body.theme-halloween #layout {
+  background-color: #fdf8f0;
+  border: 2px solid #e65100;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
+}
+
+body.theme-halloween h2 {
+  color: #bf360c;
+}
+
+body.theme-halloween a {
+  color: #4a148c;
+  border-bottom-color: #4a148c;
+}
+
+body.theme-halloween a:hover {
+  color: #e65100;
+  border-bottom-color: #e65100;
+}
+
+body.theme-halloween #quicklinks a {
+  background-color: #4a148c;
+  color: #ffffff;
+}
+
+body.theme-halloween #quicklinks a:hover {
+  background-color: #e65100;
+  color: #ffffff;
+}
+
+body.theme-halloween #lessons {
+  border-color: #e65100;
+  background-color: rgba(255, 255, 255, 0.72);
+}

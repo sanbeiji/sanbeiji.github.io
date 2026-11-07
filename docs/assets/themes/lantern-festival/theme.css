@@ -1,0 +1,49 @@
+/* Holiday Theme Stylesheet: 元宵節 Lantern Festival (lantern-festival) */
+:root {
+  --theme-accent: #ffb74d;
+  --theme-banner-bg: #fffcf5;
+  --theme-banner-fg: #bf360c;
+  --theme-banner-border: #ff9800;
+}
+
+html.theme-lantern-festival,
+body.theme-lantern-festival {
+  background: linear-gradient(180deg, #101426 0%, #1f243a 60%, #3a233b 100%);
+  background-attachment: fixed;
+  color: #1c1b1f;
+}
+
+body.theme-lantern-festival #layout {
+  background-color: #fffcf5;
+  border: 2px solid #ff9800;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
+}
+
+body.theme-lantern-festival h2 {
+  color: #bf360c;
+}
+
+body.theme-lantern-festival a {
+  color: #311b92;
+  border-bottom-color: #311b92;
+}
+
+body.theme-lantern-festival a:hover {
+  color: #e65100;
+  border-bottom-color: #e65100;
+}
+
+body.theme-lantern-festival #quicklinks a {
+  background-color: #bf360c;
+  color: #ffffff;
+}
+
+body.theme-lantern-festival #quicklinks a:hover {
+  background-color: #e65100;
+  color: #ffffff;
+}
+
+body.theme-lantern-festival #lessons {
+  border-color: #ff9800;
+  background-color: rgba(255, 255, 255, 0.72);
+}

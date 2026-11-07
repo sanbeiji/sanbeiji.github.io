@@ -1,0 +1,49 @@
+/* Holiday Theme Stylesheet: Happy Thanksgiving (thanksgiving) */
+:root {
+  --theme-accent: #ffb300;
+  --theme-banner-bg: #fffaf2;
+  --theme-banner-fg: #8d230f;
+  --theme-banner-border: #d84315;
+}
+
+html.theme-thanksgiving,
+body.theme-thanksgiving {
+  background: linear-gradient(135deg, #3e1f0d 0%, #6d3214 55%, #8c4a1e 100%);
+  background-attachment: fixed;
+  color: #1c1b1f;
+}
+
+body.theme-thanksgiving #layout {
+  background-color: #fffaf2;
+  border: 2px solid #d84315;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
+}
+
+body.theme-thanksgiving h2 {
+  color: #8d230f;
+}
+
+body.theme-thanksgiving a {
+  color: #5d4037;
+  border-bottom-color: #5d4037;
+}
+
+body.theme-thanksgiving a:hover {
+  color: #d84315;
+  border-bottom-color: #d84315;
+}
+
+body.theme-thanksgiving #quicklinks a {
+  background-color: #6d3214;
+  color: #ffffff;
+}
+
+body.theme-thanksgiving #quicklinks a:hover {
+  background-color: #d84315;
+  color: #ffffff;
+}
+
+body.theme-thanksgiving #lessons {
+  border-color: #d84315;
+  background-color: rgba(255, 255, 255, 0.72);
+}

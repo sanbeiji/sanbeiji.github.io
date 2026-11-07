@@ -1,0 +1,49 @@
+/* Holiday Theme Stylesheet: May the 4th (may-fourth) */
+:root {
+  --theme-accent: #ffe81f;
+  --theme-banner-bg: #f4f7fb;
+  --theme-banner-fg: #0d47a1;
+  --theme-banner-border: #ffe81f;
+}
+
+html.theme-may-fourth,
+body.theme-may-fourth {
+  background: radial-gradient(ellipse at top, #0b132b 0%, #05070f 75%, #000000 100%);
+  background-attachment: fixed;
+  color: #1c1b1f;
+}
+
+body.theme-may-fourth #layout {
+  background-color: #f4f7fb;
+  border: 2px solid #ffe81f;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
+}
+
+body.theme-may-fourth h2 {
+  color: #0d47a1;
+}
+
+body.theme-may-fourth a {
+  color: #01579b;
+  border-bottom-color: #01579b;
+}
+
+body.theme-may-fourth a:hover {
+  color: #b28704;
+  border-bottom-color: #b28704;
+}
+
+body.theme-may-fourth #quicklinks a {
+  background-color: #0b132b;
+  color: #ffffff;
+}
+
+body.theme-may-fourth #quicklinks a:hover {
+  background-color: #0277bd;
+  color: #ffffff;
+}
+
+body.theme-may-fourth #lessons {
+  border-color: #ffe81f;
+  background-color: rgba(255, 255, 255, 0.72);
+}

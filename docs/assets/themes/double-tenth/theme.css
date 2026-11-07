@@ -1,0 +1,49 @@
+/* Holiday Theme Stylesheet: 雙十國慶 Double Tenth (double-tenth) */
+:root {
+  --theme-accent: #ff5252;
+  --theme-banner-bg: #ffffff;
+  --theme-banner-fg: #002984;
+  --theme-banner-border: #c62828;
+}
+
+html.theme-double-tenth,
+body.theme-double-tenth {
+  background: linear-gradient(135deg, #002984 0%, #0d47a1 50%, #9a0007 100%);
+  background-attachment: fixed;
+  color: #1c1b1f;
+}
+
+body.theme-double-tenth #layout {
+  background-color: #ffffff;
+  border: 2px solid #c62828;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
+}
+
+body.theme-double-tenth h2 {
+  color: #002984;
+}
+
+body.theme-double-tenth a {
+  color: #002984;
+  border-bottom-color: #002984;
+}
+
+body.theme-double-tenth a:hover {
+  color: #c62828;
+  border-bottom-color: #c62828;
+}
+
+body.theme-double-tenth #quicklinks a {
+  background-color: #002984;
+  color: #ffffff;
+}
+
+body.theme-double-tenth #quicklinks a:hover {
+  background-color: #c62828;
+  color: #ffffff;
+}
+
+body.theme-double-tenth #lessons {
+  border-color: #c62828;
+  background-color: rgba(255, 255, 255, 0.72);
+}

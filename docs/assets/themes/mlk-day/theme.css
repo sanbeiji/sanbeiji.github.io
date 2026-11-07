@@ -1,0 +1,49 @@
+/* Holiday Theme Stylesheet: MLK Day (mlk-day) */
+:root {
+  --theme-accent: #fde68a;
+  --theme-banner-bg: #fcfbf7;
+  --theme-banner-fg: #1e3a8a;
+  --theme-banner-border: #b45309;
+}
+
+html.theme-mlk-day,
+body.theme-mlk-day {
+  background: linear-gradient(160deg, #1a233a 0%, #2c3e50 55%, #4a3b2c 100%);
+  background-attachment: fixed;
+  color: #1c1b1f;
+}
+
+body.theme-mlk-day #layout {
+  background-color: #fcfbf7;
+  border: 2px solid #b45309;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
+}
+
+body.theme-mlk-day h2 {
+  color: #1e3a8a;
+}
+
+body.theme-mlk-day a {
+  color: #1e3a8a;
+  border-bottom-color: #1e3a8a;
+}
+
+body.theme-mlk-day a:hover {
+  color: #92400e;
+  border-bottom-color: #92400e;
+}
+
+body.theme-mlk-day #quicklinks a {
+  background-color: #1e3a8a;
+  color: #ffffff;
+}
+
+body.theme-mlk-day #quicklinks a:hover {
+  background-color: #92400e;
+  color: #ffffff;
+}
+
+body.theme-mlk-day #lessons {
+  border-color: #b45309;
+  background-color: rgba(255, 255, 255, 0.72);
+}

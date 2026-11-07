@@ -1,0 +1,49 @@
+/* Holiday Theme Stylesheet: Merry Christmas (christmas) */
+:root {
+  --theme-accent: #ffd54f;
+  --theme-banner-bg: #fffefc;
+  --theme-banner-fg: #b71c1c;
+  --theme-banner-border: #b71c1c;
+}
+
+html.theme-christmas,
+body.theme-christmas {
+  background: linear-gradient(180deg, #0f291e 0%, #1b4332 60%, #2d6a4f 100%);
+  background-attachment: fixed;
+  color: #1c1b1f;
+}
+
+body.theme-christmas #layout {
+  background-color: #fffefc;
+  border: 2px solid #b71c1c;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
+}
+
+body.theme-christmas h2 {
+  color: #b71c1c;
+}
+
+body.theme-christmas a {
+  color: #1b4332;
+  border-bottom-color: #1b4332;
+}
+
+body.theme-christmas a:hover {
+  color: #c62828;
+  border-bottom-color: #c62828;
+}
+
+body.theme-christmas #quicklinks a {
+  background-color: #1b4332;
+  color: #ffffff;
+}
+
+body.theme-christmas #quicklinks a:hover {
+  background-color: #b71c1c;
+  color: #ffffff;
+}
+
+body.theme-christmas #lessons {
+  border-color: #b71c1c;
+  background-color: rgba(255, 255, 255, 0.72);
+}

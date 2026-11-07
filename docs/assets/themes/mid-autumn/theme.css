@@ -1,0 +1,49 @@
+/* Holiday Theme Stylesheet: 中秋節 Mid-Autumn (mid-autumn) */
+:root {
+  --theme-accent: #fde047;
+  --theme-banner-bg: #fffdf6;
+  --theme-banner-fg: #92400e;
+  --theme-banner-border: #f59e0b;
+}
+
+html.theme-mid-autumn,
+body.theme-mid-autumn {
+  background: linear-gradient(180deg, #0f172a 0%, #1e293b 55%, #33274d 100%);
+  background-attachment: fixed;
+  color: #1c1b1f;
+}
+
+body.theme-mid-autumn #layout {
+  background-color: #fffdf6;
+  border: 2px solid #f59e0b;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
+}
+
+body.theme-mid-autumn h2 {
+  color: #92400e;
+}
+
+body.theme-mid-autumn a {
+  color: #1e3a8a;
+  border-bottom-color: #1e3a8a;
+}
+
+body.theme-mid-autumn a:hover {
+  color: #b45309;
+  border-bottom-color: #b45309;
+}
+
+body.theme-mid-autumn #quicklinks a {
+  background-color: #92400e;
+  color: #ffffff;
+}
+
+body.theme-mid-autumn #quicklinks a:hover {
+  background-color: #b45309;
+  color: #ffffff;
+}
+
+body.theme-mid-autumn #lessons {
+  border-color: #f59e0b;
+  background-color: rgba(255, 255, 255, 0.72);
+}

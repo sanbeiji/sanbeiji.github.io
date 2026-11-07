@@ -1,0 +1,49 @@
+/* Holiday Theme Stylesheet: 4th of July (fourth-of-july) */
+:root {
+  --theme-accent: #ff5252;
+  --theme-banner-bg: #ffffff;
+  --theme-banner-fg: #0d47a1;
+  --theme-banner-border: #b71c1c;
+}
+
+html.theme-fourth-of-july,
+body.theme-fourth-of-july {
+  background: linear-gradient(180deg, #0a1931 0%, #183a6c 60%, #4a1c2a 100%);
+  background-attachment: fixed;
+  color: #1c1b1f;
+}
+
+body.theme-fourth-of-july #layout {
+  background-color: #ffffff;
+  border: 2px solid #b71c1c;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
+}
+
+body.theme-fourth-of-july h2 {
+  color: #0d47a1;
+}
+
+body.theme-fourth-of-july a {
+  color: #0d47a1;
+  border-bottom-color: #0d47a1;
+}
+
+body.theme-fourth-of-july a:hover {
+  color: #b71c1c;
+  border-bottom-color: #b71c1c;
+}
+
+body.theme-fourth-of-july #quicklinks a {
+  background-color: #0d47a1;
+  color: #ffffff;
+}
+
+body.theme-fourth-of-july #quicklinks a:hover {
+  background-color: #b71c1c;
+  color: #ffffff;
+}
+
+body.theme-fourth-of-july #lessons {
+  border-color: #b71c1c;
+  background-color: rgba(255, 255, 255, 0.72);
+}

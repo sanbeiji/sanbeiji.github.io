@@ -1,0 +1,49 @@
+/* Holiday Theme Stylesheet: Happy New Year (new-years) */
+:root {
+  --theme-accent: #ffd700;
+  --theme-banner-bg: #fffffa;
+  --theme-banner-fg: #8d6e00;
+  --theme-banner-border: #d4af37;
+}
+
+html.theme-new-years,
+body.theme-new-years {
+  background: linear-gradient(180deg, #0b0c10 0%, #1f2833 60%, #2c3531 100%);
+  background-attachment: fixed;
+  color: #1c1b1f;
+}
+
+body.theme-new-years #layout {
+  background-color: #fffffa;
+  border: 2px solid #d4af37;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
+}
+
+body.theme-new-years h2 {
+  color: #8d6e00;
+}
+
+body.theme-new-years a {
+  color: #1a237e;
+  border-bottom-color: #1a237e;
+}
+
+body.theme-new-years a:hover {
+  color: #b28704;
+  border-bottom-color: #b28704;
+}
+
+body.theme-new-years #quicklinks a {
+  background-color: #1f2833;
+  color: #ffffff;
+}
+
+body.theme-new-years #quicklinks a:hover {
+  background-color: #8d6e00;
+  color: #ffffff;
+}
+
+body.theme-new-years #lessons {
+  border-color: #d4af37;
+  background-color: rgba(255, 255, 255, 0.72);
+}

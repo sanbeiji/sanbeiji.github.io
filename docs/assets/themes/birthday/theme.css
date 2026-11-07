@@ -1,0 +1,49 @@
+/* Holiday Theme Stylesheet: Birthday Celebration (birthday) */
+:root {
+  --theme-accent: #ffd54f;
+  --theme-banner-bg: #fffdf9;
+  --theme-banner-fg: #6a1b9a;
+  --theme-banner-border: #ffb300;
+}
+
+html.theme-birthday,
+body.theme-birthday {
+  background: linear-gradient(135deg, #2e1a47 0%, #4a154b 50%, #1a237e 100%);
+  background-attachment: fixed;
+  color: #1c1b1f;
+}
+
+body.theme-birthday #layout {
+  background-color: #fffdf9;
+  border: 2px solid #ffb300;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
+}
+
+body.theme-birthday h2 {
+  color: #6a1b9a;
+}
+
+body.theme-birthday a {
+  color: #4a148c;
+  border-bottom-color: #4a148c;
+}
+
+body.theme-birthday a:hover {
+  color: #d81b60;
+  border-bottom-color: #d81b60;
+}
+
+body.theme-birthday #quicklinks a {
+  background-color: #6a1b9a;
+  color: #ffffff;
+}
+
+body.theme-birthday #quicklinks a:hover {
+  background-color: #8e24aa;
+  color: #ffffff;
+}
+
+body.theme-birthday #lessons {
+  border-color: #ffb300;
+  background-color: rgba(255, 255, 255, 0.72);
+}

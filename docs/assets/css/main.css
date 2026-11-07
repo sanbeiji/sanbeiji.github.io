@@ -139,6 +139,11 @@ a:hover {
   margin:0;
   padding: 0;
 }
+/* Gracefully suppress default bass clef when a holiday theme is active */
+html.holiday-active #bc img:not(.holiday-logo-icon) {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
 #twitter {
   font-size: 2.5em;
 }

@@ -1,0 +1,49 @@
+/* Holiday Theme Stylesheet: Pi Day (3.14) (pi-day) */
+:root {
+  --theme-accent: #4fc3f7;
+  --theme-banner-bg: #fbfdfd;
+  --theme-banner-fg: #01579b;
+  --theme-banner-border: #0288d1;
+}
+
+html.theme-pi-day,
+body.theme-pi-day {
+  background: linear-gradient(135deg, #1b2a32 0%, #243b4a 60%, #2e4c5d 100%);
+  background-attachment: fixed;
+  color: #1c1b1f;
+}
+
+body.theme-pi-day #layout {
+  background-color: #fbfdfd;
+  border: 2px solid #0288d1;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
+}
+
+body.theme-pi-day h2 {
+  color: #01579b;
+}
+
+body.theme-pi-day a {
+  color: #0d47a1;
+  border-bottom-color: #0d47a1;
+}
+
+body.theme-pi-day a:hover {
+  color: #e65100;
+  border-bottom-color: #e65100;
+}
+
+body.theme-pi-day #quicklinks a {
+  background-color: #01579b;
+  color: #ffffff;
+}
+
+body.theme-pi-day #quicklinks a:hover {
+  background-color: #0277bd;
+  color: #ffffff;
+}
+
+body.theme-pi-day #lessons {
+  border-color: #0288d1;
+  background-color: rgba(255, 255, 255, 0.72);
+}
