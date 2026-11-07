@@ -38,36 +38,43 @@ body.theme-$id {
   color: #1c1b1f;
 }
 
+html.theme-$id #layout,
 body.theme-$id #layout {
   background-color: $($cfg.cardBg);
   border: 2px solid $($cfg.cardBorder);
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
 }
 
+html.theme-$id h2,
 body.theme-$id h2 {
   color: $($cfg.headingColor);
 }
 
+html.theme-$id a,
 body.theme-$id a {
   color: $($cfg.linkColor);
   border-bottom-color: $($cfg.linkColor);
 }
 
+html.theme-$id a:hover,
 body.theme-$id a:hover {
   color: $($cfg.linkHover);
   border-bottom-color: $($cfg.linkHover);
 }
 
+html.theme-$id #quicklinks a,
 body.theme-$id #quicklinks a {
   background-color: $($cfg.btnBg);
   color: #ffffff;
 }
 
+html.theme-$id #quicklinks a:hover,
 body.theme-$id #quicklinks a:hover {
   background-color: $($cfg.btnHoverBg);
   color: #ffffff;
 }
 
+html.theme-$id #lessons,
 body.theme-$id #lessons {
   border-color: $($cfg.cardBorder);
   background-color: rgba(255, 255, 255, 0.72);

@@ -139,10 +139,41 @@ a:hover {
   margin:0;
   padding: 0;
 }
+#bc a.logo {
+  display: inline-block;
+  line-height: 1;
+}
 /* Gracefully suppress default bass clef when a holiday theme is active */
 html.holiday-active #bc img:not(.holiday-logo-icon) {
   opacity: 0 !important;
   visibility: hidden !important;
+}
+.holiday-logo-icon {
+  height: 160px;
+  width: auto;
+  max-width: 160px;
+  object-fit: contain;
+  display: inline-block;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.22));
+}
+#holiday-particle-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 50;
+}
+@media (prefers-reduced-motion: reduce) {
+  #holiday-particle-canvas {
+    display: none !important;
+  }
+  .anim,
+  .holiday-logo-icon {
+    animation: none !important;
+    transition: none !important;
+  }
 }
 #twitter {
   font-size: 2.5em;

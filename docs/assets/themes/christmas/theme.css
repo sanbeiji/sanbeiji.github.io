@@ -13,36 +13,43 @@ body.theme-christmas {
   color: #1c1b1f;
 }
 
+html.theme-christmas #layout,
 body.theme-christmas #layout {
   background-color: #fffefc;
   border: 2px solid #b71c1c;
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
 }
 
+html.theme-christmas h2,
 body.theme-christmas h2 {
   color: #b71c1c;
 }
 
+html.theme-christmas a,
 body.theme-christmas a {
   color: #1b4332;
   border-bottom-color: #1b4332;
 }
 
+html.theme-christmas a:hover,
 body.theme-christmas a:hover {
   color: #c62828;
   border-bottom-color: #c62828;
 }
 
+html.theme-christmas #quicklinks a,
 body.theme-christmas #quicklinks a {
   background-color: #1b4332;
   color: #ffffff;
 }
 
+html.theme-christmas #quicklinks a:hover,
 body.theme-christmas #quicklinks a:hover {
   background-color: #b71c1c;
   color: #ffffff;
 }
 
+html.theme-christmas #lessons,
 body.theme-christmas #lessons {
   border-color: #b71c1c;
   background-color: rgba(255, 255, 255, 0.72);

@@ -13,36 +13,43 @@ body.theme-pi-day {
   color: #1c1b1f;
 }
 
+html.theme-pi-day #layout,
 body.theme-pi-day #layout {
   background-color: #fbfdfd;
   border: 2px solid #0288d1;
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
 }
 
+html.theme-pi-day h2,
 body.theme-pi-day h2 {
   color: #01579b;
 }
 
+html.theme-pi-day a,
 body.theme-pi-day a {
   color: #0d47a1;
   border-bottom-color: #0d47a1;
 }
 
+html.theme-pi-day a:hover,
 body.theme-pi-day a:hover {
   color: #e65100;
   border-bottom-color: #e65100;
 }
 
+html.theme-pi-day #quicklinks a,
 body.theme-pi-day #quicklinks a {
   background-color: #01579b;
   color: #ffffff;
 }
 
+html.theme-pi-day #quicklinks a:hover,
 body.theme-pi-day #quicklinks a:hover {
   background-color: #0277bd;
   color: #ffffff;
 }
 
+html.theme-pi-day #lessons,
 body.theme-pi-day #lessons {
   border-color: #0288d1;
   background-color: rgba(255, 255, 255, 0.72);

@@ -13,36 +13,43 @@ body.theme-may-fourth {
   color: #1c1b1f;
 }
 
+html.theme-may-fourth #layout,
 body.theme-may-fourth #layout {
   background-color: #f4f7fb;
   border: 2px solid #ffe81f;
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
 }
 
+html.theme-may-fourth h2,
 body.theme-may-fourth h2 {
   color: #0d47a1;
 }
 
+html.theme-may-fourth a,
 body.theme-may-fourth a {
   color: #01579b;
   border-bottom-color: #01579b;
 }
 
+html.theme-may-fourth a:hover,
 body.theme-may-fourth a:hover {
   color: #b28704;
   border-bottom-color: #b28704;
 }
 
+html.theme-may-fourth #quicklinks a,
 body.theme-may-fourth #quicklinks a {
   background-color: #0b132b;
   color: #ffffff;
 }
 
+html.theme-may-fourth #quicklinks a:hover,
 body.theme-may-fourth #quicklinks a:hover {
   background-color: #0277bd;
   color: #ffffff;
 }
 
+html.theme-may-fourth #lessons,
 body.theme-may-fourth #lessons {
   border-color: #ffe81f;
   background-color: rgba(255, 255, 255, 0.72);

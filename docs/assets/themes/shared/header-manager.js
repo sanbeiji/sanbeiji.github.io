@@ -2,17 +2,7 @@
 // Replaces the bass clef logo with the themed holiday icon, matching its relative
 // size and bounce-in animation, with zero extra vertical spacing.
 
-function ensureHeaderStylesheet() {
-  if (document.getElementById('holiday-theme-ui-css')) return;
-  const link = document.createElement('link');
-  link.id = 'holiday-theme-ui-css';
-  link.rel = 'stylesheet';
-  link.href = '/assets/css/theme-toggle.css';
-  document.head.appendChild(link);
-}
-
 export function decorateHeader({ themeId, label, icon, greeting, logoSrc }) {
-  ensureHeaderStylesheet();
   const bc = document.getElementById('bc');
   if (!bc) return () => {};
 
@@ -29,7 +19,9 @@ export function decorateHeader({ themeId, label, icon, greeting, logoSrc }) {
   if (logoSrc && img.getAttribute('src') !== logoSrc) {
     img.src = logoSrc;
     img.alt = `${label || themeId} logo`;
-    img.className = 'holiday-logo-icon anim';
+    img.className = 'holiday-logo-icon';
+    void img.offsetWidth;
+    img.classList.add('anim');
   }
 
   if (greeting) {

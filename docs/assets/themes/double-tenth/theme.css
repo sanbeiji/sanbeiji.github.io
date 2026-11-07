@@ -13,36 +13,43 @@ body.theme-double-tenth {
   color: #1c1b1f;
 }
 
+html.theme-double-tenth #layout,
 body.theme-double-tenth #layout {
   background-color: #ffffff;
   border: 2px solid #c62828;
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
 }
 
+html.theme-double-tenth h2,
 body.theme-double-tenth h2 {
   color: #002984;
 }
 
+html.theme-double-tenth a,
 body.theme-double-tenth a {
   color: #002984;
   border-bottom-color: #002984;
 }
 
+html.theme-double-tenth a:hover,
 body.theme-double-tenth a:hover {
   color: #c62828;
   border-bottom-color: #c62828;
 }
 
+html.theme-double-tenth #quicklinks a,
 body.theme-double-tenth #quicklinks a {
   background-color: #002984;
   color: #ffffff;
 }
 
+html.theme-double-tenth #quicklinks a:hover,
 body.theme-double-tenth #quicklinks a:hover {
   background-color: #c62828;
   color: #ffffff;
 }
 
+html.theme-double-tenth #lessons,
 body.theme-double-tenth #lessons {
   border-color: #c62828;
   background-color: rgba(255, 255, 255, 0.72);

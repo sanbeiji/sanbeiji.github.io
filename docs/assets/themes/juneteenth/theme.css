@@ -13,36 +13,43 @@ body.theme-juneteenth {
   color: #1c1b1f;
 }
 
+html.theme-juneteenth #layout,
 body.theme-juneteenth #layout {
   background-color: #fffdf9;
   border: 2px solid #b45309;
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
 }
 
+html.theme-juneteenth h2,
 body.theme-juneteenth h2 {
   color: #991b1b;
 }
 
+html.theme-juneteenth a,
 body.theme-juneteenth a {
   color: #166534;
   border-bottom-color: #166534;
 }
 
+html.theme-juneteenth a:hover,
 body.theme-juneteenth a:hover {
   color: #b45309;
   border-bottom-color: #b45309;
 }
 
+html.theme-juneteenth #quicklinks a,
 body.theme-juneteenth #quicklinks a {
   background-color: #7f1d1d;
   color: #ffffff;
 }
 
+html.theme-juneteenth #quicklinks a:hover,
 body.theme-juneteenth #quicklinks a:hover {
   background-color: #166534;
   color: #ffffff;
 }
 
+html.theme-juneteenth #lessons,
 body.theme-juneteenth #lessons {
   border-color: #b45309;
   background-color: rgba(255, 255, 255, 0.72);

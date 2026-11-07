@@ -13,36 +13,43 @@ body.theme-mid-autumn {
   color: #1c1b1f;
 }
 
+html.theme-mid-autumn #layout,
 body.theme-mid-autumn #layout {
   background-color: #fffdf6;
   border: 2px solid #f59e0b;
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
 }
 
+html.theme-mid-autumn h2,
 body.theme-mid-autumn h2 {
   color: #92400e;
 }
 
+html.theme-mid-autumn a,
 body.theme-mid-autumn a {
   color: #1e3a8a;
   border-bottom-color: #1e3a8a;
 }
 
+html.theme-mid-autumn a:hover,
 body.theme-mid-autumn a:hover {
   color: #b45309;
   border-bottom-color: #b45309;
 }
 
+html.theme-mid-autumn #quicklinks a,
 body.theme-mid-autumn #quicklinks a {
   background-color: #92400e;
   color: #ffffff;
 }
 
+html.theme-mid-autumn #quicklinks a:hover,
 body.theme-mid-autumn #quicklinks a:hover {
   background-color: #b45309;
   color: #ffffff;
 }
 
+html.theme-mid-autumn #lessons,
 body.theme-mid-autumn #lessons {
   border-color: #f59e0b;
   background-color: rgba(255, 255, 255, 0.72);

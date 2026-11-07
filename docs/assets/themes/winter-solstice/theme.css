@@ -13,36 +13,43 @@ body.theme-winter-solstice {
   color: #1c1b1f;
 }
 
+html.theme-winter-solstice #layout,
 body.theme-winter-solstice #layout {
   background-color: #fcfaf7;
   border: 2px solid #e07a5f;
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
 }
 
+html.theme-winter-solstice h2,
 body.theme-winter-solstice h2 {
   color: #9b2226;
 }
 
+html.theme-winter-solstice a,
 body.theme-winter-solstice a {
   color: #1d3557;
   border-bottom-color: #1d3557;
 }
 
+html.theme-winter-solstice a:hover,
 body.theme-winter-solstice a:hover {
   color: #ae2012;
   border-bottom-color: #ae2012;
 }
 
+html.theme-winter-solstice #quicklinks a,
 body.theme-winter-solstice #quicklinks a {
   background-color: #415a77;
   color: #ffffff;
 }
 
+html.theme-winter-solstice #quicklinks a:hover,
 body.theme-winter-solstice #quicklinks a:hover {
   background-color: #9b2226;
   color: #ffffff;
 }
 
+html.theme-winter-solstice #lessons,
 body.theme-winter-solstice #lessons {
   border-color: #e07a5f;
   background-color: rgba(255, 255, 255, 0.72);

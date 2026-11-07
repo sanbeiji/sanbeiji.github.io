@@ -13,36 +13,43 @@ body.theme-fourth-of-july {
   color: #1c1b1f;
 }
 
+html.theme-fourth-of-july #layout,
 body.theme-fourth-of-july #layout {
   background-color: #ffffff;
   border: 2px solid #b71c1c;
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
 }
 
+html.theme-fourth-of-july h2,
 body.theme-fourth-of-july h2 {
   color: #0d47a1;
 }
 
+html.theme-fourth-of-july a,
 body.theme-fourth-of-july a {
   color: #0d47a1;
   border-bottom-color: #0d47a1;
 }
 
+html.theme-fourth-of-july a:hover,
 body.theme-fourth-of-july a:hover {
   color: #b71c1c;
   border-bottom-color: #b71c1c;
 }
 
+html.theme-fourth-of-july #quicklinks a,
 body.theme-fourth-of-july #quicklinks a {
   background-color: #0d47a1;
   color: #ffffff;
 }
 
+html.theme-fourth-of-july #quicklinks a:hover,
 body.theme-fourth-of-july #quicklinks a:hover {
   background-color: #b71c1c;
   color: #ffffff;
 }
 
+html.theme-fourth-of-july #lessons,
 body.theme-fourth-of-july #lessons {
   border-color: #b71c1c;
   background-color: rgba(255, 255, 255, 0.72);

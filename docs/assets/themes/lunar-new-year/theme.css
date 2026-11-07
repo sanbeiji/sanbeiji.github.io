@@ -13,36 +13,43 @@ body.theme-lunar-new-year {
   color: #1c1b1f;
 }
 
+html.theme-lunar-new-year #layout,
 body.theme-lunar-new-year #layout {
   background-color: #fffaf0;
   border: 2px solid #d4af37;
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
 }
 
+html.theme-lunar-new-year h2,
 body.theme-lunar-new-year h2 {
   color: #9b111e;
 }
 
+html.theme-lunar-new-year a,
 body.theme-lunar-new-year a {
   color: #7f0000;
   border-bottom-color: #7f0000;
 }
 
+html.theme-lunar-new-year a:hover,
 body.theme-lunar-new-year a:hover {
   color: #b8860b;
   border-bottom-color: #b8860b;
 }
 
+html.theme-lunar-new-year #quicklinks a,
 body.theme-lunar-new-year #quicklinks a {
   background-color: #9b111e;
   color: #ffffff;
 }
 
+html.theme-lunar-new-year #quicklinks a:hover,
 body.theme-lunar-new-year #quicklinks a:hover {
   background-color: #b8860b;
   color: #ffffff;
 }
 
+html.theme-lunar-new-year #lessons,
 body.theme-lunar-new-year #lessons {
   border-color: #d4af37;
   background-color: rgba(255, 255, 255, 0.72);

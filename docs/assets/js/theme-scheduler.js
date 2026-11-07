@@ -81,12 +81,14 @@
       img.dataset.origTitle = logoLink.getAttribute('title') || '';
     }
 
-    img.src = /assets/themes/ + themeId + /logo.svg;
-    img.alt = ${themeId} logo;
-    img.className = 'holiday-logo-icon';
-    img.classList.remove('anim');
-    void img.offsetWidth;
-    img.classList.add('anim');
+    const targetSrc = '/assets/themes/' + themeId + '/logo.svg';
+    if (img.getAttribute('src') !== targetSrc) {
+      img.src = targetSrc;
+      img.alt = themeId + ' logo';
+      img.className = 'holiday-logo-icon';
+      void img.offsetWidth;
+      img.classList.add('anim');
+    }
     return true;
   }
 
@@ -122,9 +124,9 @@
       existingCss.parentNode.removeChild(existingCss);
     }
     if (currentThemeId) {
-      document.documentElement.classList.remove('holiday-active', 	heme- + currentThemeId);
+      document.documentElement.classList.remove('holiday-active', 'theme-' + currentThemeId);
       if (document.body) {
-        document.body.classList.remove(	heme- + currentThemeId);
+        document.body.classList.remove('theme-' + currentThemeId);
         delete document.body.dataset.holidayTheme;
       }
       restoreLogoElement();
@@ -140,10 +142,17 @@
     currentThemeId = themeId;
 
     // Apply immediate synchronous markers on <html> (prevents flash of bass clef or background)
-    document.documentElement.classList.add('holiday-active', 	heme- + themeId);
+    document.documentElement.classList.add('holiday-active', 'theme-' + themeId);
     if (document.body) {
       document.body.dataset.holidayTheme = themeId;
-      document.body.classList.add(	heme- + themeId);
+      document.body.classList.add('theme-' + themeId);
+    } else {
+      document.addEventListener('DOMContentLoaded', () => {
+        if (currentThemeId === themeId && document.body) {
+          document.body.dataset.holidayTheme = themeId;
+          document.body.classList.add('theme-' + themeId);
+        }
+      }, { once: true });
     }
 
     // 1. Inject isolated theme stylesheet
@@ -154,7 +163,7 @@
       link.rel = 'stylesheet';
       document.head.appendChild(link);
     }
-    link.href = /assets/themes/ + themeId + /theme.css;
+    link.href = '/assets/themes/' + themeId + '/theme.css';
 
     // 2. Fast logo replacement as soon as #bc exists in DOM
     if (!replaceLogoElement(themeId)) {
@@ -164,20 +173,32 @@
         }
       });
       observer.observe(document.documentElement, { childList: true, subtree: true });
-      document.addEventListener('DOMContentLoaded', () => observer.disconnect(), { once: true });
+      document.addEventListener('DOMContentLoaded', () => {
+        observer.disconnect();
+        replaceLogoElement(themeId);
+      }, { once: true });
+    }
+
+    function runMount(mod) {
+      if (currentThemeId !== themeId) return;
+      if (typeof mod.mount === 'function') {
+        currentUnmount = mod.mount({ themeId }) || null;
+      }
     }
 
     // 3. Dynamically import theme ES module (particles, greetings, etc.)
-    return import(/assets/themes/ + themeId + /theme.js)
+    return import('/assets/themes/' + themeId + '/theme.js')
       .then((mod) => {
         if (currentThemeId !== themeId) return null;
-        if (typeof mod.mount === 'function') {
-          currentUnmount = mod.mount({ themeId }) || null;
+        if (document.body) {
+          runMount(mod);
+        } else {
+          document.addEventListener('DOMContentLoaded', () => runMount(mod), { once: true });
         }
         return themeId;
       })
       .catch((err) => {
-        console.warn(Theme script for  + themeId +  optional or failed:, err);
+        console.warn('Theme script for ' + themeId + ' optional or failed:', err);
         return themeId;
       });
   }
@@ -201,7 +222,10 @@
 
   // Boundary transition watcher for active theme or simulated date
   function startBoundaryWatcher() {
-    if (!dateOverride && !activeTheme) return;
+    if (themeOverride) {
+      // Pinned via URL override ?theme=<id> - do not auto-transition or unmount
+      return;
+    }
     const bootWallTime = Date.now();
     const baseSimulatedTime = dateOverride ? parseLocalDate(dateOverride) : new Date();
 

@@ -27,13 +27,26 @@ export function createParticleCanvas(options = {}) {
   const canvas = document.createElement('canvas');
   canvas.id = 'holiday-particle-canvas';
   canvas.setAttribute('aria-hidden', 'true');
-  document.body.appendChild(canvas);
+
+  let isDestroyed = false;
+
+  function attachCanvas() {
+    if (isDestroyed) return;
+    if (!canvas.parentNode && document.body) {
+      document.body.appendChild(canvas);
+    }
+  }
+
+  if (document.body) {
+    attachCanvas();
+  } else {
+    document.addEventListener('DOMContentLoaded', attachCanvas, { once: true });
+  }
 
   const ctx = canvas.getContext('2d');
-  let width = (canvas.width = window.innerWidth);
-  let height = (canvas.height = window.innerHeight);
+  let width = (canvas.width = window.innerWidth || 800);
+  let height = (canvas.height = window.innerHeight || 600);
   let rafId = null;
-  let isDestroyed = false;
 
   const particles = [];
   const trailParticles = [];

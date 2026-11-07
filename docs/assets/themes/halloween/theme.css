@@ -13,36 +13,43 @@ body.theme-halloween {
   color: #1c1b1f;
 }
 
+html.theme-halloween #layout,
 body.theme-halloween #layout {
   background-color: #fdf8f0;
   border: 2px solid #e65100;
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
 }
 
+html.theme-halloween h2,
 body.theme-halloween h2 {
   color: #bf360c;
 }
 
+html.theme-halloween a,
 body.theme-halloween a {
   color: #4a148c;
   border-bottom-color: #4a148c;
 }
 
+html.theme-halloween a:hover,
 body.theme-halloween a:hover {
   color: #e65100;
   border-bottom-color: #e65100;
 }
 
+html.theme-halloween #quicklinks a,
 body.theme-halloween #quicklinks a {
   background-color: #4a148c;
   color: #ffffff;
 }
 
+html.theme-halloween #quicklinks a:hover,
 body.theme-halloween #quicklinks a:hover {
   background-color: #e65100;
   color: #ffffff;
 }
 
+html.theme-halloween #lessons,
 body.theme-halloween #lessons {
   border-color: #e65100;
   background-color: rgba(255, 255, 255, 0.72);

@@ -13,36 +13,43 @@ body.theme-mlk-day {
   color: #1c1b1f;
 }
 
+html.theme-mlk-day #layout,
 body.theme-mlk-day #layout {
   background-color: #fcfbf7;
   border: 2px solid #b45309;
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
 }
 
+html.theme-mlk-day h2,
 body.theme-mlk-day h2 {
   color: #1e3a8a;
 }
 
+html.theme-mlk-day a,
 body.theme-mlk-day a {
   color: #1e3a8a;
   border-bottom-color: #1e3a8a;
 }
 
+html.theme-mlk-day a:hover,
 body.theme-mlk-day a:hover {
   color: #92400e;
   border-bottom-color: #92400e;
 }
 
+html.theme-mlk-day #quicklinks a,
 body.theme-mlk-day #quicklinks a {
   background-color: #1e3a8a;
   color: #ffffff;
 }
 
+html.theme-mlk-day #quicklinks a:hover,
 body.theme-mlk-day #quicklinks a:hover {
   background-color: #92400e;
   color: #ffffff;
 }
 
+html.theme-mlk-day #lessons,
 body.theme-mlk-day #lessons {
   border-color: #b45309;
   background-color: rgba(255, 255, 255, 0.72);

@@ -13,36 +13,43 @@ body.theme-dragon-boat {
   color: #1c1b1f;
 }
 
+html.theme-dragon-boat #layout,
 body.theme-dragon-boat #layout {
   background-color: #f9fbf7;
   border: 2px solid #2a9d8f;
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
 }
 
+html.theme-dragon-boat h2,
 body.theme-dragon-boat h2 {
   color: #006064;
 }
 
+html.theme-dragon-boat a,
 body.theme-dragon-boat a {
   color: #1b5e20;
   border-bottom-color: #1b5e20;
 }
 
+html.theme-dragon-boat a:hover,
 body.theme-dragon-boat a:hover {
   color: #bf360c;
   border-bottom-color: #bf360c;
 }
 
+html.theme-dragon-boat #quicklinks a,
 body.theme-dragon-boat #quicklinks a {
   background-color: #006064;
   color: #ffffff;
 }
 
+html.theme-dragon-boat #quicklinks a:hover,
 body.theme-dragon-boat #quicklinks a:hover {
   background-color: #2a9d8f;
   color: #ffffff;
 }
 
+html.theme-dragon-boat #lessons,
 body.theme-dragon-boat #lessons {
   border-color: #2a9d8f;
   background-color: rgba(255, 255, 255, 0.72);

@@ -13,36 +13,43 @@ body.theme-birthday {
   color: #1c1b1f;
 }
 
+html.theme-birthday #layout,
 body.theme-birthday #layout {
   background-color: #fffdf9;
   border: 2px solid #ffb300;
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
 }
 
+html.theme-birthday h2,
 body.theme-birthday h2 {
   color: #6a1b9a;
 }
 
+html.theme-birthday a,
 body.theme-birthday a {
   color: #4a148c;
   border-bottom-color: #4a148c;
 }
 
+html.theme-birthday a:hover,
 body.theme-birthday a:hover {
   color: #d81b60;
   border-bottom-color: #d81b60;
 }
 
+html.theme-birthday #quicklinks a,
 body.theme-birthday #quicklinks a {
   background-color: #6a1b9a;
   color: #ffffff;
 }
 
+html.theme-birthday #quicklinks a:hover,
 body.theme-birthday #quicklinks a:hover {
   background-color: #8e24aa;
   color: #ffffff;
 }
 
+html.theme-birthday #lessons,
 body.theme-birthday #lessons {
   border-color: #ffb300;
   background-color: rgba(255, 255, 255, 0.72);

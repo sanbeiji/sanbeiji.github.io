@@ -13,36 +13,43 @@ body.theme-thanksgiving {
   color: #1c1b1f;
 }
 
+html.theme-thanksgiving #layout,
 body.theme-thanksgiving #layout {
   background-color: #fffaf2;
   border: 2px solid #d84315;
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
 }
 
+html.theme-thanksgiving h2,
 body.theme-thanksgiving h2 {
   color: #8d230f;
 }
 
+html.theme-thanksgiving a,
 body.theme-thanksgiving a {
   color: #5d4037;
   border-bottom-color: #5d4037;
 }
 
+html.theme-thanksgiving a:hover,
 body.theme-thanksgiving a:hover {
   color: #d84315;
   border-bottom-color: #d84315;
 }
 
+html.theme-thanksgiving #quicklinks a,
 body.theme-thanksgiving #quicklinks a {
   background-color: #6d3214;
   color: #ffffff;
 }
 
+html.theme-thanksgiving #quicklinks a:hover,
 body.theme-thanksgiving #quicklinks a:hover {
   background-color: #d84315;
   color: #ffffff;
 }
 
+html.theme-thanksgiving #lessons,
 body.theme-thanksgiving #lessons {
   border-color: #d84315;
   background-color: rgba(255, 255, 255, 0.72);

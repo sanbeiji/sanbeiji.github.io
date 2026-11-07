@@ -13,36 +13,43 @@ body.theme-ghost-festival {
   color: #1c1b1f;
 }
 
+html.theme-ghost-festival #layout,
 body.theme-ghost-festival #layout {
   background-color: #faf8fc;
   border: 2px solid #9575cd;
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
 }
 
+html.theme-ghost-festival h2,
 body.theme-ghost-festival h2 {
   color: #4527a0;
 }
 
+html.theme-ghost-festival a,
 body.theme-ghost-festival a {
   color: #311b92;
   border-bottom-color: #311b92;
 }
 
+html.theme-ghost-festival a:hover,
 body.theme-ghost-festival a:hover {
   color: #ad1457;
   border-bottom-color: #ad1457;
 }
 
+html.theme-ghost-festival #quicklinks a,
 body.theme-ghost-festival #quicklinks a {
   background-color: #4527a0;
   color: #ffffff;
 }
 
+html.theme-ghost-festival #quicklinks a:hover,
 body.theme-ghost-festival #quicklinks a:hover {
   background-color: #ad1457;
   color: #ffffff;
 }
 
+html.theme-ghost-festival #lessons,
 body.theme-ghost-festival #lessons {
   border-color: #9575cd;
   background-color: rgba(255, 255, 255, 0.72);
