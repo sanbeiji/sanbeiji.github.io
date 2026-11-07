@@ -1,1 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80"><circle cx="40" cy="40" r="36" fill="#0a1931" stroke="#ffffff" stroke-width="3"/><circle cx="40" cy="40" r="24" fill="#b71c1c"/><polygon points="40,20 45,33 59,33 48,41 52,55 40,46 28,55 32,41 21,33 35,33" fill="#ffffff"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <circle cx="40" cy="40" r="38" fill="#1e293b" opacity="0.25"/>
+  <circle cx="40" cy="40" r="36" fill="#d32f2f" stroke="#b71c1c" stroke-width="1"/>
+  <circle cx="40" cy="40" r="28" fill="#ffffff" stroke="#e0e0e0" stroke-width="0.8"/>
+  <circle cx="40" cy="40" r="20" fill="#d32f2f" stroke="#b71c1c" stroke-width="0.8"/>
+  <circle cx="40" cy="40" r="13" fill="#0d47a1" stroke="#0a3880" stroke-width="0.8"/>
+  <polygon points="40,29 42.4,36.4 50.2,36.4 43.9,41 46.3,48.4 40,43.8 33.7,48.4 36.1,41 29.8,36.4 37.6,36.4" fill="#ffffff"/>
+  <path d="M 16 26 A 32 32 0 0 1 64 26" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.35" stroke-linecap="round"/>
+</svg>

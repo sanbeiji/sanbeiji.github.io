@@ -1,1 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80"><circle cx="40" cy="40" r="36" fill="#0b0c10" stroke="#ffd700" stroke-width="3"/><circle cx="40" cy="40" r="24" fill="none" stroke="#fff59d" stroke-width="2" stroke-dasharray="4 4"/><line x1="40" y1="40" x2="40" y2="20" stroke="#ffd700" stroke-width="3" stroke-linecap="round"/><line x1="40" y1="40" x2="48" y2="26" stroke="#ff80ab" stroke-width="2.5" stroke-linecap="round"/><circle cx="40" cy="40" r="3.5" fill="#ffd700"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+  <circle cx="40" cy="40" r="36" fill="#0b0c10" stroke="#ffd700" stroke-width="3"/>
+  <rect x="23" y="16" width="34" height="5" rx="2" fill="#d4af37" stroke="#fff8e1" stroke-width="1"/>
+  <rect x="23" y="59" width="34" height="5" rx="2" fill="#d4af37" stroke="#fff8e1" stroke-width="1"/>
+  <line x1="26" y1="21" x2="26" y2="59" stroke="#b8860b" stroke-width="2" stroke-linecap="round"/>
+  <line x1="54" y1="21" x2="54" y2="59" stroke="#b8860b" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 28 21 L 52 21 C 52 32, 44 37, 41 40 C 44 43, 52 48, 52 59 L 28 59 C 28 48, 36 43, 39 40 C 36 37, 28 32, 28 21 Z" fill="rgba(255, 255, 255, 0.12)" stroke="#e0e0e0" stroke-width="1.8"/>
+  <path d="M 30 23 L 50 23 C 50 31, 45 35, 40 37 C 35 35, 30 31, 30 23 Z" fill="#ffd700"/>
+  <line x1="40" y1="37" x2="40" y2="52" stroke="#ffd700" stroke-width="1.8" stroke-dasharray="2 1"/>
+  <path d="M 32 58 C 34 52, 46 52, 48 58 Z" fill="#ffd700"/>
+  <path d="M 31 25 C 31 30, 34 34, 37 36" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.6" stroke-linecap="round"/>
+  <circle cx="56" cy="27" r="1.8" fill="#ffd700"/>
+  <circle cx="23" cy="52" r="1.5" fill="#ffd700"/>
+</svg>

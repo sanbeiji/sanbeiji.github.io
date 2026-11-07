@@ -6,7 +6,7 @@ export function mount({ themeId }) {
   const cleanupHeader = decorateHeader({
     themeId,
     label: 'Happy Thanksgiving',
-    icon: '🍂',
+    icon: '🦃',
     greeting: 'Happy Thanksgiving · Grateful for Music & Friends',
     logoSrc: '/assets/themes/' + themeId + '/logo.svg'
   });
@@ -16,7 +16,7 @@ export function mount({ themeId }) {
     maxParticles: 32,
     speed: 0.55,
     colors: ['#ff8f00', '#d84315', '#fbc02d', '#8d6e63'],
-    symbols: ['🍁', '🍂', '🌾', '✨'],
+    symbols: ['🦃', '🥧', '🍗', '🌽', '🍠', '🍁', '🍂', '🌾', '✨'],
     cursorTrail: true
   });
 

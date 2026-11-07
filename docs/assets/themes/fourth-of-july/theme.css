@@ -3,7 +3,7 @@
   --theme-accent: #ff5252;
   --theme-banner-bg: #ffffff;
   --theme-banner-fg: #0d47a1;
-  --theme-banner-border: #b71c1c;
+  --theme-banner-border: #d32f2f;
 }
 
 html.theme-fourth-of-july,
@@ -16,7 +16,7 @@ body.theme-fourth-of-july {
 html.theme-fourth-of-july #layout,
 body.theme-fourth-of-july #layout {
   background-color: #ffffff;
-  border: 2px solid #b71c1c;
+  border: 2px solid #d32f2f;
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.28);
 }
 
@@ -33,8 +33,8 @@ body.theme-fourth-of-july a {
 
 html.theme-fourth-of-july a:hover,
 body.theme-fourth-of-july a:hover {
-  color: #b71c1c;
-  border-bottom-color: #b71c1c;
+  color: #d32f2f;
+  border-bottom-color: #d32f2f;
 }
 
 html.theme-fourth-of-july #quicklinks a,
@@ -45,12 +45,12 @@ body.theme-fourth-of-july #quicklinks a {
 
 html.theme-fourth-of-july #quicklinks a:hover,
 body.theme-fourth-of-july #quicklinks a:hover {
-  background-color: #b71c1c;
+  background-color: #d32f2f;
   color: #ffffff;
 }
 
 html.theme-fourth-of-july #lessons,
 body.theme-fourth-of-july #lessons {
-  border-color: #b71c1c;
+  border-color: #d32f2f;
   background-color: rgba(255, 255, 255, 0.72);
 }

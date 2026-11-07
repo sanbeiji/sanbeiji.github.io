@@ -6,7 +6,7 @@ export function mount({ themeId }) {
   const cleanupHeader = decorateHeader({
     themeId,
     label: 'Happy New Year',
-    icon: '🎆',
+    icon: '⏳',
     greeting: 'Happy New Year! 新年快樂 ✨',
     logoSrc: '/assets/themes/' + themeId + '/logo.svg'
   });
@@ -16,7 +16,7 @@ export function mount({ themeId }) {
     maxParticles: 34,
     speed: 0.55,
     colors: ['#ffd700', '#fff59d', '#80deea', '#f48fb1'],
-    symbols: ['✨', '🎇', '⋆', '•'],
+    symbols: ['⏳', '🥂', '👶', '🎉', '✨', '🎇', '⋆', '•'],
     cursorTrail: true
   });
 

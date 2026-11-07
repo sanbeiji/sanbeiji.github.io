@@ -16,7 +16,7 @@ export function mount({ themeId }) {
     maxParticles: 40,
     speed: 0.5,
     colors: ['#ffffff', '#4fc3f7', '#ffe81f', '#ff5252'],
-    symbols: ['✦', '⋆', '•'],
+    symbols: ['🪐', '🚀', '🛸', '⭐', '✦', '⋆', '•'],
     cursorTrail: true
   });
 

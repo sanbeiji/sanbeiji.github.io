@@ -6,7 +6,7 @@ export function mount({ themeId }) {
   const cleanupHeader = decorateHeader({
     themeId,
     label: '4th of July',
-    icon: '🎇',
+    icon: '🛡️',
     greeting: 'Happy 4th of July!',
     logoSrc: '/assets/themes/' + themeId + '/logo.svg'
   });
@@ -16,7 +16,7 @@ export function mount({ themeId }) {
     maxParticles: 36,
     speed: 0.6,
     colors: ['#ff5252', '#ffffff', '#448aff', '#ffd740'],
-    symbols: ['🎇', '★', '✨', '•'],
+    symbols: ['🎇', '★', '✨', '🇺🇸', '🎆', '•'],
     cursorTrail: true
   });
 

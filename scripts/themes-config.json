@@ -17,9 +17,29 @@
     "mode": "drift-down",
     "particles": 34,
     "speed": 0.65,
-    "colors": ["#ffd54f", "#ff80ab", "#b388ff", "#80d8ff"],
-    "symbols": ["♪", "♫", "𝄢", "🎉", "✨"],
-    "notes": [392.00, 392.00, 440.00, 392.00, 523.25, 493.88, 392.00, 587.33],
+    "colors": [
+      "#ffd54f",
+      "#ff80ab",
+      "#b388ff",
+      "#80d8ff"
+    ],
+    "symbols": [
+      "♪",
+      "♫",
+      "𝄢",
+      "🎉",
+      "✨"
+    ],
+    "notes": [
+      392.0,
+      392.0,
+      440.0,
+      392.0,
+      523.25,
+      493.88,
+      392.0,
+      587.33
+    ],
     "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 80 80\"><circle cx=\"40\" cy=\"40\" r=\"36\" fill=\"#4a148c\" stroke=\"#ffd54f\" stroke-width=\"3\"/><rect x=\"20\" y=\"42\" width=\"40\" height=\"20\" rx=\"4\" fill=\"#ff80ab\" stroke=\"#fff\" stroke-width=\"2\"/><path d=\"M20 49 Q25 54 30 49 T40 49 T50 49 T60 49\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2.5\"/><rect x=\"28\" y=\"30\" width=\"4\" height=\"12\" fill=\"#fff\"/><rect x=\"38\" y=\"28\" width=\"4\" height=\"14\" fill=\"#fff\"/><rect x=\"48\" y=\"30\" width=\"4\" height=\"12\" fill=\"#fff\"/><circle cx=\"30\" cy=\"26\" r=\"3.5\" fill=\"#ffd54f\"/><circle cx=\"40\" cy=\"24\" r=\"4\" fill=\"#ffab00\"/><circle cx=\"50\" cy=\"26\" r=\"3.5\" fill=\"#ffd54f\"/></svg>"
   },
   {
@@ -40,9 +60,28 @@
     "mode": "snow",
     "particles": 34,
     "speed": 0.55,
-    "colors": ["#ffffff", "#ffccd5", "#bde0fe", "#ffe5ec"],
-    "symbols": ["❄", "⚪", "🩷", "✨"],
-    "notes": [293.66, 369.99, 440.00, 493.88, 587.33, 493.88, 440.00, 369.99],
+    "colors": [
+      "#ffffff",
+      "#ffccd5",
+      "#bde0fe",
+      "#ffe5ec"
+    ],
+    "symbols": [
+      "❄",
+      "⚪",
+      "🩷",
+      "✨"
+    ],
+    "notes": [
+      293.66,
+      369.99,
+      440.0,
+      493.88,
+      587.33,
+      493.88,
+      440.0,
+      369.99
+    ],
     "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 80 80\"><circle cx=\"40\" cy=\"40\" r=\"36\" fill=\"#1b263b\" stroke=\"#ffccd5\" stroke-width=\"2.5\"/><circle cx=\"32\" cy=\"36\" r=\"7\" fill=\"#fff\"/><circle cx=\"46\" cy=\"35\" r=\"7\" fill=\"#ff8fa3\"/><circle cx=\"39\" cy=\"43\" r=\"7\" fill=\"#ffccd5\"/><path d=\"M18 44 A22 18 0 0 0 62 44 Z\" fill=\"#9b2226\" stroke=\"#ffd166\" stroke-width=\"2\"/><path d=\"M30 24 Q33 18 30 14 M42 22 Q45 16 42 12\" fill=\"none\" stroke=\"#fff\" stroke-width=\"2\" stroke-linecap=\"round\" opacity=\"0.7\"/></svg>"
   },
   {
@@ -63,15 +102,34 @@
     "mode": "snow",
     "particles": 38,
     "speed": 0.6,
-    "colors": ["#ffffff", "#e3f2fd", "#ffcdd2", "#fff9c4"],
-    "symbols": ["❄", "❅", "❆", "•"],
-    "notes": [659.25, 659.25, 659.25, 659.25, 783.99, 523.25, 587.33, 659.25],
+    "colors": [
+      "#ffffff",
+      "#e3f2fd",
+      "#ffcdd2",
+      "#fff9c4"
+    ],
+    "symbols": [
+      "❄",
+      "❅",
+      "❆",
+      "•"
+    ],
+    "notes": [
+      659.25,
+      659.25,
+      659.25,
+      659.25,
+      783.99,
+      523.25,
+      587.33,
+      659.25
+    ],
     "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 80 80\"><circle cx=\"40\" cy=\"40\" r=\"36\" fill=\"#1b4332\" stroke=\"#d4af37\" stroke-width=\"3\"/><polygon points=\"40,14 22,40 32,40 18,58 62,58 48,40 58,40\" fill=\"#2d6a4f\" stroke=\"#95d5b2\" stroke-width=\"1.5\"/><rect x=\"36\" y=\"58\" width=\"8\" height=\"8\" fill=\"#7f4f24\"/><circle cx=\"40\" cy=\"13\" r=\"4.5\" fill=\"#ffd700\"/><circle cx=\"33\" cy=\"36\" r=\"3\" fill=\"#e63946\"/><circle cx=\"46\" cy=\"48\" r=\"3\" fill=\"#ffd166\"/><circle cx=\"30\" cy=\"50\" r=\"3\" fill=\"#e63946\"/></svg>"
   },
   {
     "id": "new-years",
     "label": "Happy New Year",
-    "icon": "🎆",
+    "icon": "⏳",
     "greeting": "Happy New Year! 新年快樂 ✨",
     "bgGradient": "linear-gradient(180deg, #0b0c10 0%, #1f2833 60%, #2c3531 100%)",
     "cardBg": "#fffffa",
@@ -86,10 +144,33 @@
     "mode": "fireworks",
     "particles": 34,
     "speed": 0.55,
-    "colors": ["#ffd700", "#fff59d", "#80deea", "#f48fb1"],
-    "symbols": ["✨", "🎇", "⋆", "•"],
-    "notes": [261.63, 349.23, 349.23, 440.00, 392.00, 349.23, 392.00, 523.25],
-    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 80 80\"><circle cx=\"40\" cy=\"40\" r=\"36\" fill=\"#0b0c10\" stroke=\"#ffd700\" stroke-width=\"3\"/><circle cx=\"40\" cy=\"40\" r=\"24\" fill=\"none\" stroke=\"#fff59d\" stroke-width=\"2\" stroke-dasharray=\"4 4\"/><line x1=\"40\" y1=\"40\" x2=\"40\" y2=\"20\" stroke=\"#ffd700\" stroke-width=\"3\" stroke-linecap=\"round\"/><line x1=\"40\" y1=\"40\" x2=\"48\" y2=\"26\" stroke=\"#ff80ab\" stroke-width=\"2.5\" stroke-linecap=\"round\"/><circle cx=\"40\" cy=\"40\" r=\"3.5\" fill=\"#ffd700\"/></svg>"
+    "colors": [
+      "#ffd700",
+      "#fff59d",
+      "#80deea",
+      "#f48fb1"
+    ],
+    "symbols": [
+      "⏳",
+      "🥂",
+      "👶",
+      "🎉",
+      "✨",
+      "🎇",
+      "⋆",
+      "•"
+    ],
+    "notes": [
+      261.63,
+      349.23,
+      349.23,
+      440.0,
+      392.0,
+      349.23,
+      392.0,
+      523.25
+    ],
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 80 80\">\n  <circle cx=\"40\" cy=\"40\" r=\"36\" fill=\"#0b0c10\" stroke=\"#ffd700\" stroke-width=\"3\"/>\n  <rect x=\"23\" y=\"16\" width=\"34\" height=\"5\" rx=\"2\" fill=\"#d4af37\" stroke=\"#fff8e1\" stroke-width=\"1\"/>\n  <rect x=\"23\" y=\"59\" width=\"34\" height=\"5\" rx=\"2\" fill=\"#d4af37\" stroke=\"#fff8e1\" stroke-width=\"1\"/>\n  <line x1=\"26\" y1=\"21\" x2=\"26\" y2=\"59\" stroke=\"#b8860b\" stroke-width=\"2\" stroke-linecap=\"round\"/>\n  <line x1=\"54\" y1=\"21\" x2=\"54\" y2=\"59\" stroke=\"#b8860b\" stroke-width=\"2\" stroke-linecap=\"round\"/>\n  <path d=\"M 28 21 L 52 21 C 52 32, 44 37, 41 40 C 44 43, 52 48, 52 59 L 28 59 C 28 48, 36 43, 39 40 C 36 37, 28 32, 28 21 Z\" fill=\"rgba(255, 255, 255, 0.12)\" stroke=\"#e0e0e0\" stroke-width=\"1.8\"/>\n  <path d=\"M 30 23 L 50 23 C 50 31, 45 35, 40 37 C 35 35, 30 31, 30 23 Z\" fill=\"#ffd700\"/>\n  <line x1=\"40\" y1=\"37\" x2=\"40\" y2=\"52\" stroke=\"#ffd700\" stroke-width=\"1.8\" stroke-dasharray=\"2 1\"/>\n  <path d=\"M 32 58 C 34 52, 46 52, 48 58 Z\" fill=\"#ffd700\"/>\n  <path d=\"M 31 25 C 31 30, 34 34, 37 36\" fill=\"none\" stroke=\"#ffffff\" stroke-width=\"1.5\" opacity=\"0.6\" stroke-linecap=\"round\"/>\n  <circle cx=\"56\" cy=\"27\" r=\"1.8\" fill=\"#ffd700\"/>\n  <circle cx=\"23\" cy=\"52\" r=\"1.5\" fill=\"#ffd700\"/>\n</svg>"
   },
   {
     "id": "lunar-new-year",
@@ -109,9 +190,28 @@
     "mode": "drift-down",
     "particles": 32,
     "speed": 0.6,
-    "colors": ["#ffd700", "#ff5252", "#ffab40", "#ffe082"],
-    "symbols": ["🧧", "福", "✨", "🌸"],
-    "notes": [659.25, 783.99, 880.00, 783.99, 659.25, 587.33, 523.25, 659.25],
+    "colors": [
+      "#ffd700",
+      "#ff5252",
+      "#ffab40",
+      "#ffe082"
+    ],
+    "symbols": [
+      "🧧",
+      "福",
+      "✨",
+      "🌸"
+    ],
+    "notes": [
+      659.25,
+      783.99,
+      880.0,
+      783.99,
+      659.25,
+      587.33,
+      523.25,
+      659.25
+    ],
     "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 80 80\"><polygon points=\"40,6 74,40 40,74 6,40\" fill=\"#b71c1c\" stroke=\"#ffd700\" stroke-width=\"3\"/><polygon points=\"40,12 68,40 40,68 12,40\" fill=\"none\" stroke=\"#ffd700\" stroke-width=\"1.2\"/><text x=\"40\" y=\"49\" text-anchor=\"middle\" font-size=\"28\" font-weight=\"bold\" fill=\"#ffd700\" font-family=\"serif\">福</text></svg>"
   },
   {
@@ -132,9 +232,27 @@
     "mode": "float-up",
     "particles": 32,
     "speed": 0.55,
-    "colors": ["#ff9800", "#ffeb3b", "#ff5722", "#ffe082"],
-    "symbols": ["🏮", "✨", "•"],
-    "notes": [523.25, 587.33, 659.25, 783.99, 880.00, 783.99, 659.25, 587.33],
+    "colors": [
+      "#ff9800",
+      "#ffeb3b",
+      "#ff5722",
+      "#ffe082"
+    ],
+    "symbols": [
+      "🏮",
+      "✨",
+      "•"
+    ],
+    "notes": [
+      523.25,
+      587.33,
+      659.25,
+      783.99,
+      880.0,
+      783.99,
+      659.25,
+      587.33
+    ],
     "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 80 80\"><circle cx=\"40\" cy=\"40\" r=\"36\" fill=\"#101426\" stroke=\"#ffb74d\" stroke-width=\"2.5\"/><ellipse cx=\"40\" cy=\"38\" rx=\"18\" ry=\"15\" fill=\"#e63946\" stroke=\"#ffd166\" stroke-width=\"2\"/><rect x=\"33\" y=\"20\" width=\"14\" height=\"4\" fill=\"#ffd166\"/><rect x=\"33\" y=\"52\" width=\"14\" height=\"4\" fill=\"#ffd166\"/><line x1=\"40\" y1=\"56\" x2=\"40\" y2=\"68\" stroke=\"#ffd166\" stroke-width=\"2.5\"/><circle cx=\"40\" cy=\"38\" r=\"5\" fill=\"#fff3b0\" opacity=\"0.8\"/></svg>"
   },
   {
@@ -155,9 +273,32 @@
     "mode": "drift-down",
     "particles": 34,
     "speed": 0.55,
-    "colors": ["#82b1ff", "#ffd54f", "#80cbc4", "#ffffff"],
-    "symbols": ["π", "3", ".", "1", "4", "1", "5", "9"],
-    "notes": [329.63, 261.63, 349.23, 261.63, 392.00, 587.33, 293.66, 440.00],
+    "colors": [
+      "#82b1ff",
+      "#ffd54f",
+      "#80cbc4",
+      "#ffffff"
+    ],
+    "symbols": [
+      "π",
+      "3",
+      ".",
+      "1",
+      "4",
+      "1",
+      "5",
+      "9"
+    ],
+    "notes": [
+      329.63,
+      261.63,
+      349.23,
+      261.63,
+      392.0,
+      587.33,
+      293.66,
+      440.0
+    ],
     "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 80 80\"><circle cx=\"40\" cy=\"40\" r=\"36\" fill=\"#1b2a32\" stroke=\"#ffd54f\" stroke-width=\"3\"/><text x=\"40\" y=\"53\" text-anchor=\"middle\" font-size=\"42\" font-weight=\"bold\" fill=\"#ffd54f\" font-family=\"serif\">π</text></svg>"
   },
   {
@@ -178,10 +319,32 @@
     "mode": "starfield",
     "particles": 40,
     "speed": 0.5,
-    "colors": ["#ffffff", "#4fc3f7", "#ffe81f", "#ff5252"],
-    "symbols": ["✦", "⋆", "•"],
-    "notes": [261.63, 392.00, 349.23, 329.63, 293.66, 523.25, 392.00, 523.25],
-    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 80 80\"><circle cx=\"40\" cy=\"40\" r=\"36\" fill=\"#05070f\" stroke=\"#ffe81f\" stroke-width=\"2.5\"/><line x1=\"20\" y1=\"60\" x2=\"58\" y2=\"22\" stroke=\"#4fc3f7\" stroke-width=\"4\" stroke-linecap=\"round\"/><line x1=\"60\" y1=\"60\" x2=\"22\" y2=\"22\" stroke=\"#66bb6a\" stroke-width=\"4\" stroke-linecap=\"round\"/><circle cx=\"40\" cy=\"18\" r=\"3\" fill=\"#ffe81f\"/></svg>"
+    "colors": [
+      "#ffffff",
+      "#4fc3f7",
+      "#ffe81f",
+      "#ff5252"
+    ],
+    "symbols": [
+      "🪐",
+      "🚀",
+      "🛸",
+      "⭐",
+      "✦",
+      "⋆",
+      "•"
+    ],
+    "notes": [
+      261.63,
+      392.0,
+      349.23,
+      329.63,
+      293.66,
+      523.25,
+      392.0,
+      523.25
+    ],
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 80 80\">\n  <circle cx=\"40\" cy=\"40\" r=\"36\" fill=\"#05070f\" stroke=\"#ffe81f\" stroke-width=\"2.5\"/>\n  <circle cx=\"22\" cy=\"20\" r=\"1\" fill=\"#fff\"/>\n  <circle cx=\"62\" cy=\"18\" r=\"1\" fill=\"#ffe81f\"/>\n  <circle cx=\"18\" cy=\"55\" r=\"1\" fill=\"#fff\"/>\n  <circle cx=\"64\" cy=\"58\" r=\"1.2\" fill=\"#4fc3f7\"/>\n  <line x1=\"28\" y1=\"52\" x2=\"58\" y2=\"22\" stroke=\"#00e5ff\" stroke-width=\"5\" stroke-linecap=\"round\" opacity=\"0.6\"/>\n  <line x1=\"28\" y1=\"52\" x2=\"58\" y2=\"22\" stroke=\"#ffffff\" stroke-width=\"2.2\" stroke-linecap=\"round\"/>\n  <line x1=\"18\" y1=\"62\" x2=\"28\" y2=\"52\" stroke=\"#b0bec5\" stroke-width=\"5.5\" stroke-linecap=\"round\"/>\n  <line x1=\"21\" y1=\"59\" x2=\"26\" y2=\"54\" stroke=\"#263238\" stroke-width=\"4.5\"/>\n  <circle cx=\"27\" cy=\"53\" r=\"3\" fill=\"#ffe81f\"/>\n  <circle cx=\"18\" cy=\"62\" r=\"2.8\" fill=\"#37474f\"/>\n  <line x1=\"52\" y1=\"52\" x2=\"22\" y2=\"22\" stroke=\"#00e676\" stroke-width=\"5\" stroke-linecap=\"round\" opacity=\"0.6\"/>\n  <line x1=\"52\" y1=\"52\" x2=\"22\" y2=\"22\" stroke=\"#ffffff\" stroke-width=\"2.2\" stroke-linecap=\"round\"/>\n  <line x1=\"62\" y1=\"62\" x2=\"52\" y2=\"52\" stroke=\"#b0bec5\" stroke-width=\"5.5\" stroke-linecap=\"round\"/>\n  <line x1=\"59\" y1=\"59\" x2=\"54\" y2=\"54\" stroke=\"#263238\" stroke-width=\"4.5\"/>\n  <circle cx=\"53\" cy=\"53\" r=\"3\" fill=\"#cfd8dc\"/>\n  <circle cx=\"62\" cy=\"62\" r=\"2.8\" fill=\"#37474f\"/>\n  <circle cx=\"40\" cy=\"37\" r=\"4.5\" fill=\"#fff\" opacity=\"0.9\"/>\n  <polygon points=\"40,31 42,37 48,37 43,40 45,46 40,42 35,46 37,40 32,37 38,37\" fill=\"#ffe81f\"/>\n</svg>"
   },
   {
     "id": "dragon-boat",
@@ -201,9 +364,28 @@
     "mode": "drift-down",
     "particles": 30,
     "speed": 0.55,
-    "colors": ["#80cbc4", "#a5d6a7", "#ffd54f", "#b2ebf2"],
-    "symbols": ["粽", "🌿", "💧", "✨"],
-    "notes": [392.00, 440.00, 523.25, 587.33, 659.25, 587.33, 523.25, 440.00],
+    "colors": [
+      "#80cbc4",
+      "#a5d6a7",
+      "#ffd54f",
+      "#b2ebf2"
+    ],
+    "symbols": [
+      "粽",
+      "🌿",
+      "💧",
+      "✨"
+    ],
+    "notes": [
+      392.0,
+      440.0,
+      523.25,
+      587.33,
+      659.25,
+      587.33,
+      523.25,
+      440.0
+    ],
     "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 80 80\"><circle cx=\"40\" cy=\"40\" r=\"36\" fill=\"#0d3b3e\" stroke=\"#ffd166\" stroke-width=\"2.5\"/><polygon points=\"40,18 22,48 58,48\" fill=\"#52b788\" stroke=\"#d8f3dc\" stroke-width=\"2\"/><line x1=\"28\" y1=\"38\" x2=\"52\" y2=\"38\" stroke=\"#ffd166\" stroke-width=\"2.5\"/><path d=\"M16 58 Q28 52 40 58 T64 58\" fill=\"none\" stroke=\"#90e0ef\" stroke-width=\"3\" stroke-linecap=\"round\"/></svg>"
   },
   {
@@ -224,33 +406,72 @@
     "mode": "starfield",
     "particles": 34,
     "speed": 0.55,
-    "colors": ["#ef4444", "#22c55e", "#facc15", "#ffffff"],
-    "symbols": ["✦", "★", "✨"],
-    "notes": [261.63, 329.63, 392.00, 493.88, 587.33, 523.25, 392.00, 523.25],
+    "colors": [
+      "#ef4444",
+      "#22c55e",
+      "#facc15",
+      "#ffffff"
+    ],
+    "symbols": [
+      "✦",
+      "★",
+      "✨"
+    ],
+    "notes": [
+      261.63,
+      329.63,
+      392.0,
+      493.88,
+      587.33,
+      523.25,
+      392.0,
+      523.25
+    ],
     "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 80 80\"><circle cx=\"40\" cy=\"40\" r=\"36\" fill=\"#1c1917\" stroke=\"#facc15\" stroke-width=\"3\"/><polygon points=\"40,14 46,31 64,31 50,41 55,58 40,48 25,58 30,41 16,31 34,31\" fill=\"#ef4444\" stroke=\"#22c55e\" stroke-width=\"2\"/></svg>"
   },
   {
     "id": "fourth-of-july",
     "label": "4th of July",
-    "icon": "🎇",
+    "icon": "🛡️",
     "greeting": "Happy 4th of July!",
     "bgGradient": "linear-gradient(180deg, #0a1931 0%, #183a6c 60%, #4a1c2a 100%)",
     "cardBg": "#ffffff",
-    "cardBorder": "#b71c1c",
+    "cardBorder": "#d32f2f",
     "headingColor": "#0d47a1",
     "linkColor": "#0d47a1",
-    "linkHover": "#b71c1c",
+    "linkHover": "#d32f2f",
     "btnBg": "#0d47a1",
-    "btnHoverBg": "#b71c1c",
+    "btnHoverBg": "#d32f2f",
     "pillBg": "rgba(10, 25, 49, 0.90)",
     "accent": "#ff5252",
     "mode": "fireworks",
     "particles": 36,
     "speed": 0.6,
-    "colors": ["#ff5252", "#ffffff", "#448aff", "#ffd740"],
-    "symbols": ["🎇", "★", "✨", "•"],
-    "notes": [392.00, 329.63, 261.63, 329.63, 392.00, 523.25, 659.25, 523.25],
-    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 80 80\"><circle cx=\"40\" cy=\"40\" r=\"36\" fill=\"#0a1931\" stroke=\"#ffffff\" stroke-width=\"3\"/><circle cx=\"40\" cy=\"40\" r=\"24\" fill=\"#b71c1c\"/><polygon points=\"40,20 45,33 59,33 48,41 52,55 40,46 28,55 32,41 21,33 35,33\" fill=\"#ffffff\"/></svg>"
+    "colors": [
+      "#ff5252",
+      "#ffffff",
+      "#448aff",
+      "#ffd740"
+    ],
+    "symbols": [
+      "🎇",
+      "★",
+      "✨",
+      "🇺🇸",
+      "🎆",
+      "•"
+    ],
+    "notes": [
+      392.0,
+      329.63,
+      261.63,
+      329.63,
+      392.0,
+      523.25,
+      659.25,
+      523.25
+    ],
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 80 80\">\n  <circle cx=\"40\" cy=\"40\" r=\"38\" fill=\"#1e293b\" opacity=\"0.25\"/>\n  <circle cx=\"40\" cy=\"40\" r=\"36\" fill=\"#d32f2f\" stroke=\"#b71c1c\" stroke-width=\"1\"/>\n  <circle cx=\"40\" cy=\"40\" r=\"28\" fill=\"#ffffff\" stroke=\"#e0e0e0\" stroke-width=\"0.8\"/>\n  <circle cx=\"40\" cy=\"40\" r=\"20\" fill=\"#d32f2f\" stroke=\"#b71c1c\" stroke-width=\"0.8\"/>\n  <circle cx=\"40\" cy=\"40\" r=\"13\" fill=\"#0d47a1\" stroke=\"#0a3880\" stroke-width=\"0.8\"/>\n  <polygon points=\"40,29 42.4,36.4 50.2,36.4 43.9,41 46.3,48.4 40,43.8 33.7,48.4 36.1,41 29.8,36.4 37.6,36.4\" fill=\"#ffffff\"/>\n  <path d=\"M 16 26 A 32 32 0 0 1 64 26\" fill=\"none\" stroke=\"#ffffff\" stroke-width=\"2\" opacity=\"0.35\" stroke-linecap=\"round\"/>\n</svg>"
   },
   {
     "id": "ghost-festival",
@@ -270,9 +491,28 @@
     "mode": "float-up",
     "particles": 30,
     "speed": 0.5,
-    "colors": ["#f48fb1", "#ce93d8", "#ffe082", "#80deea"],
-    "symbols": ["🪷", "🕯️", "✨", "•"],
-    "notes": [440.00, 659.25, 587.33, 493.88, 440.00, 329.63, 440.00, 493.88],
+    "colors": [
+      "#f48fb1",
+      "#ce93d8",
+      "#ffe082",
+      "#80deea"
+    ],
+    "symbols": [
+      "🪷",
+      "🕯️",
+      "✨",
+      "•"
+    ],
+    "notes": [
+      440.0,
+      659.25,
+      587.33,
+      493.88,
+      440.0,
+      329.63,
+      440.0,
+      493.88
+    ],
     "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 80 80\"><circle cx=\"40\" cy=\"40\" r=\"36\" fill=\"#120d2b\" stroke=\"#ce93d8\" stroke-width=\"2.5\"/><path d=\"M40 22 C48 32 48 44 40 50 C32 44 32 32 40 22 Z\" fill=\"#f48fb1\"/><path d=\"M24 34 C32 34 36 44 40 50 C28 50 22 44 24 34 Z\" fill=\"#f8bbd0\"/><path d=\"M56 34 C48 34 44 44 40 50 C52 50 58 44 56 34 Z\" fill=\"#f8bbd0\"/><path d=\"M18 58 Q40 53 62 58\" fill=\"none\" stroke=\"#80deea\" stroke-width=\"2.5\" stroke-linecap=\"round\"/></svg>"
   },
   {
@@ -293,9 +533,28 @@
     "mode": "drift-down",
     "particles": 32,
     "speed": 0.52,
-    "colors": ["#fde047", "#fbbf24", "#fef08a", "#fed7aa"],
-    "symbols": ["🌕", "🥮", "桂", "✨"],
-    "notes": [392.00, 440.00, 523.25, 587.33, 659.25, 783.99, 659.25, 523.25],
+    "colors": [
+      "#fde047",
+      "#fbbf24",
+      "#fef08a",
+      "#fed7aa"
+    ],
+    "symbols": [
+      "🌕",
+      "🥮",
+      "桂",
+      "✨"
+    ],
+    "notes": [
+      392.0,
+      440.0,
+      523.25,
+      587.33,
+      659.25,
+      783.99,
+      659.25,
+      523.25
+    ],
     "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 80 80\"><circle cx=\"40\" cy=\"40\" r=\"36\" fill=\"#0f172a\" stroke=\"#fde047\" stroke-width=\"2.5\"/><circle cx=\"40\" cy=\"38\" r=\"22\" fill=\"#fde047\"/><ellipse cx=\"38\" cy=\"42\" rx=\"7\" ry=\"5\" fill=\"#fffbeb\"/><circle cx=\"43\" cy=\"38\" r=\"3.5\" fill=\"#fffbeb\"/><ellipse cx=\"40\" cy=\"32\" rx=\"1.8\" ry=\"5\" fill=\"#fffbeb\"/></svg>"
   },
   {
@@ -316,9 +575,28 @@
     "mode": "fireworks",
     "particles": 34,
     "speed": 0.58,
-    "colors": ["#ff5252", "#ffffff", "#448aff", "#ffd740"],
-    "symbols": ["十", "✨", "★", "•"],
-    "notes": [261.63, 329.63, 392.00, 523.25, 440.00, 392.00, 659.25, 523.25],
+    "colors": [
+      "#ff5252",
+      "#ffffff",
+      "#448aff",
+      "#ffd740"
+    ],
+    "symbols": [
+      "十",
+      "✨",
+      "★",
+      "•"
+    ],
+    "notes": [
+      261.63,
+      329.63,
+      392.0,
+      523.25,
+      440.0,
+      392.0,
+      659.25,
+      523.25
+    ],
     "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 80 80\"><circle cx=\"40\" cy=\"40\" r=\"36\" fill=\"#002984\" stroke=\"#ffffff\" stroke-width=\"3\"/><path d=\"M26 24 V56 M16 40 H36 M54 24 V56 M44 40 H64\" stroke=\"#ef4444\" stroke-width=\"6\" stroke-linecap=\"round\"/></svg>"
   },
   {
@@ -339,15 +617,34 @@
     "mode": "float-up",
     "particles": 32,
     "speed": 0.55,
-    "colors": ["#ff6d00", "#ffab00", "#b388ff", "#ea80fc"],
-    "symbols": ["🎃", "👻", "🦇", "✨"],
-    "notes": [293.66, 349.23, 440.00, 466.16, 440.00, 349.23, 277.18, 293.66],
+    "colors": [
+      "#ff6d00",
+      "#ffab00",
+      "#b388ff",
+      "#ea80fc"
+    ],
+    "symbols": [
+      "🎃",
+      "👻",
+      "🦇",
+      "✨"
+    ],
+    "notes": [
+      293.66,
+      349.23,
+      440.0,
+      466.16,
+      440.0,
+      349.23,
+      277.18,
+      293.66
+    ],
     "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 80 80\"><circle cx=\"40\" cy=\"40\" r=\"36\" fill=\"#12081c\" stroke=\"#ff9100\" stroke-width=\"3\"/><ellipse cx=\"40\" cy=\"44\" rx=\"20\" ry=\"16\" fill=\"#ff6d00\"/><rect x=\"37\" y=\"23\" width=\"6\" height=\"6\" fill=\"#2e7d32\"/><polygon points=\"31,38 35,44 27,44\" fill=\"#fff3e0\"/><polygon points=\"49,38 53,44 45,44\" fill=\"#fff3e0\"/><path d=\"M29 50 Q40 57 51 50\" fill=\"none\" stroke=\"#fff3e0\" stroke-width=\"3\"/></svg>"
   },
   {
     "id": "thanksgiving",
     "label": "Happy Thanksgiving",
-    "icon": "🍂",
+    "icon": "🦃",
     "greeting": "Happy Thanksgiving · Grateful for Music & Friends",
     "bgGradient": "linear-gradient(135deg, #3e1f0d 0%, #6d3214 55%, #8c4a1e 100%)",
     "cardBg": "#fffaf2",
@@ -362,10 +659,34 @@
     "mode": "drift-down",
     "particles": 32,
     "speed": 0.55,
-    "colors": ["#ff8f00", "#d84315", "#fbc02d", "#8d6e63"],
-    "symbols": ["🍁", "🍂", "🌾", "✨"],
-    "notes": [349.23, 440.00, 523.25, 587.33, 523.25, 440.00, 392.00, 349.23],
-    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 80 80\"><circle cx=\"40\" cy=\"40\" r=\"36\" fill=\"#3e1f0d\" stroke=\"#ffb300\" stroke-width=\"3\"/><polygon points=\"40,16 46,28 58,26 50,38 60,46 44,48 40,62 36,48 20,46 30,38 22,26 34,28\" fill=\"#e65100\" stroke=\"#ffd54f\" stroke-width=\"1.5\"/></svg>"
+    "colors": [
+      "#ff8f00",
+      "#d84315",
+      "#fbc02d",
+      "#8d6e63"
+    ],
+    "symbols": [
+      "🦃",
+      "🥧",
+      "🍗",
+      "🌽",
+      "🍠",
+      "🍁",
+      "🍂",
+      "🌾",
+      "✨"
+    ],
+    "notes": [
+      349.23,
+      440.0,
+      523.25,
+      587.33,
+      523.25,
+      440.0,
+      392.0,
+      349.23
+    ],
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 80 80\">\n  <circle cx=\"40\" cy=\"40\" r=\"36\" fill=\"#3e1f0d\" stroke=\"#ffb300\" stroke-width=\"3\"/>\n  <path d=\"M 20 44 C 14 30, 24 16, 40 16 C 56 16, 66 30, 60 44 Z\" fill=\"#d97706\"/>\n  <path d=\"M 23 44 C 18 32, 28 21, 40 21 C 52 21, 62 32, 57 44 Z\" fill=\"#dc2626\"/>\n  <path d=\"M 26 44 C 22 35, 30 26, 40 26 C 50 26, 58 35, 54 44 Z\" fill=\"#fbbf24\"/>\n  <ellipse cx=\"40\" cy=\"50\" rx=\"16\" ry=\"14\" fill=\"#78350f\"/>\n  <path d=\"M 32 46 C 36 54, 44 54, 48 46\" fill=\"none\" stroke=\"#92400e\" stroke-width=\"2\"/>\n  <ellipse cx=\"40\" cy=\"38\" rx=\"8\" ry=\"9\" fill=\"#9a3412\"/>\n  <path d=\"M 42 38 C 45 40, 45 46, 42 48 C 40 48, 40 42, 42 38 Z\" fill=\"#ef4444\"/>\n  <polygon points=\"38,37 44,37 41,43\" fill=\"#f59e0b\"/>\n  <circle cx=\"37\" cy=\"35\" r=\"1.8\" fill=\"#ffffff\"/>\n  <circle cx=\"37\" cy=\"35\" r=\"0.9\" fill=\"#1c1917\"/>\n  <circle cx=\"43\" cy=\"35\" r=\"1.8\" fill=\"#ffffff\"/>\n  <circle cx=\"43\" cy=\"35\" r=\"0.9\" fill=\"#1c1917\"/>\n  <line x1=\"36\" y1=\"64\" x2=\"36\" y2=\"69\" stroke=\"#f59e0b\" stroke-width=\"2.5\" stroke-linecap=\"round\"/>\n  <line x1=\"44\" y1=\"64\" x2=\"44\" y2=\"69\" stroke=\"#f59e0b\" stroke-width=\"2.5\" stroke-linecap=\"round\"/>\n</svg>"
   },
   {
     "id": "mlk-day",
@@ -385,9 +706,30 @@
     "mode": "float-up",
     "particles": 28,
     "speed": 0.48,
-    "colors": ["#fde68a", "#ffffff", "#93c5fd"],
-    "symbols": ["🕊️", "✨", "•"],
-    "notes": [261.63, 349.23, 440.00, 523.25, 466.16, 440.00, 392.00, 349.23],
-    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 80 80\"><circle cx=\"40\" cy=\"40\" r=\"36\" fill=\"#1a233a\" stroke=\"#fde68a\" stroke-width=\"2.5\"/><path d=\"M24 46 C30 34 44 30 56 34 C50 42 46 50 32 50 Z\" fill=\"#ffffff\"/><path d=\"M36 36 C32 24 44 20 48 32\" fill=\"#e2e8f0\"/><circle cx=\"52\" cy=\"34\" r=\"1.5\" fill=\"#1a233a\"/></svg>"
+    "colors": [
+      "#fde68a",
+      "#ffffff",
+      "#93c5fd"
+    ],
+    "symbols": [
+      "🕊️",
+      "⚖️",
+      "✊",
+      "☮️",
+      "🤝",
+      "✨",
+      "⭐"
+    ],
+    "notes": [
+      261.63,
+      349.23,
+      440.0,
+      523.25,
+      466.16,
+      440.0,
+      392.0,
+      349.23
+    ],
+    "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 80 80\">\n  <circle cx=\"40\" cy=\"40\" r=\"36\" fill=\"#1a233a\" stroke=\"#ffd700\" stroke-width=\"3\"/>\n  <circle cx=\"22\" cy=\"22\" r=\"1.5\" fill=\"#fde68a\"/>\n  <circle cx=\"60\" cy=\"20\" r=\"1.5\" fill=\"#fde68a\"/>\n  <circle cx=\"62\" cy=\"60\" r=\"1.5\" fill=\"#fde68a\"/>\n  <path d=\"M 37 38 C 30 25, 20 18, 14 20 C 14 28, 24 35, 33 41 Z\" fill=\"#e2e8f0\"/>\n  <path d=\"M 44 48 C 50 56, 56 62, 62 64 C 61 58, 56 50, 48 46 Z\" fill=\"#ffffff\" stroke=\"#cbd5e1\" stroke-width=\"0.8\"/>\n  <path d=\"M 46 47 C 54 53, 62 56, 67 56 C 64 51, 56 46, 49 44 Z\" fill=\"#f1f5f9\"/>\n  <path d=\"M 26 36 C 32 34, 42 38, 46 47 C 43 49, 36 49, 30 46 C 26 44, 24 39, 26 36 Z\" fill=\"#ffffff\"/>\n  <path d=\"M 34 38 C 36 22, 46 14, 56 12 C 55 18, 48 24, 45 28 C 50 24, 56 22, 58 24 C 55 29, 49 33, 44 36 C 48 34, 53 34, 54 36 C 50 40, 42 42, 36 41 Z\" fill=\"#ffffff\" stroke=\"#cbd5e1\" stroke-width=\"0.8\"/>\n  <circle cx=\"24\" cy=\"35\" r=\"5.5\" fill=\"#ffffff\"/>\n  <polygon points=\"19,34 14,36 19,37\" fill=\"#fbbf24\"/>\n  <circle cx=\"23\" cy=\"34\" r=\"1\" fill=\"#1e293b\"/>\n  <path d=\"M 16 36 Q 10 37 7 42\" fill=\"none\" stroke=\"#16a34a\" stroke-width=\"1.8\" stroke-linecap=\"round\"/>\n  <ellipse cx=\"11\" cy=\"37\" rx=\"3\" ry=\"1.4\" fill=\"#22c55e\" transform=\"rotate(-25 11 37)\"/>\n  <ellipse cx=\"8\" cy=\"41\" rx=\"2.8\" ry=\"1.3\" fill=\"#22c55e\" transform=\"rotate(35 8 41)\"/>\n  <ellipse cx=\"13\" cy=\"40\" rx=\"2.5\" ry=\"1.2\" fill=\"#22c55e\" transform=\"rotate(-60 13 40)\"/>\n</svg>"
   }
 ]
